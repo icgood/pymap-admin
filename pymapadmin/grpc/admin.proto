@@ -1,0 +1,44 @@
+syntax = "proto3";
+
+package admin;
+
+message PingRequest {
+  string client_version = 1;
+}
+
+message PingResponse {
+  string server_version = 1;
+}
+
+enum Result {
+  SUCCESS = 0;
+  ERROR_RESPONSE = 1;
+}
+
+message Login {
+  string user = 1;
+}
+
+message AppendRequest {
+  Login login = 1;
+  string sender = 2;
+  string recipient = 3;
+  string mailbox = 4;
+  bytes data = 5;
+  repeated string flags = 6;
+  uint64 when = 7;
+}
+
+message AppendResponse {
+  Result result = 1;
+  string error_type = 2;
+  bytes error_response = 3;
+  string mailbox = 4;
+  uint32 validity = 5;
+  uint32 uid = 6;
+}
+
+service Admin {
+  rpc Ping (PingRequest) returns (PingResponse) {}
+  rpc Append (AppendRequest) returns (AppendResponse) {}
+}

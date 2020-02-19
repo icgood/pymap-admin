@@ -1,0 +1,7 @@
+mypy
+flake8
+pytest
+pytest-asyncio
+pytest-cov
+grpclib
+protobuf

@@ -1,0 +1,17 @@
+language: python
+python:
+  - "3.8"
+dist: bionic     # https://docs.travis-ci.com/user/languages/python/#python-37-and-higher
+install:
+  - travis_retry pip install -r test/requirements.txt
+  - travis_retry pip install coveralls
+  - travis_retry pip install -e .
+script:
+  - py.test --cov=pymapadmin
+  - mypy pymapadmin test
+  - flake8 pymapadmin test
+after_success:
+  - coveralls
+branches:
+  only:
+    - master
