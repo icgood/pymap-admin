@@ -1,1 +1,2 @@
 include README.md LICENSE.md pymapadmin/py.typed
+recursive-include pymapadmin *.pyi
