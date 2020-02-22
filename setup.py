@@ -28,7 +28,7 @@ with open('LICENSE.md') as f:
     license = f.read()
 
 setup(name='pymap-admin',
-      version='0.1.1',
+      version='0.1.2',
       author='Ian Good',
       author_email='icgood@gmail.com',
       description='Admin tool for running pymap instances.',
@@ -49,7 +49,7 @@ setup(name='pymap-admin',
       include_package_data=True,
       packages=find_packages(),
       install_requires=[
-          'grpclib', 'protobuf'],
+          'grpclib', 'protobuf', 'typing-extensions'],
       extras_require={
           'build': ['grpcio-tools', 'mypy-protobuf']},
       entry_points={
