@@ -10,9 +10,15 @@ message PingResponse {
   string server_version = 1;
 }
 
-enum Result {
+enum ResultCode {
   SUCCESS = 0;
-  ERROR_RESPONSE = 1;
+  FAILURE = 1;
+}
+
+message Result {
+  ResultCode code = 1;
+  bytes response = 2;
+  string key = 3;
 }
 
 message Login {
@@ -31,14 +37,44 @@ message AppendRequest {
 
 message AppendResponse {
   Result result = 1;
-  string error_type = 2;
-  bytes error_response = 3;
-  string mailbox = 4;
-  uint32 validity = 5;
-  uint32 uid = 6;
+  string mailbox = 2;
+  uint32 validity = 3;
+  uint32 uid = 4;
+}
+
+message UserData {
+  string password = 1;
+  map<string, string> params = 5;
+}
+
+message UserResponse {
+  Result result = 1;
+  string username = 2;
+  UserData data = 3;
+}
+
+message ListUsersRequest {
+  string match = 1;
+}
+
+message GetUserRequest {
+  string username = 1;
+}
+
+message SetUserRequest {
+  string username = 1;
+  UserData data = 2;
+}
+
+message DeleteUserRequest {
+  string username = 1;
 }
 
 service Admin {
   rpc Ping (PingRequest) returns (PingResponse) {}
   rpc Append (AppendRequest) returns (AppendResponse) {}
+  rpc ListUsers (ListUsersRequest) returns (stream UserResponse) {}
+  rpc GetUser (stream GetUserRequest) returns (stream UserResponse) {}
+  rpc SetUser (stream SetUserRequest) returns (stream UserResponse) {}
+  rpc DeleteUser (stream DeleteUserRequest) returns (stream UserResponse) {}
 }

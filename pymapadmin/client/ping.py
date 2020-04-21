@@ -1,4 +1,3 @@
-"""Ping the server."""
 
 from __future__ import annotations
 
@@ -12,15 +11,16 @@ from ..grpc.admin_pb2 import PingRequest
 
 
 class PingCommand(ClientCommand):
+    """Ping the server."""
 
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
             -> None:  # pragma: no cover
         subparsers.add_parser(
-            name, description=__doc__,
+            name, description=cls.__doc__,
             help='ping the server')
 
-    async def run(self, fileobj: TextIO) -> int:
+    async def run(self, outfile: TextIO) -> int:
         req = PingRequest(client_version=client_version)
         try:
             res = await self.stub.Ping(req)

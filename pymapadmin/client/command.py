@@ -39,11 +39,11 @@ class ClientCommand(metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    async def run(self, fileobj: TextIO) -> int:
+    async def run(self, outfile: TextIO) -> int:
         """Run the command and return the exit code.
 
         Args:
-            fileobj: The file object to print the output to.
+            outfile: The file object to print the output to.
 
         """
         ...

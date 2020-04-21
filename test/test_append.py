@@ -1,41 +1,27 @@
 
 from io import BytesIO, StringIO
 from argparse import Namespace
-from typing import Any, Optional
 
 import pytest  # type: ignore
 from pymapadmin.client.append import AppendCommand
-from pymapadmin.grpc.admin_pb2 import AppendResponse, SUCCESS
+from pymapadmin.grpc.admin_pb2 import AppendResponse, Result, FAILURE
+
+from stub import StubChannel
 
 pytestmark = pytest.mark.asyncio
 
 
-class _Stub:
-
-    def __init__(self, response) -> None:
-        self.method: Optional[str] = None
-        self.request: Optional[Any] = None
-        self.response = response
-
-    async def _action(self, request):
-        self.request = request
-        return self.response
-
-    def __getattr__(self, method):
-        self.method = method
-        return self._action
-
-
-class TestAdminClient:
+class TestAppendCommand:
 
     async def test_append(self):
-        stub = _Stub(AppendResponse(result=SUCCESS))
+        stub = StubChannel(AppendResponse())
+        outfile = StringIO()
         args = Namespace(user='testuser', sender=None, recipient=None,
                          mailbox='INBOX', data=BytesIO(b'test data'),
                          flags=['\\Flagged', '\\Seen'],
                          timestamp=1234567890)
         command = AppendCommand(stub, args)
-        code = await command.run(StringIO())
+        code = await command.run(outfile)
         request = stub.request
         assert 'Append' == stub.method
         assert 0 == code
@@ -44,3 +30,34 @@ class TestAdminClient:
         assert ['\\Flagged', '\\Seen'] == request.flags
         assert 'testuser' == request.login.user
         assert 'INBOX' == request.mailbox
+        assert '2.0.0 Message delivered\n' == outfile.getvalue()
+
+    async def test_append_failure(self):
+        stub = StubChannel(AppendResponse(
+            result=Result(code=FAILURE, key='MailboxNotFound')))
+        outfile = StringIO()
+        args = Namespace(user='testuser', sender=None, recipient=None,
+                         mailbox='Bad', data=BytesIO(b'test data'),
+                         flags=['\\Flagged', '\\Seen'],
+                         timestamp=1234567890)
+        command = AppendCommand(stub, args)
+        code = await command.run(outfile)
+        request = stub.request
+        assert 1 == code
+        assert 'Bad' == request.mailbox
+        assert '4.2.0 Message not deliverable\n' == outfile.getvalue()
+
+    async def test_append_unknown(self):
+        stub = StubChannel(AppendResponse(
+            result=Result(code=FAILURE, key='SomeUnknownKey')))
+        outfile = StringIO()
+        args = Namespace(user='testuser', sender=None, recipient=None,
+                         mailbox='INBOX', data=BytesIO(b'test data'),
+                         flags=['\\Flagged', '\\Seen'],
+                         timestamp=1234567890)
+        command = AppendCommand(stub, args)
+        code = await command.run(outfile)
+        request = stub.request
+        assert 1 == code
+        assert 'INBOX' == request.mailbox
+        assert '4.3.0 Unhandled system error\n' == outfile.getvalue()

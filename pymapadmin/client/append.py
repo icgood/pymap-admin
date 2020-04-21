@@ -1,4 +1,3 @@
-"""Append a message directly to a user's mailbox."""
 
 from __future__ import annotations
 
@@ -9,11 +8,12 @@ from argparse import FileType
 from typing import Any, Tuple, TextIO
 
 from .command import ClientCommand
-from ..grpc.admin_pb2 import AppendRequest, AppendResponse, Login, \
-    SUCCESS, ERROR_RESPONSE
+from ..grpc.admin_pb2 import Login, SUCCESS, FAILURE, \
+    AppendRequest, AppendResponse
 
 
 class AppendCommand(ClientCommand):
+    """Append a message directly to a user's mailbox."""
 
     success = '2.0.0 Message delivered'
     messages = {'InvalidAuth': '5.7.8 Authentication credentials invalid',
@@ -27,7 +27,7 @@ class AppendCommand(ClientCommand):
     def add_subparser(cls, name: str, subparsers: Any) \
             -> None:  # pragma: no cover
         subparser = subparsers.add_parser(
-            name, description=__doc__,
+            name, description=cls.__doc__,
             help='append a message to a mailbox')
         subparser.add_argument('--from', metavar='ADDRESS', dest='sender',
                                default='', help='the message envelope sender')
@@ -36,7 +36,7 @@ class AppendCommand(ClientCommand):
         subparser.add_argument('--mailbox', metavar='NAME',
                                help='the mailbox name')
         subparser.add_argument('--timestamp', type=int, metavar='SECONDS',
-                               help='the message timestamp (defualt: now)')
+                               help='the message timestamp (default: now)')
         subparser.add_argument('--data', type=FileType('rb'), metavar='FILE',
                                default=sys.stdin.buffer,
                                help='the message data (default: stdin)')
@@ -55,7 +55,7 @@ class AppendCommand(ClientCommand):
         flags.add_argument('--answered', dest='flags', action='append_const',
                            const='\\Answered', help='the message is answered')
 
-    async def run(self, fileobj: TextIO) -> int:
+    async def run(self, outfile: TextIO) -> int:
         args = self.args
         recipient = args.recipient or args.user
         data = args.data.read()
@@ -75,17 +75,18 @@ class AppendCommand(ClientCommand):
         else:
             print(res, file=sys.stderr)
             code, msg = self._parse(res)
-        print(msg, file=fileobj)
+        print(msg, file=outfile)
         return code
 
     def _parse(self, response: AppendResponse) -> Tuple[int, str]:
-        if response.result == SUCCESS:
+        result = response.result
+        if result.code == SUCCESS:
             return 0, self.success
-        elif response.result == ERROR_RESPONSE:
+        elif result.code == FAILURE:
             try:
-                msg = self.messages[response.error_type]
+                msg = self.messages[result.key]
             except KeyError:
                 msg = self.messages['UnhandledError']
             return 1, msg
         else:
-            raise NotImplementedError(response.result)
+            raise NotImplementedError(result)
