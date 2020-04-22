@@ -3,6 +3,9 @@ from io import StringIO
 from argparse import Namespace
 
 import pytest  # type: ignore
+
+pytest.importorskip('pysasl')  # noqa
+
 from pymapadmin.client.user import ListUsersCommand, GetUserCommand, \
     SetUserCommand, DeleteUserCommand
 from pymapadmin.grpc.admin_pb2 import UserResponse
