@@ -3,16 +3,24 @@ from __future__ import annotations
 
 import sys
 import time
-import traceback
 from argparse import FileType
-from typing import Any, Tuple, TextIO
+from typing import Any, TextIO, AsyncContextManager
 
-from .command import ClientCommand
-from ..grpc.admin_pb2 import Login, SUCCESS, FAILURE, \
-    AppendRequest, AppendResponse
+from grpclib.client import Channel, Stream
+
+from .command import RequestT, ResponseT, ClientCommand
+from ..grpc.admin_grpc import MailboxStub
+from ..grpc.admin_pb2 import AppendRequest, AppendResponse
 
 
-class AppendCommand(ClientCommand):
+class MailboxBase(ClientCommand[MailboxStub, RequestT, ResponseT]):
+
+    @classmethod
+    def get_stub(cls, channel: Channel) -> MailboxStub:
+        return MailboxStub(channel)
+
+
+class AppendCommand(MailboxBase[AppendRequest, AppendResponse]):
     """Append a message directly to a user's mailbox."""
 
     success = '2.0.0 Message delivered'
@@ -55,38 +63,29 @@ class AppendCommand(ClientCommand):
         flags.add_argument('--answered', dest='flags', action='append_const',
                            const='\\Answered', help='the message is answered')
 
-    async def run(self, outfile: TextIO) -> int:
+    def open(self) -> AsyncContextManager[
+            Stream[AppendRequest, AppendResponse]]:
+        return self.stub.Append.open()
+
+    def build_request(self) -> AppendRequest:
         args = self.args
         recipient = args.recipient or args.user
         data = args.data.read()
         when: int = args.timestamp or int(time.time())
-        login = Login(user=args.user)
-        req = AppendRequest(login=login, sender=args.sender,
-                            recipient=recipient, mailbox=args.mailbox,
-                            data=data, flags=args.flags, when=when)
-        try:
-            res = await self.stub.Append(req)
-        except OSError:
-            traceback.print_exc()
-            code, msg = 1, self.messages['ConnectionFailed']
-        except Exception:
-            traceback.print_exc()
-            code, msg = 1, self.messages['UnhandledError']
-        else:
-            print(res, file=sys.stderr)
-            code, msg = self._parse(res)
-        print(msg, file=outfile)
-        return code
+        login = self.get_login(args.user)
+        return AppendRequest(login=login, sender=args.sender,
+                             recipient=recipient, mailbox=args.mailbox,
+                             data=data, flags=args.flags, when=when)
 
-    def _parse(self, response: AppendResponse) -> Tuple[int, str]:
-        result = response.result
-        if result.code == SUCCESS:
-            return 0, self.success
-        elif result.code == FAILURE:
-            try:
-                msg = self.messages[result.key]
-            except KeyError:
-                msg = self.messages['UnhandledError']
-            return 1, msg
-        else:
-            raise NotImplementedError(result)
+    def print_success(self, res: AppendResponse, outfile: TextIO) -> None:
+        print(res, file=sys.stderr)
+        print(self.success, file=outfile)
+
+    def print_failure(self, res: AppendResponse, outfile: TextIO) -> None:
+        print(res.result, file=sys.stderr)
+        print(self.messages[res.result.key], file=outfile)
+
+    def handle_exception(self, exc: Exception, outfile: TextIO) -> int:
+        ret = super().handle_exception(exc, outfile)
+        print(self.messages['UnhandledError'], file=outfile)
+        return ret

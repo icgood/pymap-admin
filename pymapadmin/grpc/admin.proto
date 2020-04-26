@@ -2,14 +2,6 @@ syntax = "proto3";
 
 package admin;
 
-message PingRequest {
-  string client_version = 1;
-}
-
-message PingResponse {
-  string server_version = 1;
-}
-
 enum ResultCode {
   SUCCESS = 0;
   FAILURE = 1;
@@ -21,8 +13,19 @@ message Result {
   string key = 3;
 }
 
+message PingRequest {
+  string client_version = 2;
+}
+
+message PingResponse {
+  Result result = 1;
+  string server_version = 2;
+}
+
 message Login {
-  string user = 1;
+  string authcid = 1;
+  string authzid = 2;
+  string secret = 3;
 }
 
 message AppendRequest {
@@ -42,9 +45,32 @@ message AppendResponse {
   uint32 uid = 4;
 }
 
+message ListUsersRequest {
+  Login login = 1;
+  string match = 2;
+}
+
+message ListUsersResponse {
+  Result result = 1;
+  repeated string users = 2;
+}
+
 message UserData {
   string password = 1;
-  map<string, string> params = 5;
+  map<string, string> params = 2;
+}
+
+message GetUserRequest {
+  Login login = 1;
+}
+
+message SetUserRequest {
+  Login login = 1;
+  UserData data = 2;
+}
+
+message DeleteUserRequest {
+  Login login = 1;
 }
 
 message UserResponse {
@@ -53,28 +79,17 @@ message UserResponse {
   UserData data = 3;
 }
 
-message ListUsersRequest {
-  string match = 1;
-}
-
-message GetUserRequest {
-  string username = 1;
-}
-
-message SetUserRequest {
-  string username = 1;
-  UserData data = 2;
-}
-
-message DeleteUserRequest {
-  string username = 1;
-}
-
-service Admin {
+service System {
   rpc Ping (PingRequest) returns (PingResponse) {}
+}
+
+service Mailbox {
   rpc Append (AppendRequest) returns (AppendResponse) {}
-  rpc ListUsers (ListUsersRequest) returns (stream UserResponse) {}
-  rpc GetUser (stream GetUserRequest) returns (stream UserResponse) {}
-  rpc SetUser (stream SetUserRequest) returns (stream UserResponse) {}
-  rpc DeleteUser (stream DeleteUserRequest) returns (stream UserResponse) {}
+}
+
+service User {
+  rpc ListUsers (ListUsersRequest) returns (stream ListUsersResponse) {}
+  rpc GetUser (GetUserRequest) returns (UserResponse) {}
+  rpc SetUser (SetUserRequest) returns (UserResponse) {}
+  rpc DeleteUser (DeleteUserRequest) returns (UserResponse) {}
 }
