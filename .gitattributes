@@ -1,0 +1,3 @@
+pymapadmin/grpc/admin_grpc.py -diff
+pymapadmin/grpc/admin_pb2.py -diff
+pymapadmin/grpc/admin_pb2.pyi -diff

@@ -1,18 +1,23 @@
-"""Admin functions for a running pymap server."""
+"""Admin functions for a running pymap server.
+
+Many arguments may also be given with a $PYMAP_ADMIN_* environment variable.
+
+"""
 
 from __future__ import annotations
 
-import asyncio
+import os
 import sys
+import asyncio
 from argparse import ArgumentParser, Namespace, FileType
-from typing import Type, Mapping
+from ssl import create_default_context
+from typing import Type, Optional, Mapping
 
 from grpclib.client import Channel
 from pkg_resources import iter_entry_points, DistributionNotFound
 from pymapadmin import __version__
 
 from .command import ClientCommand
-from ..grpc.admin_grpc import AdminStub
 
 
 def main() -> int:
@@ -22,10 +27,18 @@ def main() -> int:
     parser.add_argument('--outfile', metavar='PATH',
                         type=FileType('w'), default=sys.stdout,
                         help='the output file (default: stdout)')
-    parser.add_argument('--host', metavar='HOST', default='localhost',
-                        help='host to connect to')
-    parser.add_argument('--port', metavar='PORT', type=int, default=9090,
-                        help='port to connect to')
+    parser.add_argument('--host', metavar='HOST',
+                        default=_def('HOST', 'localhost'), help='server host')
+    parser.add_argument('--port', metavar='PORT', type=int,
+                        default=_def('PORT', '9090'), help='server port')
+    parser.add_argument('--cafile', metavar='FILE', default=_def('CAFILE'),
+                        help='CA cert file')
+    parser.add_argument('--capath', metavar='PATH', default=_def('CAPATH'),
+                        help='CA cert path')
+    parser.add_argument('--username', metavar='NAME', dest='admin_username',
+                        default=_def('USERNAME'), help='auth username')
+    parser.add_argument('--password', metavar='PASS', dest='admin_password',
+                        default=_def('PASSWORD'), help='auth password')
 
     subparsers = parser.add_subparsers(dest='command',
                                        help='which admin command to run')
@@ -43,15 +56,18 @@ def main() -> int:
 
 async def run(parser: ArgumentParser, args: Namespace,
               command_cls: Type[ClientCommand]) -> int:
-    loop = asyncio.get_event_loop()
-    channel = Channel(host=args.host, port=args.port, loop=loop)
-    stub = AdminStub(channel)
+    ssl = create_default_context(cafile=args.cafile, capath=args.capath)
+    channel = Channel(host=args.host, port=args.port, ssl=ssl)
+    stub = command_cls.get_stub(channel)
     command = command_cls(stub, args)
     try:
-        code = await command.run(args.outfile)
+        return await command()
     finally:
         channel.close()
-    return code
+
+
+def _def(name: str, val: str = None) -> Optional[str]:
+    return os.environ.get(f'PYMAP_ADMIN_{name}', val)
 
 
 def _load_entry_points(group: str) -> Mapping[str, Type[ClientCommand]]:

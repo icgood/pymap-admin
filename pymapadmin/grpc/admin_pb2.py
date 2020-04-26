@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='admin',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x1bpymapadmin/grpc/admin.proto\x12\x05\x61\x64min\"%\n\x0bPingRequest\x12\x16\n\x0e\x63lient_version\x18\x01 \x01(\t\"&\n\x0cPingResponse\x12\x16\n\x0eserver_version\x18\x01 \x01(\t\"H\n\x06Result\x12\x1f\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x11.admin.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"\x15\n\x05Login\x12\x0c\n\x04user\x18\x01 \x01(\t\"\x8b\x01\n\rAppendRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\x0e\n\x06sender\x18\x02 \x01(\t\x12\x11\n\trecipient\x18\x03 \x01(\t\x12\x0f\n\x07mailbox\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\"_\n\x0e\x41ppendResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x10\n\x08validity\x18\x03 \x01(\r\x12\x0b\n\x03uid\x18\x04 \x01(\r\"x\n\x08UserData\x12\x10\n\x08password\x18\x01 \x01(\t\x12+\n\x06params\x18\x05 \x03(\x0b\x32\x1b.admin.UserData.ParamsEntry\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"^\n\x0cUserResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x1d\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x0f.admin.UserData\"!\n\x10ListUsersRequest\x12\r\n\x05match\x18\x01 \x01(\t\"\"\n\x0eGetUserRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"A\n\x0eSetUserRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x1d\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x0f.admin.UserData\"%\n\x11\x44\x65leteUserRequest\x12\x10\n\x08username\x18\x01 \x01(\t*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32\xef\x02\n\x05\x41\x64min\x12\x31\n\x04Ping\x12\x12.admin.PingRequest\x1a\x13.admin.PingResponse\"\x00\x12\x37\n\x06\x41ppend\x12\x14.admin.AppendRequest\x1a\x15.admin.AppendResponse\"\x00\x12=\n\tListUsers\x12\x17.admin.ListUsersRequest\x1a\x13.admin.UserResponse\"\x00\x30\x01\x12;\n\x07GetUser\x12\x15.admin.GetUserRequest\x1a\x13.admin.UserResponse\"\x00(\x01\x30\x01\x12;\n\x07SetUser\x12\x15.admin.SetUserRequest\x1a\x13.admin.UserResponse\"\x00(\x01\x30\x01\x12\x41\n\nDeleteUser\x12\x18.admin.DeleteUserRequest\x1a\x13.admin.UserResponse\"\x00(\x01\x30\x01\x62\x06proto3'
+  serialized_pb=b'\n\x1bpymapadmin/grpc/admin.proto\x12\x05\x61\x64min\"H\n\x06Result\x12\x1f\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x11.admin.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"%\n\x0bPingRequest\x12\x16\n\x0e\x63lient_version\x18\x02 \x01(\t\"E\n\x0cPingResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x16\n\x0eserver_version\x18\x02 \x01(\t\"9\n\x05Login\x12\x0f\n\x07\x61uthcid\x18\x01 \x01(\t\x12\x0f\n\x07\x61uthzid\x18\x02 \x01(\t\x12\x0e\n\x06secret\x18\x03 \x01(\t\"\x8b\x01\n\rAppendRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\x0e\n\x06sender\x18\x02 \x01(\t\x12\x11\n\trecipient\x18\x03 \x01(\t\x12\x0f\n\x07mailbox\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\"_\n\x0e\x41ppendResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x10\n\x08validity\x18\x03 \x01(\r\x12\x0b\n\x03uid\x18\x04 \x01(\r\">\n\x10ListUsersRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\r\n\x05match\x18\x02 \x01(\t\"A\n\x11ListUsersResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\r\n\x05users\x18\x02 \x03(\t\"x\n\x08UserData\x12\x10\n\x08password\x18\x01 \x01(\t\x12+\n\x06params\x18\x02 \x03(\x0b\x32\x1b.admin.UserData.ParamsEntry\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"-\n\x0eGetUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\"L\n\x0eSetUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\x1d\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x0f.admin.UserData\"0\n\x11\x44\x65leteUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\"^\n\x0cUserResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x1d\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x0f.admin.UserData*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32;\n\x06System\x12\x31\n\x04Ping\x12\x12.admin.PingRequest\x1a\x13.admin.PingResponse\"\x00\x32\x42\n\x07Mailbox\x12\x37\n\x06\x41ppend\x12\x14.admin.AppendRequest\x1a\x15.admin.AppendResponse\"\x00\x32\xfb\x01\n\x04User\x12\x42\n\tListUsers\x12\x17.admin.ListUsersRequest\x1a\x18.admin.ListUsersResponse\"\x00\x30\x01\x12\x37\n\x07GetUser\x12\x15.admin.GetUserRequest\x1a\x13.admin.UserResponse\"\x00\x12\x37\n\x07SetUser\x12\x15.admin.SetUserRequest\x1a\x13.admin.UserResponse\"\x00\x12=\n\nDeleteUser\x12\x18.admin.DeleteUserRequest\x1a\x13.admin.UserResponse\"\x00\x62\x06proto3'
 )
 
 _RESULTCODE = _descriptor.EnumDescriptor(
@@ -39,8 +39,8 @@ _RESULTCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=848,
-  serialized_end=886,
+  serialized_start=1044,
+  serialized_end=1082,
 )
 _sym_db.RegisterEnumDescriptor(_RESULTCODE)
 
@@ -48,68 +48,6 @@ ResultCode = enum_type_wrapper.EnumTypeWrapper(_RESULTCODE)
 SUCCESS = 0
 FAILURE = 1
 
-
-
-_PINGREQUEST = _descriptor.Descriptor(
-  name='PingRequest',
-  full_name='admin.PingRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='client_version', full_name='admin.PingRequest.client_version', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=38,
-  serialized_end=75,
-)
-
-
-_PINGRESPONSE = _descriptor.Descriptor(
-  name='PingResponse',
-  full_name='admin.PingResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='server_version', full_name='admin.PingResponse.server_version', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=77,
-  serialized_end=115,
-)
 
 
 _RESULT = _descriptor.Descriptor(
@@ -152,21 +90,21 @@ _RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=117,
-  serialized_end=189,
+  serialized_start=38,
+  serialized_end=110,
 )
 
 
-_LOGIN = _descriptor.Descriptor(
-  name='Login',
-  full_name='admin.Login',
+_PINGREQUEST = _descriptor.Descriptor(
+  name='PingRequest',
+  full_name='admin.PingRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='user', full_name='admin.Login.user', index=0,
-      number=1, type=9, cpp_type=9, label=1,
+      name='client_version', full_name='admin.PingRequest.client_version', index=0,
+      number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -183,8 +121,91 @@ _LOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=191,
-  serialized_end=212,
+  serialized_start=112,
+  serialized_end=149,
+)
+
+
+_PINGRESPONSE = _descriptor.Descriptor(
+  name='PingResponse',
+  full_name='admin.PingResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='result', full_name='admin.PingResponse.result', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='server_version', full_name='admin.PingResponse.server_version', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=151,
+  serialized_end=220,
+)
+
+
+_LOGIN = _descriptor.Descriptor(
+  name='Login',
+  full_name='admin.Login',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='authcid', full_name='admin.Login.authcid', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='authzid', full_name='admin.Login.authzid', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='secret', full_name='admin.Login.secret', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=222,
+  serialized_end=279,
 )
 
 
@@ -256,8 +277,8 @@ _APPENDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=215,
-  serialized_end=354,
+  serialized_start=282,
+  serialized_end=421,
 )
 
 
@@ -308,8 +329,84 @@ _APPENDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=356,
-  serialized_end=451,
+  serialized_start=423,
+  serialized_end=518,
+)
+
+
+_LISTUSERSREQUEST = _descriptor.Descriptor(
+  name='ListUsersRequest',
+  full_name='admin.ListUsersRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='login', full_name='admin.ListUsersRequest.login', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='match', full_name='admin.ListUsersRequest.match', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=520,
+  serialized_end=582,
+)
+
+
+_LISTUSERSRESPONSE = _descriptor.Descriptor(
+  name='ListUsersResponse',
+  full_name='admin.ListUsersResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='result', full_name='admin.ListUsersResponse.result', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='users', full_name='admin.ListUsersResponse.users', index=1,
+      number=2, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=584,
+  serialized_end=649,
 )
 
 
@@ -346,8 +443,8 @@ _USERDATA_PARAMSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=528,
-  serialized_end=573,
+  serialized_start=726,
+  serialized_end=771,
 )
 
 _USERDATA = _descriptor.Descriptor(
@@ -366,7 +463,7 @@ _USERDATA = _descriptor.Descriptor(
       serialized_options=None, file=DESCRIPTOR),
     _descriptor.FieldDescriptor(
       name='params', full_name='admin.UserData.params', index=1,
-      number=5, type=11, cpp_type=10, label=3,
+      number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -383,8 +480,108 @@ _USERDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=453,
-  serialized_end=573,
+  serialized_start=651,
+  serialized_end=771,
+)
+
+
+_GETUSERREQUEST = _descriptor.Descriptor(
+  name='GetUserRequest',
+  full_name='admin.GetUserRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='login', full_name='admin.GetUserRequest.login', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=773,
+  serialized_end=818,
+)
+
+
+_SETUSERREQUEST = _descriptor.Descriptor(
+  name='SetUserRequest',
+  full_name='admin.SetUserRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='login', full_name='admin.SetUserRequest.login', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='data', full_name='admin.SetUserRequest.data', index=1,
+      number=2, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=820,
+  serialized_end=896,
+)
+
+
+_DELETEUSERREQUEST = _descriptor.Descriptor(
+  name='DeleteUserRequest',
+  full_name='admin.DeleteUserRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='login', full_name='admin.DeleteUserRequest.login', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=898,
+  serialized_end=946,
 )
 
 
@@ -428,163 +625,46 @@ _USERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=575,
-  serialized_end=669,
-)
-
-
-_LISTUSERSREQUEST = _descriptor.Descriptor(
-  name='ListUsersRequest',
-  full_name='admin.ListUsersRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='match', full_name='admin.ListUsersRequest.match', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=671,
-  serialized_end=704,
-)
-
-
-_GETUSERREQUEST = _descriptor.Descriptor(
-  name='GetUserRequest',
-  full_name='admin.GetUserRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='username', full_name='admin.GetUserRequest.username', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=706,
-  serialized_end=740,
-)
-
-
-_SETUSERREQUEST = _descriptor.Descriptor(
-  name='SetUserRequest',
-  full_name='admin.SetUserRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='username', full_name='admin.SetUserRequest.username', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='data', full_name='admin.SetUserRequest.data', index=1,
-      number=2, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=742,
-  serialized_end=807,
-)
-
-
-_DELETEUSERREQUEST = _descriptor.Descriptor(
-  name='DeleteUserRequest',
-  full_name='admin.DeleteUserRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='username', full_name='admin.DeleteUserRequest.username', index=0,
-      number=1, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=809,
-  serialized_end=846,
+  serialized_start=948,
+  serialized_end=1042,
 )
 
 _RESULT.fields_by_name['code'].enum_type = _RESULTCODE
+_PINGRESPONSE.fields_by_name['result'].message_type = _RESULT
 _APPENDREQUEST.fields_by_name['login'].message_type = _LOGIN
 _APPENDRESPONSE.fields_by_name['result'].message_type = _RESULT
+_LISTUSERSREQUEST.fields_by_name['login'].message_type = _LOGIN
+_LISTUSERSRESPONSE.fields_by_name['result'].message_type = _RESULT
 _USERDATA_PARAMSENTRY.containing_type = _USERDATA
 _USERDATA.fields_by_name['params'].message_type = _USERDATA_PARAMSENTRY
+_GETUSERREQUEST.fields_by_name['login'].message_type = _LOGIN
+_SETUSERREQUEST.fields_by_name['login'].message_type = _LOGIN
+_SETUSERREQUEST.fields_by_name['data'].message_type = _USERDATA
+_DELETEUSERREQUEST.fields_by_name['login'].message_type = _LOGIN
 _USERRESPONSE.fields_by_name['result'].message_type = _RESULT
 _USERRESPONSE.fields_by_name['data'].message_type = _USERDATA
-_SETUSERREQUEST.fields_by_name['data'].message_type = _USERDATA
+DESCRIPTOR.message_types_by_name['Result'] = _RESULT
 DESCRIPTOR.message_types_by_name['PingRequest'] = _PINGREQUEST
 DESCRIPTOR.message_types_by_name['PingResponse'] = _PINGRESPONSE
-DESCRIPTOR.message_types_by_name['Result'] = _RESULT
 DESCRIPTOR.message_types_by_name['Login'] = _LOGIN
 DESCRIPTOR.message_types_by_name['AppendRequest'] = _APPENDREQUEST
 DESCRIPTOR.message_types_by_name['AppendResponse'] = _APPENDRESPONSE
-DESCRIPTOR.message_types_by_name['UserData'] = _USERDATA
-DESCRIPTOR.message_types_by_name['UserResponse'] = _USERRESPONSE
 DESCRIPTOR.message_types_by_name['ListUsersRequest'] = _LISTUSERSREQUEST
+DESCRIPTOR.message_types_by_name['ListUsersResponse'] = _LISTUSERSRESPONSE
+DESCRIPTOR.message_types_by_name['UserData'] = _USERDATA
 DESCRIPTOR.message_types_by_name['GetUserRequest'] = _GETUSERREQUEST
 DESCRIPTOR.message_types_by_name['SetUserRequest'] = _SETUSERREQUEST
 DESCRIPTOR.message_types_by_name['DeleteUserRequest'] = _DELETEUSERREQUEST
+DESCRIPTOR.message_types_by_name['UserResponse'] = _USERRESPONSE
 DESCRIPTOR.enum_types_by_name['ResultCode'] = _RESULTCODE
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
+
+Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), {
+  'DESCRIPTOR' : _RESULT,
+  '__module__' : 'pymapadmin.grpc.admin_pb2'
+  # @@protoc_insertion_point(class_scope:admin.Result)
+  })
+_sym_db.RegisterMessage(Result)
 
 PingRequest = _reflection.GeneratedProtocolMessageType('PingRequest', (_message.Message,), {
   'DESCRIPTOR' : _PINGREQUEST,
@@ -599,13 +679,6 @@ PingResponse = _reflection.GeneratedProtocolMessageType('PingResponse', (_messag
   # @@protoc_insertion_point(class_scope:admin.PingResponse)
   })
 _sym_db.RegisterMessage(PingResponse)
-
-Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), {
-  'DESCRIPTOR' : _RESULT,
-  '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.Result)
-  })
-_sym_db.RegisterMessage(Result)
 
 Login = _reflection.GeneratedProtocolMessageType('Login', (_message.Message,), {
   'DESCRIPTOR' : _LOGIN,
@@ -628,6 +701,20 @@ AppendResponse = _reflection.GeneratedProtocolMessageType('AppendResponse', (_me
   })
 _sym_db.RegisterMessage(AppendResponse)
 
+ListUsersRequest = _reflection.GeneratedProtocolMessageType('ListUsersRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSERSREQUEST,
+  '__module__' : 'pymapadmin.grpc.admin_pb2'
+  # @@protoc_insertion_point(class_scope:admin.ListUsersRequest)
+  })
+_sym_db.RegisterMessage(ListUsersRequest)
+
+ListUsersResponse = _reflection.GeneratedProtocolMessageType('ListUsersResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LISTUSERSRESPONSE,
+  '__module__' : 'pymapadmin.grpc.admin_pb2'
+  # @@protoc_insertion_point(class_scope:admin.ListUsersResponse)
+  })
+_sym_db.RegisterMessage(ListUsersResponse)
+
 UserData = _reflection.GeneratedProtocolMessageType('UserData', (_message.Message,), {
 
   'ParamsEntry' : _reflection.GeneratedProtocolMessageType('ParamsEntry', (_message.Message,), {
@@ -642,20 +729,6 @@ UserData = _reflection.GeneratedProtocolMessageType('UserData', (_message.Messag
   })
 _sym_db.RegisterMessage(UserData)
 _sym_db.RegisterMessage(UserData.ParamsEntry)
-
-UserResponse = _reflection.GeneratedProtocolMessageType('UserResponse', (_message.Message,), {
-  'DESCRIPTOR' : _USERRESPONSE,
-  '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.UserResponse)
-  })
-_sym_db.RegisterMessage(UserResponse)
-
-ListUsersRequest = _reflection.GeneratedProtocolMessageType('ListUsersRequest', (_message.Message,), {
-  'DESCRIPTOR' : _LISTUSERSREQUEST,
-  '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.ListUsersRequest)
-  })
-_sym_db.RegisterMessage(ListUsersRequest)
 
 GetUserRequest = _reflection.GeneratedProtocolMessageType('GetUserRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETUSERREQUEST,
@@ -678,49 +751,86 @@ DeleteUserRequest = _reflection.GeneratedProtocolMessageType('DeleteUserRequest'
   })
 _sym_db.RegisterMessage(DeleteUserRequest)
 
+UserResponse = _reflection.GeneratedProtocolMessageType('UserResponse', (_message.Message,), {
+  'DESCRIPTOR' : _USERRESPONSE,
+  '__module__' : 'pymapadmin.grpc.admin_pb2'
+  # @@protoc_insertion_point(class_scope:admin.UserResponse)
+  })
+_sym_db.RegisterMessage(UserResponse)
+
 
 _USERDATA_PARAMSENTRY._options = None
 
-_ADMIN = _descriptor.ServiceDescriptor(
-  name='Admin',
-  full_name='admin.Admin',
+_SYSTEM = _descriptor.ServiceDescriptor(
+  name='System',
+  full_name='admin.System',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=889,
-  serialized_end=1256,
+  serialized_start=1084,
+  serialized_end=1143,
   methods=[
   _descriptor.MethodDescriptor(
     name='Ping',
-    full_name='admin.Admin.Ping',
+    full_name='admin.System.Ping',
     index=0,
     containing_service=None,
     input_type=_PINGREQUEST,
     output_type=_PINGRESPONSE,
     serialized_options=None,
   ),
+])
+_sym_db.RegisterServiceDescriptor(_SYSTEM)
+
+DESCRIPTOR.services_by_name['System'] = _SYSTEM
+
+
+_MAILBOX = _descriptor.ServiceDescriptor(
+  name='Mailbox',
+  full_name='admin.Mailbox',
+  file=DESCRIPTOR,
+  index=1,
+  serialized_options=None,
+  serialized_start=1145,
+  serialized_end=1211,
+  methods=[
   _descriptor.MethodDescriptor(
     name='Append',
-    full_name='admin.Admin.Append',
-    index=1,
+    full_name='admin.Mailbox.Append',
+    index=0,
     containing_service=None,
     input_type=_APPENDREQUEST,
     output_type=_APPENDRESPONSE,
     serialized_options=None,
   ),
+])
+_sym_db.RegisterServiceDescriptor(_MAILBOX)
+
+DESCRIPTOR.services_by_name['Mailbox'] = _MAILBOX
+
+
+_USER = _descriptor.ServiceDescriptor(
+  name='User',
+  full_name='admin.User',
+  file=DESCRIPTOR,
+  index=2,
+  serialized_options=None,
+  serialized_start=1214,
+  serialized_end=1465,
+  methods=[
   _descriptor.MethodDescriptor(
     name='ListUsers',
-    full_name='admin.Admin.ListUsers',
-    index=2,
+    full_name='admin.User.ListUsers',
+    index=0,
     containing_service=None,
     input_type=_LISTUSERSREQUEST,
-    output_type=_USERRESPONSE,
+    output_type=_LISTUSERSRESPONSE,
     serialized_options=None,
   ),
   _descriptor.MethodDescriptor(
     name='GetUser',
-    full_name='admin.Admin.GetUser',
-    index=3,
+    full_name='admin.User.GetUser',
+    index=1,
     containing_service=None,
     input_type=_GETUSERREQUEST,
     output_type=_USERRESPONSE,
@@ -728,8 +838,8 @@ _ADMIN = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='SetUser',
-    full_name='admin.Admin.SetUser',
-    index=4,
+    full_name='admin.User.SetUser',
+    index=2,
     containing_service=None,
     input_type=_SETUSERREQUEST,
     output_type=_USERRESPONSE,
@@ -737,16 +847,16 @@ _ADMIN = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='DeleteUser',
-    full_name='admin.Admin.DeleteUser',
-    index=5,
+    full_name='admin.User.DeleteUser',
+    index=3,
     containing_service=None,
     input_type=_DELETEUSERREQUEST,
     output_type=_USERRESPONSE,
     serialized_options=None,
   ),
 ])
-_sym_db.RegisterServiceDescriptor(_ADMIN)
+_sym_db.RegisterServiceDescriptor(_USER)
 
-DESCRIPTOR.services_by_name['Admin'] = _ADMIN
+DESCRIPTOR.services_by_name['User'] = _USER
 
 # @@protoc_insertion_point(module_scope)
