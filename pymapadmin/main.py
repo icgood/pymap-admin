@@ -29,7 +29,7 @@ def main() -> int:
     parser.add_argument('--host', metavar='HOST',
                         default=_def('HOST'), help='server host')
     parser.add_argument('--port', metavar='PORT', type=int,
-                        default=_def('PORT', '9090'), help='server port')
+                        default=_def('PORT'), help='server port')
     parser.set_defaults(path=get_admin_socket())
 
     group = parser.add_argument_group('tls options')

@@ -50,4 +50,5 @@ class ResponseProtocol(Protocol):
     @property
     @abstractmethod
     def result(self) -> Result:
+        """The result protobuf, containing a code and additional data."""
         ...

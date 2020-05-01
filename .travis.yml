@@ -3,6 +3,7 @@ python:
   - "3.8"
 dist: bionic     # https://docs.travis-ci.com/user/languages/python/#python-37-and-higher
 install:
+  - travis_retry pip install -U -r doc/requirements.txt
   - travis_retry pip install -U -r test/requirements.txt
   - travis_retry pip install coveralls
   - travis_retry pip install -e .
@@ -12,6 +13,15 @@ script:
   - flake8 pymapadmin test
 after_success:
   - coveralls
+  - make -C doc html
 branches:
   only:
     - master
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GH_TOKEN
+  keep_history: true
+  on:
+    branch: master
+  local_dir: doc/build/html
