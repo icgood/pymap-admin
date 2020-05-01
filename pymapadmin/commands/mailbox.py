@@ -3,24 +3,25 @@ from __future__ import annotations
 
 import sys
 import time
-from argparse import FileType
-from typing import Any, TextIO, AsyncContextManager
+from argparse import ArgumentParser, FileType
+from typing import Any, TextIO
 
-from grpclib.client import Channel, Stream
+from grpclib.client import Channel
 
-from .command import RequestT, ResponseT, ClientCommand
+from . import Command
+from ..typing import RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_grpc import MailboxStub
 from ..grpc.admin_pb2 import AppendRequest, AppendResponse
 
 
-class MailboxBase(ClientCommand[MailboxStub, RequestT, ResponseT]):
+class MailboxCommand(Command[MailboxStub, RequestT, ResponseT]):
 
     @classmethod
-    def get_stub(cls, channel: Channel) -> MailboxStub:
+    def get_client(cls, channel: Channel) -> MailboxStub:
         return MailboxStub(channel)
 
 
-class AppendCommand(MailboxBase[AppendRequest, AppendResponse]):
+class AppendCommand(MailboxCommand[AppendRequest, AppendResponse]):
     """Append a message directly to a user's mailbox."""
 
     success = '2.0.0 Message delivered'
@@ -33,7 +34,7 @@ class AppendCommand(MailboxBase[AppendRequest, AppendResponse]):
 
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
-            -> None:  # pragma: no cover
+            -> ArgumentParser:  # pragma: no cover
         subparser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='append a message to a mailbox')
@@ -48,7 +49,7 @@ class AppendCommand(MailboxBase[AppendRequest, AppendResponse]):
         subparser.add_argument('--data', type=FileType('rb'), metavar='FILE',
                                default=sys.stdin.buffer,
                                help='the message data (default: stdin)')
-        subparser.add_argument('user', help='the user name')
+        subparser.add_argument('username', help='the user name')
         flags = subparser.add_argument_group('message flags')
         flags.add_argument('--flag', dest='flags', action='append',
                            metavar='VAL', help='a message flag or keyword')
@@ -62,17 +63,18 @@ class AppendCommand(MailboxBase[AppendRequest, AppendResponse]):
                            const='\\Deleted', help='the message is deleted')
         flags.add_argument('--answered', dest='flags', action='append_const',
                            const='\\Answered', help='the message is answered')
+        return subparser
 
-    def open(self) -> AsyncContextManager[
-            Stream[AppendRequest, AppendResponse]]:
-        return self.stub.Append.open()
+    @property
+    def method(self) -> MethodProtocol[AppendRequest, AppendResponse]:
+        return self.client.Append
 
     def build_request(self) -> AppendRequest:
         args = self.args
-        recipient = args.recipient or args.user
+        recipient = args.recipient or args.username
         data = args.data.read()
         when: int = args.timestamp or int(time.time())
-        login = self.get_login(args.user)
+        login = self.get_login(args.username)
         return AppendRequest(login=login, sender=args.sender,
                              recipient=recipient, mailbox=args.mailbox,
                              data=data, flags=args.flags, when=when)

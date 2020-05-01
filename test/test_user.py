@@ -6,11 +6,11 @@ import pytest  # type: ignore
 from grpclib.client import Channel
 from unittest.mock import MagicMock
 
-from pymapadmin.client.user import ListUsersCommand, GetUserCommand, \
+from pymapadmin.commands.user import ListUsersCommand, GetUserCommand, \
     SetUserCommand, DeleteUserCommand
 from pymapadmin.grpc.admin_pb2 import ListUsersResponse, UserResponse
 
-from stub import TestStub
+from client import MockClient
 
 pytestmark = pytest.mark.asyncio
 
@@ -20,16 +20,15 @@ channel = MagicMock(Channel)
 class TestListUsersCommand:
 
     async def test_list_users(self):
-        stub = TestStub([ListUsersResponse(users=['user1', 'user2']),
-                         ListUsersResponse(users=['user3'])])
+        client = MockClient([ListUsersResponse(users=['user1', 'user2']),
+                             ListUsersResponse(users=['user3'])])
         outfile = StringIO()
-        args = Namespace(outfile=outfile,
-                         admin_username='admuser', admin_password='admpass',
-                         match=None)
-        command = ListUsersCommand(stub, args)
-        code = await command()
-        request = stub.request
-        assert 'ListUsers' == stub.method
+        args = Namespace(admin_username='admuser', admin_password='admpass',
+                         ask_password=False, match=None)
+        command = ListUsersCommand(args, client)
+        code = await command(outfile)
+        request = client.request
+        assert 'ListUsers' == client.method
         assert 0 == code
         assert '' == request.match
         assert 'user1\nuser2\nuser3\n' == outfile.getvalue()
@@ -38,72 +37,68 @@ class TestListUsersCommand:
 class TestGetUserCommand:
 
     async def test_get_user(self):
-        stub = TestStub([UserResponse(username='user1')])
+        client = MockClient([UserResponse(username='user1')])
         outfile = StringIO()
-        args = Namespace(outfile=outfile,
-                         admin_username='admuser', admin_password='admpass',
-                         username='user1')
-        command = GetUserCommand(stub, args)
-        code = await command()
-        request = stub.request
-        assert 'GetUser' == stub.method
+        args = Namespace(admin_username='admuser', admin_password='admpass',
+                         ask_password=False, username='user1')
+        command = GetUserCommand(args, client)
+        code = await command(outfile)
+        request = client.request
+        assert 'GetUser' == client.method
         assert 0 == code
         assert 'user1' == request.login.authzid
-        assert '' == outfile.getvalue()
+        assert 'username: "user1"\n\n' == outfile.getvalue()
 
 
 class TestDeleteUserCommand:
 
     async def test_delete_user(self):
-        stub = TestStub([UserResponse(username='user1')])
+        client = MockClient([UserResponse(username='user1')])
         outfile = StringIO()
-        args = Namespace(outfile=outfile,
-                         admin_username='admuser', admin_password='admpass',
-                         username='user1')
-        command = DeleteUserCommand(stub, args)
-        code = await command()
-        request = stub.request
-        assert 'DeleteUser' == stub.method
+        args = Namespace(admin_username='admuser', admin_password='admpass',
+                         ask_password=False, username='user1')
+        command = DeleteUserCommand(args, client)
+        code = await command(outfile)
+        request = client.request
+        assert 'DeleteUser' == client.method
         assert 0 == code
         assert 'user1' == request.login.authzid
-        assert '' == outfile.getvalue()
+        assert 'username: "user1"\n\n' == outfile.getvalue()
 
 
 class TestSetUserCommand:
 
     async def test_set_user_no_password(self):
-        stub = TestStub([UserResponse(username='user1')])
+        client = MockClient([UserResponse(username='user1')])
         outfile = StringIO()
-        args = Namespace(outfile=outfile,
-                         admin_username='admuser', admin_password='admpass',
-                         username='user1', no_password=True,
-                         param=[['identity', 'test']])
-        command = SetUserCommand(stub, args)
-        code = await command()
-        request = stub.request
-        assert 'SetUser' == stub.method
+        args = Namespace(admin_username='admuser', admin_password='admpass',
+                         ask_password=False, username='user1',
+                         no_password=True, param=[['identity', 'test']])
+        command = SetUserCommand(args, client)
+        code = await command(outfile)
+        request = client.request
+        assert 'SetUser' == client.method
         assert 0 == code
         assert 'user1' == request.login.authzid
         assert '' == request.data.password
         assert {'identity': 'test'} == request.data.params
-        assert '' == outfile.getvalue()
+        assert 'username: "user1"\n\n' == outfile.getvalue()
 
     async def test_set_user_password_file(self):
-        stub = TestStub([UserResponse(username='user1')])
+        client = MockClient([UserResponse(username='user1')])
         outfile = StringIO()
         pw_file = MagicMock()
         pw_file.readline.return_value = 'testpass'
-        args = Namespace(outfile=outfile,
-                         admin_username='admuser', admin_password='admpass',
-                         username='user1', no_password=False,
-                         password_file=pw_file,
+        args = Namespace(admin_username='admuser', admin_password='admpass',
+                         ask_password=False, username='user1',
+                         no_password=False, password_file=pw_file,
                          param=[['identity', 'test']])
-        command = SetUserCommand(stub, args)
-        code = await command()
-        request = stub.request
-        assert 'SetUser' == stub.method
+        command = SetUserCommand(args, client)
+        code = await command(outfile)
+        request = client.request
+        assert 'SetUser' == client.method
         assert 0 == code
         assert 'user1' == request.login.authzid
         assert 'testpass' == request.data.password
         assert {'identity': 'test'} == request.data.params
-        assert '' == outfile.getvalue()
+        assert 'username: "user1"\n\n' == outfile.getvalue()

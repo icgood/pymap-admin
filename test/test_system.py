@@ -3,10 +3,10 @@ from io import StringIO
 from argparse import Namespace
 
 import pytest  # type: ignore
-from pymapadmin.client.system import PingCommand
+from pymapadmin.commands.system import PingCommand
 from pymapadmin.grpc.admin_pb2 import PingResponse
 
-from stub import TestStub
+from client import MockClient
 
 pytestmark = pytest.mark.asyncio
 
@@ -14,9 +14,9 @@ pytestmark = pytest.mark.asyncio
 class TestPingCommand:
 
     async def test_ping(self):
-        stub = TestStub([PingResponse(server_version='test')])
-        args = Namespace(outfile=StringIO())
-        command = PingCommand(stub, args)
-        code = await command()
-        assert 'Ping' == stub.method
+        client = MockClient([PingResponse(server_version='test')])
+        args = Namespace()
+        command = PingCommand(args, client)
+        code = await command(StringIO())
+        assert 'Ping' == client.method
         assert 0 == code

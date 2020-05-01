@@ -20,6 +20,7 @@ message PingRequest {
 message PingResponse {
   Result result = 1;
   string server_version = 2;
+  bool public_client = 3;
 }
 
 message Login {

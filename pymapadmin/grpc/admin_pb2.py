@@ -19,7 +19,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='admin',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x1bpymapadmin/grpc/admin.proto\x12\x05\x61\x64min\"H\n\x06Result\x12\x1f\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x11.admin.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"%\n\x0bPingRequest\x12\x16\n\x0e\x63lient_version\x18\x02 \x01(\t\"E\n\x0cPingResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x16\n\x0eserver_version\x18\x02 \x01(\t\"9\n\x05Login\x12\x0f\n\x07\x61uthcid\x18\x01 \x01(\t\x12\x0f\n\x07\x61uthzid\x18\x02 \x01(\t\x12\x0e\n\x06secret\x18\x03 \x01(\t\"\x8b\x01\n\rAppendRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\x0e\n\x06sender\x18\x02 \x01(\t\x12\x11\n\trecipient\x18\x03 \x01(\t\x12\x0f\n\x07mailbox\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\"_\n\x0e\x41ppendResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x10\n\x08validity\x18\x03 \x01(\r\x12\x0b\n\x03uid\x18\x04 \x01(\r\">\n\x10ListUsersRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\r\n\x05match\x18\x02 \x01(\t\"A\n\x11ListUsersResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\r\n\x05users\x18\x02 \x03(\t\"x\n\x08UserData\x12\x10\n\x08password\x18\x01 \x01(\t\x12+\n\x06params\x18\x02 \x03(\x0b\x32\x1b.admin.UserData.ParamsEntry\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"-\n\x0eGetUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\"L\n\x0eSetUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\x1d\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x0f.admin.UserData\"0\n\x11\x44\x65leteUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\"^\n\x0cUserResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x1d\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x0f.admin.UserData*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32;\n\x06System\x12\x31\n\x04Ping\x12\x12.admin.PingRequest\x1a\x13.admin.PingResponse\"\x00\x32\x42\n\x07Mailbox\x12\x37\n\x06\x41ppend\x12\x14.admin.AppendRequest\x1a\x15.admin.AppendResponse\"\x00\x32\xfb\x01\n\x04User\x12\x42\n\tListUsers\x12\x17.admin.ListUsersRequest\x1a\x18.admin.ListUsersResponse\"\x00\x30\x01\x12\x37\n\x07GetUser\x12\x15.admin.GetUserRequest\x1a\x13.admin.UserResponse\"\x00\x12\x37\n\x07SetUser\x12\x15.admin.SetUserRequest\x1a\x13.admin.UserResponse\"\x00\x12=\n\nDeleteUser\x12\x18.admin.DeleteUserRequest\x1a\x13.admin.UserResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x1bpymapadmin/grpc/admin.proto\x12\x05\x61\x64min\"H\n\x06Result\x12\x1f\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x11.admin.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"%\n\x0bPingRequest\x12\x16\n\x0e\x63lient_version\x18\x02 \x01(\t\"\\\n\x0cPingResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x16\n\x0eserver_version\x18\x02 \x01(\t\x12\x15\n\rpublic_client\x18\x03 \x01(\x08\"9\n\x05Login\x12\x0f\n\x07\x61uthcid\x18\x01 \x01(\t\x12\x0f\n\x07\x61uthzid\x18\x02 \x01(\t\x12\x0e\n\x06secret\x18\x03 \x01(\t\"\x8b\x01\n\rAppendRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\x0e\n\x06sender\x18\x02 \x01(\t\x12\x11\n\trecipient\x18\x03 \x01(\t\x12\x0f\n\x07mailbox\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\"_\n\x0e\x41ppendResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x10\n\x08validity\x18\x03 \x01(\r\x12\x0b\n\x03uid\x18\x04 \x01(\r\">\n\x10ListUsersRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\r\n\x05match\x18\x02 \x01(\t\"A\n\x11ListUsersResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\r\n\x05users\x18\x02 \x03(\t\"x\n\x08UserData\x12\x10\n\x08password\x18\x01 \x01(\t\x12+\n\x06params\x18\x02 \x03(\x0b\x32\x1b.admin.UserData.ParamsEntry\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"-\n\x0eGetUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\"L\n\x0eSetUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\x1d\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x0f.admin.UserData\"0\n\x11\x44\x65leteUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\"^\n\x0cUserResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x1d\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x0f.admin.UserData*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32;\n\x06System\x12\x31\n\x04Ping\x12\x12.admin.PingRequest\x1a\x13.admin.PingResponse\"\x00\x32\x42\n\x07Mailbox\x12\x37\n\x06\x41ppend\x12\x14.admin.AppendRequest\x1a\x15.admin.AppendResponse\"\x00\x32\xfb\x01\n\x04User\x12\x42\n\tListUsers\x12\x17.admin.ListUsersRequest\x1a\x18.admin.ListUsersResponse\"\x00\x30\x01\x12\x37\n\x07GetUser\x12\x15.admin.GetUserRequest\x1a\x13.admin.UserResponse\"\x00\x12\x37\n\x07SetUser\x12\x15.admin.SetUserRequest\x1a\x13.admin.UserResponse\"\x00\x12=\n\nDeleteUser\x12\x18.admin.DeleteUserRequest\x1a\x13.admin.UserResponse\"\x00\x62\x06proto3'
 )
 
 _RESULTCODE = _descriptor.EnumDescriptor(
@@ -39,8 +39,8 @@ _RESULTCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1044,
-  serialized_end=1082,
+  serialized_start=1067,
+  serialized_end=1105,
 )
 _sym_db.RegisterEnumDescriptor(_RESULTCODE)
 
@@ -147,6 +147,13 @@ _PINGRESPONSE = _descriptor.Descriptor(
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR),
+    _descriptor.FieldDescriptor(
+      name='public_client', full_name='admin.PingResponse.public_client', index=2,
+      number=3, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR),
   ],
   extensions=[
   ],
@@ -160,7 +167,7 @@ _PINGRESPONSE = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=151,
-  serialized_end=220,
+  serialized_end=243,
 )
 
 
@@ -204,8 +211,8 @@ _LOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=222,
-  serialized_end=279,
+  serialized_start=245,
+  serialized_end=302,
 )
 
 
@@ -277,8 +284,8 @@ _APPENDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=282,
-  serialized_end=421,
+  serialized_start=305,
+  serialized_end=444,
 )
 
 
@@ -329,8 +336,8 @@ _APPENDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=423,
-  serialized_end=518,
+  serialized_start=446,
+  serialized_end=541,
 )
 
 
@@ -367,8 +374,8 @@ _LISTUSERSREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=520,
-  serialized_end=582,
+  serialized_start=543,
+  serialized_end=605,
 )
 
 
@@ -405,8 +412,8 @@ _LISTUSERSRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=584,
-  serialized_end=649,
+  serialized_start=607,
+  serialized_end=672,
 )
 
 
@@ -443,8 +450,8 @@ _USERDATA_PARAMSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=726,
-  serialized_end=771,
+  serialized_start=749,
+  serialized_end=794,
 )
 
 _USERDATA = _descriptor.Descriptor(
@@ -480,8 +487,8 @@ _USERDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=651,
-  serialized_end=771,
+  serialized_start=674,
+  serialized_end=794,
 )
 
 
@@ -511,8 +518,8 @@ _GETUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=773,
-  serialized_end=818,
+  serialized_start=796,
+  serialized_end=841,
 )
 
 
@@ -549,8 +556,8 @@ _SETUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=820,
-  serialized_end=896,
+  serialized_start=843,
+  serialized_end=919,
 )
 
 
@@ -580,8 +587,8 @@ _DELETEUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=898,
-  serialized_end=946,
+  serialized_start=921,
+  serialized_end=969,
 )
 
 
@@ -625,8 +632,8 @@ _USERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=948,
-  serialized_end=1042,
+  serialized_start=971,
+  serialized_end=1065,
 )
 
 _RESULT.fields_by_name['code'].enum_type = _RESULTCODE
@@ -767,8 +774,8 @@ _SYSTEM = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
-  serialized_start=1084,
-  serialized_end=1143,
+  serialized_start=1107,
+  serialized_end=1166,
   methods=[
   _descriptor.MethodDescriptor(
     name='Ping',
@@ -791,8 +798,8 @@ _MAILBOX = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=1,
   serialized_options=None,
-  serialized_start=1145,
-  serialized_end=1211,
+  serialized_start=1168,
+  serialized_end=1234,
   methods=[
   _descriptor.MethodDescriptor(
     name='Append',
@@ -815,8 +822,8 @@ _USER = _descriptor.ServiceDescriptor(
   file=DESCRIPTOR,
   index=2,
   serialized_options=None,
-  serialized_start=1214,
-  serialized_end=1465,
+  serialized_start=1237,
+  serialized_end=1488,
   methods=[
   _descriptor.MethodDescriptor(
     name='ListUsers',

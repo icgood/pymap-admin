@@ -2,38 +2,39 @@
 from __future__ import annotations
 
 import sys
+import getpass
 import traceback
 from abc import abstractmethod, ABCMeta
-from argparse import Namespace
-from typing import Generic, Any, TextIO, AsyncContextManager
+from argparse import ArgumentParser, Namespace
+from typing import Generic, Any, TextIO
 from typing_extensions import Final
 
-from grpclib.client import Channel, Stream
+from grpclib.client import Channel
 
-from ..typing import StubT, RequestT, ResponseT
+from ..typing import StubT, RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_pb2 import Login, SUCCESS
 
-__all__ = ['ClientCommand']
+__all__ = ['Command']
 
 
-class ClientCommand(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
+class Command(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
     """Interface for client command implementations.
 
     Args:
-        stub: The client stub object.
         args: The command line arguments.
+        client: The client object.
 
     """
 
-    def __init__(self, stub: StubT, args: Namespace) -> None:
+    def __init__(self, args: Namespace, client: StubT) -> None:
         super().__init__()
-        self.stub: Final = stub
         self.args: Final = args
+        self.client: Final = client
 
     @classmethod
     @abstractmethod
-    def get_stub(cls, channel: Channel) -> StubT:
-        """Get the client stub object for the command.
+    def get_client(cls, channel: Channel) -> StubT:
+        """Get the client object for the command.
 
         Args:
             channel: The GRPC channel for executing commands.
@@ -43,13 +44,16 @@ class ClientCommand(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
 
     @classmethod
     @abstractmethod
-    def add_subparser(cls, name: str, subparsers: Any) -> None:
+    def add_subparser(cls, name: str, subparsers: Any) -> ArgumentParser:
         """Add the command-line argument subparser for the command.
 
         Args:
             name: The name to use for the subparser.
             subparsers: The special action object as returned by
                 :meth:`~argparse.ArgumentParser.add_subparsers`.
+
+        Returns:
+            The new sub-parser object.
 
         """
         ...
@@ -62,13 +66,21 @@ class ClientCommand(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
             user: The user to authorize as using the admin credentials.
 
         """
-        return Login(authcid=self.args.admin_username,
-                     secret=self.args.admin_password,
+        if self.args.admin_username is None:
+            admin_username = user
+        else:
+            admin_username = self.args.admin_username
+        if self.args.ask_password:
+            admin_password = getpass.getpass(f'{admin_username} Password: ')
+        else:
+            admin_password = self.args.admin_password
+        return Login(authcid=admin_username, secret=admin_password,
                      authzid=user)
 
+    @property
     @abstractmethod
-    def open(self) -> AsyncContextManager[Stream[RequestT, ResponseT]]:
-        """Opens a stream for the GRPC command."""
+    def method(self) -> MethodProtocol[RequestT, ResponseT]:
+        """The GRPC client method."""
         ...
 
     @abstractmethod
@@ -103,7 +115,7 @@ class ClientCommand(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
             outfile: The file object to print the output to.
 
         """
-        print(response, file=sys.stderr)
+        print(response, file=outfile)
 
     def print_failure(self, response: ResponseT, outfile: TextIO) -> None:
         """Print a failure response.
@@ -126,17 +138,16 @@ class ClientCommand(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
         traceback.print_exc()
         return 1
 
-    async def __call__(self) -> int:
-        args = self.args
+    async def __call__(self, outfile: TextIO) -> int:
         req = self.build_request()
         try:
-            async with self.open() as stream:
+            async with self.method.open() as stream:
                 await stream.send_message(req, end=True)
                 async for res in stream:
-                    ret = self.handle_response(res, args.outfile)
+                    ret = self.handle_response(res, outfile)
                     if ret != 0:
                         return ret
         except Exception as exc:
-            return self.handle_exception(exc, args.outfile)
+            return self.handle_exception(exc, outfile)
         else:
             return 0

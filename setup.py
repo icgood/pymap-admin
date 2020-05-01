@@ -28,7 +28,7 @@ with open('LICENSE.md') as f:
     license = f.read()
 
 setup(name='pymap-admin',
-      version='0.3.0',
+      version='0.4.0',
       author='Ian Good',
       author_email='icgood@gmail.com',
       description='Admin tool for running pymap instances.',
@@ -54,12 +54,12 @@ setup(name='pymap-admin',
           'build': ['grpcio-tools', 'mypy-protobuf']},
       entry_points={
           'console_scripts': [
-              'pymap-admin = pymapadmin.client.main:main'],
-          'pymapadmin.client': [
-              'ping = pymapadmin.client.system:PingCommand',
-              'append = pymapadmin.client.mailbox:AppendCommand',
-              'list-users = pymapadmin.client.user:ListUsersCommand',
-              'get-user = pymapadmin.client.user:GetUserCommand',
-              'set-user = pymapadmin.client.user:SetUserCommand',
-              'delete-user = pymapadmin.client.user:DeleteUserCommand'],
+              'pymap-admin = pymapadmin.main:main'],
+          'pymapadmin.commands': [
+              'ping = pymapadmin.commands.system:PingCommand',
+              'append = pymapadmin.commands.mailbox:AppendCommand',
+              'list-users = pymapadmin.commands.user:ListUsersCommand',
+              'get-user = pymapadmin.commands.user:GetUserCommand',
+              'set-user = pymapadmin.commands.user:SetUserCommand',
+              'delete-user = pymapadmin.commands.user:DeleteUserCommand'],
           })
