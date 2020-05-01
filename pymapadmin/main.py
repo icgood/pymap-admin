@@ -11,7 +11,7 @@ import os.path
 import sys
 import asyncio
 from argparse import ArgumentParser, Namespace
-from ssl import create_default_context, CERT_NONE
+from ssl import create_default_context, CERT_NONE, SSLContext
 from typing import Type, Optional
 
 from grpclib.client import Channel
@@ -33,6 +33,8 @@ def main() -> int:
     parser.set_defaults(path=get_admin_socket())
 
     group = parser.add_argument_group('tls options')
+    group.add_argument('--tls', action='store_true', default=_def('TLS'),
+                       help='enable TLS')
     group.add_argument('--cafile', metavar='FILE', default=_def('CAFILE'),
                        help='CA cert file')
     group.add_argument('--capath', metavar='PATH', default=_def('CAPATH'),
@@ -63,10 +65,12 @@ def main() -> int:
 
 async def run(parser: ArgumentParser, args: Namespace,
               command_cls: Type[Command]) -> int:
-    ssl = create_default_context(cafile=args.cafile, capath=args.capath)
-    if args.no_verify_cert:
-        ssl.check_hostname = False
-        ssl.verify_mode = CERT_NONE
+    ssl: Optional[SSLContext] = None
+    if args.tls:
+        ssl = create_default_context(cafile=args.cafile, capath=args.capath)
+        if args.no_verify_cert:
+            ssl.check_hostname = False
+            ssl.verify_mode = CERT_NONE
     if args.host is None:
         if not os.path.exists(args.path):
             parser.error(f'File not found: {args.path}\n\n'
