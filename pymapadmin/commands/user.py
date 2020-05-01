@@ -2,39 +2,41 @@
 from __future__ import annotations
 
 import getpass
-from argparse import FileType
-from typing import Any, Optional, Dict, TextIO, AsyncContextManager
+from argparse import ArgumentParser, FileType
+from typing import Any, Optional, Dict, TextIO
 
-from grpclib.client import Channel, Stream
+from grpclib.client import Channel
 
-from .command import RequestT, ResponseT, ClientCommand
+from . import Command
+from ..typing import RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_grpc import UserStub
 from ..grpc.admin_pb2 import ListUsersRequest, ListUsersResponse, \
     UserData, UserResponse, GetUserRequest, SetUserRequest, DeleteUserRequest
 
 
-class UserBase(ClientCommand[UserStub, RequestT, ResponseT]):
+class UserCommand(Command[UserStub, RequestT, ResponseT]):
 
     @classmethod
-    def get_stub(self, channel: Channel) -> UserStub:
+    def get_client(self, channel: Channel) -> UserStub:
         return UserStub(channel)
 
 
-class ListUsersCommand(UserBase[ListUsersRequest, ListUsersResponse]):
+class ListUsersCommand(UserCommand[ListUsersRequest, ListUsersResponse]):
     """List all matching users."""
 
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
-            -> None:  # pragma: no cover
+            -> ArgumentParser:  # pragma: no cover
         subparser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='list users')
         subparser.add_argument('match', nargs='?',
                                help='the user name match string')
+        return subparser
 
-    def open(self) -> AsyncContextManager[
-            Stream[ListUsersRequest, ListUsersResponse]]:
-        return self.stub.ListUsers.open()
+    @property
+    def method(self) -> MethodProtocol[ListUsersRequest, ListUsersResponse]:
+        return self.client.ListUsers
 
     def build_request(self) -> ListUsersRequest:
         return ListUsersRequest(login=self.get_login(), match=self.args.match)
@@ -44,32 +46,33 @@ class ListUsersCommand(UserBase[ListUsersRequest, ListUsersResponse]):
             print(user, file=outfile)
 
 
-class GetUserCommand(UserBase[GetUserRequest, UserResponse]):
+class GetUserCommand(UserCommand[GetUserRequest, UserResponse]):
     """Print a user and its metadata."""
 
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
-            -> None:  # pragma: no cover
+            -> ArgumentParser:  # pragma: no cover
         subparser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='get a user')
         subparser.add_argument('username', help='the user name')
+        return subparser
 
-    def open(self) -> AsyncContextManager[
-            Stream[GetUserRequest, UserResponse]]:
-        return self.stub.GetUser.open()
+    @property
+    def method(self) -> MethodProtocol[GetUserRequest, UserResponse]:
+        return self.client.GetUser
 
     def build_request(self) -> GetUserRequest:
         login = self.get_login(self.args.username)
         return GetUserRequest(login=login)
 
 
-class SetUserCommand(UserBase[SetUserRequest, UserResponse]):
+class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
     """Set the metadata for a user, creating it if it does not exist."""
 
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
-            -> None:  # pragma: no cover
+            -> ArgumentParser:  # pragma: no cover
         subparser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='assign a password to a user')
@@ -82,10 +85,11 @@ class SetUserCommand(UserBase[SetUserRequest, UserResponse]):
         subparser.add_argument('--no-password', action='store_true',
                                help='send the request with no password value')
         subparser.add_argument('username', help='the user name')
+        return subparser
 
-    def open(self) -> AsyncContextManager[
-            Stream[SetUserRequest, UserResponse]]:
-        return self.stub.SetUser.open()
+    @property
+    def method(self) -> MethodProtocol[SetUserRequest, UserResponse]:
+        return self.client.SetUser
 
     def getpass(self) -> Optional[str]:
         if self.args.no_password:
@@ -106,20 +110,21 @@ class SetUserCommand(UserBase[SetUserRequest, UserResponse]):
         return SetUserRequest(login=login, data=new_data)
 
 
-class DeleteUserCommand(UserBase[DeleteUserRequest, UserResponse]):
+class DeleteUserCommand(UserCommand[DeleteUserRequest, UserResponse]):
     """Delete a user and its mail data."""
 
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
-            -> None:  # pragma: no cover
+            -> ArgumentParser:  # pragma: no cover
         subparser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='delete a user')
         subparser.add_argument('username', help='the user name')
+        return subparser
 
-    def open(self) -> AsyncContextManager[
-            Stream[DeleteUserRequest, UserResponse]]:
-        return self.stub.DeleteUser.open()
+    @property
+    def method(self) -> MethodProtocol[DeleteUserRequest, UserResponse]:
+        return self.client.DeleteUser
 
     def build_request(self) -> DeleteUserRequest:
         args = self.args

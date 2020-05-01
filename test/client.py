@@ -2,22 +2,22 @@
 from typing import Any, Optional
 
 
-class TestStream:
+class MockStream:
 
-    def __init__(self, stub) -> None:
-        self.stub = stub
+    def __init__(self, client) -> None:
+        self.client = client
 
     def open(self):
         return self
 
     async def send_message(self, request, end):
-        self.stub.request = request
+        self.client.request = request
 
     def __aiter__(self):
         return self.aiter()
 
     async def aiter(self):
-        for res in self.stub.responses:
+        for res in self.client.responses:
             yield res
 
     async def __aenter__(self):
@@ -27,7 +27,7 @@ class TestStream:
         pass
 
 
-class TestStub:
+class MockClient:
 
     def __init__(self, responses) -> None:
         self.method: Optional[str] = None
@@ -40,4 +40,4 @@ class TestStub:
 
     def __getattr__(self, method):
         self.method = method
-        return TestStream(self)
+        return MockStream(self)
