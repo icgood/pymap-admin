@@ -1,7 +1,7 @@
 pymap-admin
 ===========
 
-[![Build Status](https://travis-ci.org/icgood/pymap-admin.svg?branch=master)](https://travis-ci.org/icgood/pymap-admin)
+[![Build Status](https://travis-ci.com/icgood/pymap-admin.svg?branch=master)](https://travis-ci.com/icgood/pymap-admin)
 [![Coverage Status](https://coveralls.io/repos/icgood/pymap-admin/badge.svg)](https://coveralls.io/r/icgood/pymap-admin)
 [![PyPI](https://img.shields.io/pypi/v/pymap-admin.svg)](https://pypi.python.org/pypi/pymap-admin)
 [![PyPI](https://img.shields.io/pypi/pyversions/pymap-admin.svg)](https://pypi.python.org/pypi/pymap-admin)
