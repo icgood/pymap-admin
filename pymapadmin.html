@@ -6,6 +6,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>pymapadmin &#8212; pymap-admin 0.4.2 documentation</title>
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -57,7 +58,8 @@
           <a href="index.html" title="pymap-admin Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">pymap-admin 0.4.2 documentation</a> &#187;</li>
- 
+
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin</span></code></a></li> 
       </ul>
     </div>
     </div>
@@ -94,31 +96,34 @@ behavior with an explicit value.</p>
 <span id="pymapadmin-typing"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.typing</span></code><a class="headerlink" href="#module-pymapadmin.typing" title="Permalink to this headline">¶</a></h2>
 <dl class="py data">
 <dt id="pymapadmin.typing.StubT">
-<code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">StubT</code><em class="property"> = ~StubT</em><a class="headerlink" href="#pymapadmin.typing.StubT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">StubT</code><a class="headerlink" href="#pymapadmin.typing.StubT" title="Permalink to this definition">¶</a></dt>
 <dd><p>A type variable corresponding to an admin stub object.</p>
+<p>alias of TypeVar(‘StubT’)</p>
 </dd></dl>
 
 <dl class="py data">
 <dt id="pymapadmin.typing.RequestT">
-<code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">RequestT</code><em class="property"> = ~RequestT</em><a class="headerlink" href="#pymapadmin.typing.RequestT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">RequestT</code><a class="headerlink" href="#pymapadmin.typing.RequestT" title="Permalink to this definition">¶</a></dt>
 <dd><p>A type variable corresponding to an admin request object.</p>
+<p>alias of TypeVar(‘RequestT’)</p>
 </dd></dl>
 
 <dl class="py data">
 <dt id="pymapadmin.typing.ResponseT">
-<code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">ResponseT</code><em class="property"> = ~ResponseT</em><a class="headerlink" href="#pymapadmin.typing.ResponseT" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">ResponseT</code><a class="headerlink" href="#pymapadmin.typing.ResponseT" title="Permalink to this definition">¶</a></dt>
 <dd><p>A type variable corresponding to an admin response object.</p>
+<p>alias of TypeVar(‘ResponseT’)</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="pymapadmin.typing.MethodProtocol">
-<em class="property">class </em><code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">MethodProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.MethodProtocol" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">MethodProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.MethodProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Protocol defining an admin method, for a command.</p>
 </dd></dl>
 
 <dl class="py class">
 <dt id="pymapadmin.typing.RequestProtocol">
-<em class="property">class </em><code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">RequestProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.RequestProtocol" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">RequestProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.RequestProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Protocol defining the fields that all admin request objects are expected
 to have.</p>
 <div class="admonition note">
@@ -129,7 +134,7 @@ to have.</p>
 
 <dl class="py class">
 <dt id="pymapadmin.typing.ResponseProtocol">
-<em class="property">class </em><code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">ResponseProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.ResponseProtocol" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">pymapadmin.typing.</code><code class="sig-name descname">ResponseProtocol</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.ResponseProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Protocol defining the fields that all admin response objects are
 expected to have.</p>
 <dl class="py method">
@@ -149,6 +154,7 @@ expected to have.</p>
 </div>
 
 
+            <div class="clearer"></div>
           </div>
         </div>
       </div>
@@ -230,14 +236,15 @@ expected to have.</p>
           <a href="index.html" title="pymap-admin Documentation"
              >previous</a> &nbsp; &nbsp;</li>
     <li><a href="index.html">pymap-admin 0.4.2 documentation</a> &#187;</li>
- 
+
+        <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin</span></code></a></li> 
       </ul>
     </div>
     </div>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ian Good.
-      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.0.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
