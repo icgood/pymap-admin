@@ -5,6 +5,12 @@
 .. automodule:: pymapadmin.commands
    :members:
 
+``pymapadmin.commands.load``
+-------------------------------
+
+.. automodule:: pymapadmin.commands.load
+   :members:
+
 ``pymapadmin.commands.system``
 -------------------------------
 

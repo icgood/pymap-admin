@@ -1,5 +1,0 @@
-[report]
-omit = */main.py
-exclude_lines =
-    pragma: no cover
-    ^\s*...\s*$
