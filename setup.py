@@ -28,9 +28,9 @@ with open('LICENSE.md') as f:
     license = f.read()
 
 setup(name='pymap-admin',
-      version='0.4.2',
+      version='0.4.3',
       author='Ian Good',
-      author_email='icgood@gmail.com',
+      author_email='ian@icgood.net',
       description='Admin tool for running pymap instances.',
       long_description=readme + license,
       long_description_content_type='text/markdown',

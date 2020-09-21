@@ -2,6 +2,9 @@
 ``pymapadmin``
 =====================
 
+.. automodule:: pymapadmin
+   :members:
+
 ``pymapadmin.local``
 ---------------------
 

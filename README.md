@@ -11,6 +11,8 @@ The `pymap-admin` tool can be used to perform various admin functions against a
 running pymap server. This is a separate [grpc][2] service using [grpclib][3]
 listening on a socket.
 
+#### [API Documentation](https://icgood.github.io/pymap-admin/)
+
 ### Connections
 
 By default, the `pymap-admin` command will attempt to interact with a pymap
