@@ -18,8 +18,8 @@ from grpclib.client import Channel
 from pymapadmin import __version__
 
 from .local import get_admin_socket
-from .commands import Command
-from .commands.load import load_commands
+from .commands import load_commands
+from .commands.base import Command
 
 
 def main() -> int:

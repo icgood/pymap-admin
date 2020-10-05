@@ -6,7 +6,7 @@ from typing import Any, TextIO
 
 from grpclib.client import Channel
 
-from . import Command
+from .base import Command
 from .. import __version__ as client_version
 from ..typing import RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_grpc import SystemStub

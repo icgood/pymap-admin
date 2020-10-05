@@ -8,7 +8,7 @@ from typing import Any, TextIO
 
 from grpclib.client import Channel
 
-from . import Command
+from .base import Command
 from ..typing import RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_grpc import MailboxStub
 from ..grpc.admin_pb2 import AppendRequest, AppendResponse

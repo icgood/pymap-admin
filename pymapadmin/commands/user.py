@@ -7,7 +7,7 @@ from typing import Any, Optional, Dict, TextIO
 
 from grpclib.client import Channel
 
-from . import Command
+from .base import Command
 from ..typing import RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_grpc import UserStub
 from ..grpc.admin_pb2 import ListUsersRequest, ListUsersResponse, \
