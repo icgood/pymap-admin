@@ -2,45 +2,46 @@
 from __future__ import annotations
 
 import sys
-import getpass
 import traceback
 from abc import abstractmethod, ABCMeta
 from argparse import ArgumentParser, Namespace
-from typing import Generic, Any, TextIO
+from typing import Generic, Any, Mapping, TextIO
 from typing_extensions import Final
 
 from grpclib.client import Channel
 
+from .. import __version__ as client_version
+from ..config import Config
 from ..typing import StubT, RequestT, ResponseT, MethodProtocol
-from ..grpc.admin_pb2 import Login, SUCCESS
+from ..grpc.admin_pb2 import SUCCESS
 
-__all__ = ['Command']
+try:
+    # This import ensures error details are displayed correctly
+    # https://grpclib.readthedocs.io/en/latest/errors.html#error-details
+    from google.rpc import error_details_pb2  # noqa
+except ImportError:
+    pass
+
+__all__ = ['Command', 'ClientCommand']
 
 
-class Command(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
-    """Interface for client command implementations.
+class Command(metaclass=ABCMeta):
+    """Interface for command implementations.
 
     Args:
-        args: The command line arguments.
-        client: The client object.
+        args: The command-line arguments.
+        channel: The GRPC channel for executing commands.
 
     """
 
-    def __init__(self, args: Namespace, client: StubT) -> None:
+    def __init__(self, args: Namespace, channel: Channel) -> None:
         super().__init__()
         self.args: Final = args
-        self.client: Final = client
+        self.channel: Final = channel
 
-    @classmethod
-    @abstractmethod
-    def get_client(cls, channel: Channel) -> StubT:
-        """Get the client object for the command.
-
-        Args:
-            channel: The GRPC channel for executing commands.
-
-        """
-        ...
+    @property
+    def config(self) -> Config:
+        return self.args.config
 
     @classmethod
     @abstractmethod
@@ -58,24 +59,39 @@ class Command(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
         """
         ...
 
-    def get_login(self, user: str = None) -> Login:
-        """Build and return a ``Login`` object containing the admin credentials
-        and optionally the *user* to authorize as.
+    @abstractmethod
+    async def __call__(self, outfile: TextIO) -> int:
+        ...
+
+
+class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
+                    metaclass=ABCMeta):
+    """Interface for client command implementations.
+
+    Args:
+        args: The command line arguments.
+        client: The client object.
+
+    """
+
+    @property
+    @abstractmethod
+    def client(self) -> StubT:
+        """Get the client object for the command.
 
         Args:
-            user: The user to authorize as using the admin credentials.
+            channel: The GRPC channel for executing commands.
 
         """
-        if self.args.admin_username is None:
-            admin_username = user
-        else:
-            admin_username = self.args.admin_username
-        if self.args.ask_password:
-            admin_password = getpass.getpass(f'{admin_username} Password: ')
-        else:
-            admin_password = self.args.admin_password
-        return Login(authcid=admin_username, secret=admin_password,
-                     authzid=user)
+        ...
+
+    def _get_metadata(self) -> Mapping[str, str]:
+        metadata = {'client-version': client_version}
+        if self.args.token is not None:
+            metadata['auth-token'] = self.args.token
+        elif self.config.token is not None:
+            metadata['auth-token'] = self.config.token
+        return metadata
 
     @property
     @abstractmethod
@@ -92,8 +108,8 @@ class Command(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
         """Handle each response. For streaming responses, this will be
         called once for each streamed response as long as ``0`` is returned.
 
-        The default implementation calls :meth:`.print_success` or
-        :meth:`.print_failure` depending on the result code.
+        The default implementation calls :meth:`.handle_success` or
+        :meth:`.handle_failure` depending on the result code.
 
         Args:
             response: The response from the server.
@@ -101,13 +117,13 @@ class Command(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
 
         """
         if response.result.code == SUCCESS:
-            self.print_success(response, outfile)
+            self.handle_success(response, outfile)
             return 0
         else:
-            self.print_failure(response, outfile)
+            self.handle_failure(response, outfile)
             return 1
 
-    def print_success(self, response: ResponseT, outfile: TextIO) -> None:
+    def handle_success(self, response: ResponseT, outfile: TextIO) -> None:
         """Print a successful response.
 
         Args:
@@ -117,7 +133,7 @@ class Command(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
         """
         print(response, file=outfile)
 
-    def print_failure(self, response: ResponseT, outfile: TextIO) -> None:
+    def handle_failure(self, response: ResponseT, outfile: TextIO) -> None:
         """Print a failure response.
 
         Args:
@@ -140,8 +156,9 @@ class Command(Generic[StubT, RequestT, ResponseT], metaclass=ABCMeta):
 
     async def __call__(self, outfile: TextIO) -> int:
         req = self.build_request()
+        metadata = self._get_metadata()
         try:
-            async with self.method.open() as stream:
+            async with self.method.open(metadata=metadata) as stream:
                 await stream.send_message(req, end=True)
                 async for res in stream:
                     ret = self.handle_response(res, outfile)

@@ -6,19 +6,19 @@ import time
 from argparse import ArgumentParser, FileType
 from typing import Any, TextIO
 
-from grpclib.client import Channel
-
-from .base import Command
+from .base import ClientCommand
 from ..typing import RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_grpc import MailboxStub
 from ..grpc.admin_pb2 import AppendRequest, AppendResponse
 
+__all__ = ['AppendCommand']
 
-class MailboxCommand(Command[MailboxStub, RequestT, ResponseT]):
 
-    @classmethod
-    def get_client(cls, channel: Channel) -> MailboxStub:
-        return MailboxStub(channel)
+class MailboxCommand(ClientCommand[MailboxStub, RequestT, ResponseT]):
+
+    @property
+    def client(self) -> MailboxStub:
+        return MailboxStub(self.channel)
 
 
 class AppendCommand(MailboxCommand[AppendRequest, AppendResponse]):
@@ -74,16 +74,15 @@ class AppendCommand(MailboxCommand[AppendRequest, AppendResponse]):
         recipient = args.recipient or args.username
         data = args.data.read()
         when: int = args.timestamp or int(time.time())
-        login = self.get_login(args.username)
-        return AppendRequest(login=login, sender=args.sender,
+        return AppendRequest(user=args.username, sender=args.sender,
                              recipient=recipient, mailbox=args.mailbox,
                              data=data, flags=args.flags, when=when)
 
-    def print_success(self, res: AppendResponse, outfile: TextIO) -> None:
+    def handle_success(self, res: AppendResponse, outfile: TextIO) -> None:
         print(res, file=sys.stderr)
         print(self.success, file=outfile)
 
-    def print_failure(self, res: AppendResponse, outfile: TextIO) -> None:
+    def handle_failure(self, res: AppendResponse, outfile: TextIO) -> None:
         print(res.result, file=sys.stderr)
         print(self.messages[res.result.key], file=outfile)
 

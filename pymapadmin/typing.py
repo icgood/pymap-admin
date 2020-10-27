@@ -2,7 +2,7 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import TypeVar, AsyncContextManager
+from typing import TypeVar, Mapping, AsyncContextManager
 from typing_extensions import Protocol
 
 from grpclib.client import Stream
@@ -26,7 +26,8 @@ class MethodProtocol(Protocol[RequestT, ResponseT]):
     """Protocol defining an admin method, for a command."""
 
     @abstractmethod
-    def open(self) -> AsyncContextManager[Stream[RequestT, ResponseT]]:
+    def open(self, *, metadata: Mapping[str, str]) \
+            -> AsyncContextManager[Stream[RequestT, ResponseT]]:
         ...
 
 
