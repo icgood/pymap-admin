@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin &#8212; pymap-admin 0.4.3 documentation</title>
+    <title>pymapadmin &#8212; pymap-admin 0.5.0 documentation</title>
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="index.html" title="pymap-admin Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.4.3 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.5.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin</span></code></a></li> 
       </ul>
@@ -77,21 +77,39 @@
 <p class="admonition-title">See also</p>
 <p><a class="reference external" href="https://www.python.org/dev/peps/pep-0396/">PEP 396</a></p>
 </div>
+<dl class="py function">
+<dt id="pymapadmin.is_compatible">
+<code class="sig-prename descclassname">pymapadmin.</code><code class="sig-name descname">is_compatible</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">client_version</span></em>, <em class="sig-param"><span class="n">server_version</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.is_compatible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if the given client version is backwards- and forwards-compatible
+with the server version.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>client_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The provided client version string.</p></li>
+<li><p><strong>server_version</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The server version string, usually <code class="xref py py-attr docutils literal notranslate"><span class="pre">__version__</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
 <div class="section" id="module-pymapadmin.local">
 <span id="pymapadmin-local"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.local</span></code><a class="headerlink" href="#module-pymapadmin.local" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="pymapadmin.local.get_admin_socket">
 <code class="sig-prename descclassname">pymapadmin.local.</code><code class="sig-name descname">get_admin_socket</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.get_admin_socket" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a path in <a class="reference external" href="https://docs.python.org/3/library/tempfile.html#tempfile.gettempdir" title="(in Python v3.8)"><code class="xref py py-func docutils literal notranslate"><span class="pre">gettempdir()</span></code></a> that should be consistent
+<dd><p>Returns a path in <a class="reference external" href="https://docs.python.org/3/library/tempfile.html#tempfile.gettempdir" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">gettempdir()</span></code></a> that should be consistent
 between a <code class="docutils literal notranslate"><span class="pre">pymap-admin</span></code> client and a <code class="docutils literal notranslate"><span class="pre">pymap</span></code> server.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">$PYMAP_ADMIN_SOCK</span></code> environment variable to override this
 behavior with an explicit value.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>mkdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the intermediate directory should be created.</p>
+<dd class="field-odd"><p><strong>mkdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the intermediate directory should be created.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.8)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -240,7 +258,7 @@ expected to have.</p>
         <li class="right" >
           <a href="index.html" title="pymap-admin Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.4.3 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.5.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin</span></code></a></li> 
       </ul>
