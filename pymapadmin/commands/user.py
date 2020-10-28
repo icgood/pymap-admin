@@ -11,8 +11,7 @@ from ..grpc.admin_grpc import UserStub
 from ..grpc.admin_pb2 import \
     UserData, UserResponse, GetUserRequest, SetUserRequest, DeleteUserRequest
 
-__all__ = ['GetUserCommand', 'SetUserCommand',
-           'DeleteUserCommand']
+__all__ = ['GetUserCommand', 'SetUserCommand', 'DeleteUserCommand']
 
 
 class UserCommand(ClientCommand[UserStub, RequestT, ResponseT]):
