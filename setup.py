@@ -50,7 +50,7 @@ setup(name='pymap-admin',
       include_package_data=True,
       packages=find_packages(),
       install_requires=[
-          'grpclib', 'protobuf', 'pymacaroons', 'typing-extensions'],
+          'grpclib', 'protobuf', 'typing-extensions'],
       extras_require={
           'optional': ['googleapis-common-protos'],
           'build': ['grpcio-tools', 'mypy-protobuf']},
