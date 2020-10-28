@@ -16,16 +16,16 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='pymapadmin/grpc/admin.proto',
-  package='admin',
+  package='pymapadmin.grpc',
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1bpymapadmin/grpc/admin.proto\x12\x05\x61\x64min\"H\n\x06Result\x12\x1f\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x11.admin.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"%\n\x0bPingRequest\x12\x16\n\x0e\x63lient_version\x18\x02 \x01(\t\"\\\n\x0cPingResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x16\n\x0eserver_version\x18\x02 \x01(\t\x12\x15\n\rpublic_client\x18\x03 \x01(\x08\"9\n\x05Login\x12\x0f\n\x07\x61uthcid\x18\x01 \x01(\t\x12\x0f\n\x07\x61uthzid\x18\x02 \x01(\t\x12\x0e\n\x06secret\x18\x03 \x01(\t\"\x8b\x01\n\rAppendRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\x0e\n\x06sender\x18\x02 \x01(\t\x12\x11\n\trecipient\x18\x03 \x01(\t\x12\x0f\n\x07mailbox\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\"_\n\x0e\x41ppendResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x10\n\x08validity\x18\x03 \x01(\r\x12\x0b\n\x03uid\x18\x04 \x01(\r\">\n\x10ListUsersRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\r\n\x05match\x18\x02 \x01(\t\"A\n\x11ListUsersResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\r\n\x05users\x18\x02 \x03(\t\"x\n\x08UserData\x12\x10\n\x08password\x18\x01 \x01(\t\x12+\n\x06params\x18\x02 \x03(\x0b\x32\x1b.admin.UserData.ParamsEntry\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"-\n\x0eGetUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\"L\n\x0eSetUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\x12\x1d\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x0f.admin.UserData\"0\n\x11\x44\x65leteUserRequest\x12\x1b\n\x05login\x18\x01 \x01(\x0b\x32\x0c.admin.Login\"^\n\x0cUserResponse\x12\x1d\n\x06result\x18\x01 \x01(\x0b\x32\r.admin.Result\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x1d\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x0f.admin.UserData*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32;\n\x06System\x12\x31\n\x04Ping\x12\x12.admin.PingRequest\x1a\x13.admin.PingResponse\"\x00\x32\x42\n\x07Mailbox\x12\x37\n\x06\x41ppend\x12\x14.admin.AppendRequest\x1a\x15.admin.AppendResponse\"\x00\x32\xfb\x01\n\x04User\x12\x42\n\tListUsers\x12\x17.admin.ListUsersRequest\x1a\x18.admin.ListUsersResponse\"\x00\x30\x01\x12\x37\n\x07GetUser\x12\x15.admin.GetUserRequest\x1a\x13.admin.UserResponse\"\x00\x12\x37\n\x07SetUser\x12\x15.admin.SetUserRequest\x1a\x13.admin.UserResponse\"\x00\x12=\n\nDeleteUser\x12\x18.admin.DeleteUserRequest\x1a\x13.admin.UserResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x1bpymapadmin/grpc/admin.proto\x12\x0fpymapadmin.grpc\"R\n\x06Result\x12)\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1b.pymapadmin.grpc.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"Z\n\x0cLoginRequest\x12\x0f\n\x07\x61uthcid\x18\x01 \x01(\t\x12\x0e\n\x06secret\x18\x02 \x01(\t\x12\x0f\n\x07\x61uthzid\x18\x03 \x01(\t\x12\x18\n\x10token_expiration\x18\x04 \x01(\x01\"N\n\rLoginResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x14\n\x0c\x62\x65\x61rer_token\x18\x02 \x01(\t\"\r\n\x0bPingRequest\"k\n\x0cPingResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x15\n\rpymap_version\x18\x02 \x01(\t\x12\x1b\n\x13pymap_admin_version\x18\x03 \x01(\t\"|\n\rAppendRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\x0e\n\x06sender\x18\x02 \x01(\t\x12\x11\n\trecipient\x18\x03 \x01(\t\x12\x0f\n\x07mailbox\x18\x04 \x01(\t\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\"i\n\x0e\x41ppendResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x10\n\x08validity\x18\x03 \x01(\r\x12\x0b\n\x03uid\x18\x04 \x01(\r\"\x82\x01\n\x08UserData\x12\x10\n\x08password\x18\x01 \x01(\t\x12\x35\n\x06params\x18\x02 \x03(\x0b\x32%.pymapadmin.grpc.UserData.ParamsEntry\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\"\x1e\n\x0eGetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"G\n\x0eSetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\'\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x19.pymapadmin.grpc.UserData\"!\n\x11\x44\x65leteUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"r\n\x0cUserResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x10\n\x08username\x18\x02 \x01(\t\x12\'\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x19.pymapadmin.grpc.UserData*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32\x99\x01\n\x06System\x12\x45\n\x04Ping\x12\x1c.pymapadmin.grpc.PingRequest\x1a\x1d.pymapadmin.grpc.PingResponse\"\x00\x12H\n\x05Login\x12\x1d.pymapadmin.grpc.LoginRequest\x1a\x1e.pymapadmin.grpc.LoginResponse\"\x00\x32V\n\x07Mailbox\x12K\n\x06\x41ppend\x12\x1e.pymapadmin.grpc.AppendRequest\x1a\x1f.pymapadmin.grpc.AppendResponse\"\x00\x32\xf3\x01\n\x04User\x12K\n\x07GetUser\x12\x1f.pymapadmin.grpc.GetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12K\n\x07SetUser\x12\x1f.pymapadmin.grpc.SetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12Q\n\nDeleteUser\x12\".pymapadmin.grpc.DeleteUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x62\x06proto3'
 )
 
 _RESULTCODE = _descriptor.EnumDescriptor(
   name='ResultCode',
-  full_name='admin.ResultCode',
+  full_name='pymapadmin.grpc.ResultCode',
   filename=None,
   file=DESCRIPTOR,
   create_key=_descriptor._internal_create_key,
@@ -43,8 +43,8 @@ _RESULTCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1067,
-  serialized_end=1105,
+  serialized_start=1050,
+  serialized_end=1088,
 )
 _sym_db.RegisterEnumDescriptor(_RESULTCODE)
 
@@ -56,28 +56,28 @@ FAILURE = 1
 
 _RESULT = _descriptor.Descriptor(
   name='Result',
-  full_name='admin.Result',
+  full_name='pymapadmin.grpc.Result',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='code', full_name='admin.Result.code', index=0,
+      name='code', full_name='pymapadmin.grpc.Result.code', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='response', full_name='admin.Result.response', index=1,
+      name='response', full_name='pymapadmin.grpc.Result.response', index=1,
       number=2, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='key', full_name='admin.Result.key', index=2,
+      name='key', full_name='pymapadmin.grpc.Result.key', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -95,113 +95,152 @@ _RESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=38,
-  serialized_end=110,
+  serialized_start=48,
+  serialized_end=130,
 )
 
 
-_PINGREQUEST = _descriptor.Descriptor(
-  name='PingRequest',
-  full_name='admin.PingRequest',
+_LOGINREQUEST = _descriptor.Descriptor(
+  name='LoginRequest',
+  full_name='pymapadmin.grpc.LoginRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='client_version', full_name='admin.PingRequest.client_version', index=0,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=112,
-  serialized_end=149,
-)
-
-
-_PINGRESPONSE = _descriptor.Descriptor(
-  name='PingResponse',
-  full_name='admin.PingResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='result', full_name='admin.PingResponse.result', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='server_version', full_name='admin.PingResponse.server_version', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='public_client', full_name='admin.PingResponse.public_client', index=2,
-      number=3, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=151,
-  serialized_end=243,
-)
-
-
-_LOGIN = _descriptor.Descriptor(
-  name='Login',
-  full_name='admin.Login',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='authcid', full_name='admin.Login.authcid', index=0,
+      name='authcid', full_name='pymapadmin.grpc.LoginRequest.authcid', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='authzid', full_name='admin.Login.authzid', index=1,
+      name='secret', full_name='pymapadmin.grpc.LoginRequest.secret', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='secret', full_name='admin.Login.secret', index=2,
+      name='authzid', full_name='pymapadmin.grpc.LoginRequest.authzid', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='token_expiration', full_name='pymapadmin.grpc.LoginRequest.token_expiration', index=3,
+      number=4, type=1, cpp_type=5, label=1,
+      has_default_value=False, default_value=float(0),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=132,
+  serialized_end=222,
+)
+
+
+_LOGINRESPONSE = _descriptor.Descriptor(
+  name='LoginResponse',
+  full_name='pymapadmin.grpc.LoginResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='result', full_name='pymapadmin.grpc.LoginResponse.result', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='bearer_token', full_name='pymapadmin.grpc.LoginResponse.bearer_token', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=224,
+  serialized_end=302,
+)
+
+
+_PINGREQUEST = _descriptor.Descriptor(
+  name='PingRequest',
+  full_name='pymapadmin.grpc.PingRequest',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=304,
+  serialized_end=317,
+)
+
+
+_PINGRESPONSE = _descriptor.Descriptor(
+  name='PingResponse',
+  full_name='pymapadmin.grpc.PingResponse',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='result', full_name='pymapadmin.grpc.PingResponse.result', index=0,
+      number=1, type=11, cpp_type=10, label=1,
+      has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pymap_version', full_name='pymapadmin.grpc.PingResponse.pymap_version', index=1,
+      number=2, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='pymap_admin_version', full_name='pymapadmin.grpc.PingResponse.pymap_admin_version', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -219,63 +258,63 @@ _LOGIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=245,
-  serialized_end=302,
+  serialized_start=319,
+  serialized_end=426,
 )
 
 
 _APPENDREQUEST = _descriptor.Descriptor(
   name='AppendRequest',
-  full_name='admin.AppendRequest',
+  full_name='pymapadmin.grpc.AppendRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='login', full_name='admin.AppendRequest.login', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='user', full_name='pymapadmin.grpc.AppendRequest.user', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='sender', full_name='admin.AppendRequest.sender', index=1,
+      name='sender', full_name='pymapadmin.grpc.AppendRequest.sender', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='recipient', full_name='admin.AppendRequest.recipient', index=2,
+      name='recipient', full_name='pymapadmin.grpc.AppendRequest.recipient', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='mailbox', full_name='admin.AppendRequest.mailbox', index=3,
+      name='mailbox', full_name='pymapadmin.grpc.AppendRequest.mailbox', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='data', full_name='admin.AppendRequest.data', index=4,
+      name='data', full_name='pymapadmin.grpc.AppendRequest.data', index=4,
       number=5, type=12, cpp_type=9, label=1,
       has_default_value=False, default_value=b"",
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='flags', full_name='admin.AppendRequest.flags', index=5,
+      name='flags', full_name='pymapadmin.grpc.AppendRequest.flags', index=5,
       number=6, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='when', full_name='admin.AppendRequest.when', index=6,
+      name='when', full_name='pymapadmin.grpc.AppendRequest.when', index=6,
       number=7, type=4, cpp_type=4, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -293,42 +332,42 @@ _APPENDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=305,
-  serialized_end=444,
+  serialized_start=428,
+  serialized_end=552,
 )
 
 
 _APPENDRESPONSE = _descriptor.Descriptor(
   name='AppendResponse',
-  full_name='admin.AppendResponse',
+  full_name='pymapadmin.grpc.AppendResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='result', full_name='admin.AppendResponse.result', index=0,
+      name='result', full_name='pymapadmin.grpc.AppendResponse.result', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='mailbox', full_name='admin.AppendResponse.mailbox', index=1,
+      name='mailbox', full_name='pymapadmin.grpc.AppendResponse.mailbox', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='validity', full_name='admin.AppendResponse.validity', index=2,
+      name='validity', full_name='pymapadmin.grpc.AppendResponse.validity', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='uid', full_name='admin.AppendResponse.uid', index=3,
+      name='uid', full_name='pymapadmin.grpc.AppendResponse.uid', index=3,
       number=4, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -346,106 +385,28 @@ _APPENDRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=446,
-  serialized_end=541,
-)
-
-
-_LISTUSERSREQUEST = _descriptor.Descriptor(
-  name='ListUsersRequest',
-  full_name='admin.ListUsersRequest',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='login', full_name='admin.ListUsersRequest.login', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='match', full_name='admin.ListUsersRequest.match', index=1,
-      number=2, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=543,
-  serialized_end=605,
-)
-
-
-_LISTUSERSRESPONSE = _descriptor.Descriptor(
-  name='ListUsersResponse',
-  full_name='admin.ListUsersResponse',
-  filename=None,
-  file=DESCRIPTOR,
-  containing_type=None,
-  create_key=_descriptor._internal_create_key,
-  fields=[
-    _descriptor.FieldDescriptor(
-      name='result', full_name='admin.ListUsersResponse.result', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-    _descriptor.FieldDescriptor(
-      name='users', full_name='admin.ListUsersResponse.users', index=1,
-      number=2, type=9, cpp_type=9, label=3,
-      has_default_value=False, default_value=[],
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
-  ],
-  extensions=[
-  ],
-  nested_types=[],
-  enum_types=[
-  ],
-  serialized_options=None,
-  is_extendable=False,
-  syntax='proto3',
-  extension_ranges=[],
-  oneofs=[
-  ],
-  serialized_start=607,
-  serialized_end=672,
+  serialized_start=554,
+  serialized_end=659,
 )
 
 
 _USERDATA_PARAMSENTRY = _descriptor.Descriptor(
   name='ParamsEntry',
-  full_name='admin.UserData.ParamsEntry',
+  full_name='pymapadmin.grpc.UserData.ParamsEntry',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='key', full_name='admin.UserData.ParamsEntry.key', index=0,
+      name='key', full_name='pymapadmin.grpc.UserData.ParamsEntry.key', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='value', full_name='admin.UserData.ParamsEntry.value', index=1,
+      name='value', full_name='pymapadmin.grpc.UserData.ParamsEntry.value', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -463,27 +424,27 @@ _USERDATA_PARAMSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=749,
-  serialized_end=794,
+  serialized_start=747,
+  serialized_end=792,
 )
 
 _USERDATA = _descriptor.Descriptor(
   name='UserData',
-  full_name='admin.UserData',
+  full_name='pymapadmin.grpc.UserData',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='password', full_name='admin.UserData.password', index=0,
+      name='password', full_name='pymapadmin.grpc.UserData.password', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='params', full_name='admin.UserData.params', index=1,
+      name='params', full_name='pymapadmin.grpc.UserData.params', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
@@ -501,23 +462,23 @@ _USERDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=674,
-  serialized_end=794,
+  serialized_start=662,
+  serialized_end=792,
 )
 
 
 _GETUSERREQUEST = _descriptor.Descriptor(
   name='GetUserRequest',
-  full_name='admin.GetUserRequest',
+  full_name='pymapadmin.grpc.GetUserRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='login', full_name='admin.GetUserRequest.login', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='user', full_name='pymapadmin.grpc.GetUserRequest.user', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -533,28 +494,28 @@ _GETUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=796,
-  serialized_end=841,
+  serialized_start=794,
+  serialized_end=824,
 )
 
 
 _SETUSERREQUEST = _descriptor.Descriptor(
   name='SetUserRequest',
-  full_name='admin.SetUserRequest',
+  full_name='pymapadmin.grpc.SetUserRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='login', full_name='admin.SetUserRequest.login', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='user', full_name='pymapadmin.grpc.SetUserRequest.user', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='data', full_name='admin.SetUserRequest.data', index=1,
+      name='data', full_name='pymapadmin.grpc.SetUserRequest.data', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -572,23 +533,23 @@ _SETUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=843,
-  serialized_end=919,
+  serialized_start=826,
+  serialized_end=897,
 )
 
 
 _DELETEUSERREQUEST = _descriptor.Descriptor(
   name='DeleteUserRequest',
-  full_name='admin.DeleteUserRequest',
+  full_name='pymapadmin.grpc.DeleteUserRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='login', full_name='admin.DeleteUserRequest.login', index=0,
-      number=1, type=11, cpp_type=10, label=1,
-      has_default_value=False, default_value=None,
+      name='user', full_name='pymapadmin.grpc.DeleteUserRequest.user', index=0,
+      number=1, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
@@ -604,35 +565,35 @@ _DELETEUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=921,
-  serialized_end=969,
+  serialized_start=899,
+  serialized_end=932,
 )
 
 
 _USERRESPONSE = _descriptor.Descriptor(
   name='UserResponse',
-  full_name='admin.UserResponse',
+  full_name='pymapadmin.grpc.UserResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='result', full_name='admin.UserResponse.result', index=0,
+      name='result', full_name='pymapadmin.grpc.UserResponse.result', index=0,
       number=1, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='username', full_name='admin.UserResponse.username', index=1,
+      name='username', full_name='pymapadmin.grpc.UserResponse.username', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='data', full_name='admin.UserResponse.data', index=2,
+      name='data', full_name='pymapadmin.grpc.UserResponse.data', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -650,32 +611,26 @@ _USERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=971,
-  serialized_end=1065,
+  serialized_start=934,
+  serialized_end=1048,
 )
 
 _RESULT.fields_by_name['code'].enum_type = _RESULTCODE
+_LOGINRESPONSE.fields_by_name['result'].message_type = _RESULT
 _PINGRESPONSE.fields_by_name['result'].message_type = _RESULT
-_APPENDREQUEST.fields_by_name['login'].message_type = _LOGIN
 _APPENDRESPONSE.fields_by_name['result'].message_type = _RESULT
-_LISTUSERSREQUEST.fields_by_name['login'].message_type = _LOGIN
-_LISTUSERSRESPONSE.fields_by_name['result'].message_type = _RESULT
 _USERDATA_PARAMSENTRY.containing_type = _USERDATA
 _USERDATA.fields_by_name['params'].message_type = _USERDATA_PARAMSENTRY
-_GETUSERREQUEST.fields_by_name['login'].message_type = _LOGIN
-_SETUSERREQUEST.fields_by_name['login'].message_type = _LOGIN
 _SETUSERREQUEST.fields_by_name['data'].message_type = _USERDATA
-_DELETEUSERREQUEST.fields_by_name['login'].message_type = _LOGIN
 _USERRESPONSE.fields_by_name['result'].message_type = _RESULT
 _USERRESPONSE.fields_by_name['data'].message_type = _USERDATA
 DESCRIPTOR.message_types_by_name['Result'] = _RESULT
+DESCRIPTOR.message_types_by_name['LoginRequest'] = _LOGINREQUEST
+DESCRIPTOR.message_types_by_name['LoginResponse'] = _LOGINRESPONSE
 DESCRIPTOR.message_types_by_name['PingRequest'] = _PINGREQUEST
 DESCRIPTOR.message_types_by_name['PingResponse'] = _PINGRESPONSE
-DESCRIPTOR.message_types_by_name['Login'] = _LOGIN
 DESCRIPTOR.message_types_by_name['AppendRequest'] = _APPENDREQUEST
 DESCRIPTOR.message_types_by_name['AppendResponse'] = _APPENDRESPONSE
-DESCRIPTOR.message_types_by_name['ListUsersRequest'] = _LISTUSERSREQUEST
-DESCRIPTOR.message_types_by_name['ListUsersResponse'] = _LISTUSERSRESPONSE
 DESCRIPTOR.message_types_by_name['UserData'] = _USERDATA
 DESCRIPTOR.message_types_by_name['GetUserRequest'] = _GETUSERREQUEST
 DESCRIPTOR.message_types_by_name['SetUserRequest'] = _SETUSERREQUEST
@@ -687,70 +642,63 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 Result = _reflection.GeneratedProtocolMessageType('Result', (_message.Message,), {
   'DESCRIPTOR' : _RESULT,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.Result)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.Result)
   })
 _sym_db.RegisterMessage(Result)
+
+LoginRequest = _reflection.GeneratedProtocolMessageType('LoginRequest', (_message.Message,), {
+  'DESCRIPTOR' : _LOGINREQUEST,
+  '__module__' : 'pymapadmin.grpc.admin_pb2'
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.LoginRequest)
+  })
+_sym_db.RegisterMessage(LoginRequest)
+
+LoginResponse = _reflection.GeneratedProtocolMessageType('LoginResponse', (_message.Message,), {
+  'DESCRIPTOR' : _LOGINRESPONSE,
+  '__module__' : 'pymapadmin.grpc.admin_pb2'
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.LoginResponse)
+  })
+_sym_db.RegisterMessage(LoginResponse)
 
 PingRequest = _reflection.GeneratedProtocolMessageType('PingRequest', (_message.Message,), {
   'DESCRIPTOR' : _PINGREQUEST,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.PingRequest)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.PingRequest)
   })
 _sym_db.RegisterMessage(PingRequest)
 
 PingResponse = _reflection.GeneratedProtocolMessageType('PingResponse', (_message.Message,), {
   'DESCRIPTOR' : _PINGRESPONSE,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.PingResponse)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.PingResponse)
   })
 _sym_db.RegisterMessage(PingResponse)
-
-Login = _reflection.GeneratedProtocolMessageType('Login', (_message.Message,), {
-  'DESCRIPTOR' : _LOGIN,
-  '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.Login)
-  })
-_sym_db.RegisterMessage(Login)
 
 AppendRequest = _reflection.GeneratedProtocolMessageType('AppendRequest', (_message.Message,), {
   'DESCRIPTOR' : _APPENDREQUEST,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.AppendRequest)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.AppendRequest)
   })
 _sym_db.RegisterMessage(AppendRequest)
 
 AppendResponse = _reflection.GeneratedProtocolMessageType('AppendResponse', (_message.Message,), {
   'DESCRIPTOR' : _APPENDRESPONSE,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.AppendResponse)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.AppendResponse)
   })
 _sym_db.RegisterMessage(AppendResponse)
-
-ListUsersRequest = _reflection.GeneratedProtocolMessageType('ListUsersRequest', (_message.Message,), {
-  'DESCRIPTOR' : _LISTUSERSREQUEST,
-  '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.ListUsersRequest)
-  })
-_sym_db.RegisterMessage(ListUsersRequest)
-
-ListUsersResponse = _reflection.GeneratedProtocolMessageType('ListUsersResponse', (_message.Message,), {
-  'DESCRIPTOR' : _LISTUSERSRESPONSE,
-  '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.ListUsersResponse)
-  })
-_sym_db.RegisterMessage(ListUsersResponse)
 
 UserData = _reflection.GeneratedProtocolMessageType('UserData', (_message.Message,), {
 
   'ParamsEntry' : _reflection.GeneratedProtocolMessageType('ParamsEntry', (_message.Message,), {
     'DESCRIPTOR' : _USERDATA_PARAMSENTRY,
     '__module__' : 'pymapadmin.grpc.admin_pb2'
-    # @@protoc_insertion_point(class_scope:admin.UserData.ParamsEntry)
+    # @@protoc_insertion_point(class_scope:pymapadmin.grpc.UserData.ParamsEntry)
     })
   ,
   'DESCRIPTOR' : _USERDATA,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.UserData)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.UserData)
   })
 _sym_db.RegisterMessage(UserData)
 _sym_db.RegisterMessage(UserData.ParamsEntry)
@@ -758,28 +706,28 @@ _sym_db.RegisterMessage(UserData.ParamsEntry)
 GetUserRequest = _reflection.GeneratedProtocolMessageType('GetUserRequest', (_message.Message,), {
   'DESCRIPTOR' : _GETUSERREQUEST,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.GetUserRequest)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.GetUserRequest)
   })
 _sym_db.RegisterMessage(GetUserRequest)
 
 SetUserRequest = _reflection.GeneratedProtocolMessageType('SetUserRequest', (_message.Message,), {
   'DESCRIPTOR' : _SETUSERREQUEST,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.SetUserRequest)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.SetUserRequest)
   })
 _sym_db.RegisterMessage(SetUserRequest)
 
 DeleteUserRequest = _reflection.GeneratedProtocolMessageType('DeleteUserRequest', (_message.Message,), {
   'DESCRIPTOR' : _DELETEUSERREQUEST,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.DeleteUserRequest)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.DeleteUserRequest)
   })
 _sym_db.RegisterMessage(DeleteUserRequest)
 
 UserResponse = _reflection.GeneratedProtocolMessageType('UserResponse', (_message.Message,), {
   'DESCRIPTOR' : _USERRESPONSE,
   '__module__' : 'pymapadmin.grpc.admin_pb2'
-  # @@protoc_insertion_point(class_scope:admin.UserResponse)
+  # @@protoc_insertion_point(class_scope:pymapadmin.grpc.UserResponse)
   })
 _sym_db.RegisterMessage(UserResponse)
 
@@ -788,21 +736,31 @@ _USERDATA_PARAMSENTRY._options = None
 
 _SYSTEM = _descriptor.ServiceDescriptor(
   name='System',
-  full_name='admin.System',
+  full_name='pymapadmin.grpc.System',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1107,
-  serialized_end=1166,
+  serialized_start=1091,
+  serialized_end=1244,
   methods=[
   _descriptor.MethodDescriptor(
     name='Ping',
-    full_name='admin.System.Ping',
+    full_name='pymapadmin.grpc.System.Ping',
     index=0,
     containing_service=None,
     input_type=_PINGREQUEST,
     output_type=_PINGRESPONSE,
+    serialized_options=None,
+    create_key=_descriptor._internal_create_key,
+  ),
+  _descriptor.MethodDescriptor(
+    name='Login',
+    full_name='pymapadmin.grpc.System.Login',
+    index=1,
+    containing_service=None,
+    input_type=_LOGINREQUEST,
+    output_type=_LOGINRESPONSE,
     serialized_options=None,
     create_key=_descriptor._internal_create_key,
   ),
@@ -814,17 +772,17 @@ DESCRIPTOR.services_by_name['System'] = _SYSTEM
 
 _MAILBOX = _descriptor.ServiceDescriptor(
   name='Mailbox',
-  full_name='admin.Mailbox',
+  full_name='pymapadmin.grpc.Mailbox',
   file=DESCRIPTOR,
   index=1,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1168,
-  serialized_end=1234,
+  serialized_start=1246,
+  serialized_end=1332,
   methods=[
   _descriptor.MethodDescriptor(
     name='Append',
-    full_name='admin.Mailbox.Append',
+    full_name='pymapadmin.grpc.Mailbox.Append',
     index=0,
     containing_service=None,
     input_type=_APPENDREQUEST,
@@ -840,28 +798,18 @@ DESCRIPTOR.services_by_name['Mailbox'] = _MAILBOX
 
 _USER = _descriptor.ServiceDescriptor(
   name='User',
-  full_name='admin.User',
+  full_name='pymapadmin.grpc.User',
   file=DESCRIPTOR,
   index=2,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1237,
-  serialized_end=1488,
+  serialized_start=1335,
+  serialized_end=1578,
   methods=[
   _descriptor.MethodDescriptor(
-    name='ListUsers',
-    full_name='admin.User.ListUsers',
-    index=0,
-    containing_service=None,
-    input_type=_LISTUSERSREQUEST,
-    output_type=_LISTUSERSRESPONSE,
-    serialized_options=None,
-    create_key=_descriptor._internal_create_key,
-  ),
-  _descriptor.MethodDescriptor(
     name='GetUser',
-    full_name='admin.User.GetUser',
-    index=1,
+    full_name='pymapadmin.grpc.User.GetUser',
+    index=0,
     containing_service=None,
     input_type=_GETUSERREQUEST,
     output_type=_USERRESPONSE,
@@ -870,8 +818,8 @@ _USER = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='SetUser',
-    full_name='admin.User.SetUser',
-    index=2,
+    full_name='pymapadmin.grpc.User.SetUser',
+    index=1,
     containing_service=None,
     input_type=_SETUSERREQUEST,
     output_type=_USERRESPONSE,
@@ -880,8 +828,8 @@ _USER = _descriptor.ServiceDescriptor(
   ),
   _descriptor.MethodDescriptor(
     name='DeleteUser',
-    full_name='admin.User.DeleteUser',
-    index=3,
+    full_name='pymapadmin.grpc.User.DeleteUser',
+    index=2,
     containing_service=None,
     input_type=_DELETEUSERREQUEST,
     output_type=_USERRESPONSE,

@@ -16,34 +16,32 @@ listening on a socket.
 ### Connections
 
 By default, the `pymap-admin` command will attempt to interact with a pymap
-admin server over a UNIX socket, typically in `/tmp/pymap/pymap-adin.sock`.
-With the `--host` or `$PYMAP_ADMIN_HOST` options, you can use a TCP connection
-(the default grpc port is 50051). However, the pymap admin service must also be
-configured to listen on a port, using either of these options:
+admin server over a UNIX socket, typically in `/tmp/pymap/pymap-adin.sock`. See
+the `pymap-admin --help` commands for other connection options, depending on
+how the pymap admin service is configured.
 
-```
-pymap ... --admin-private 127.0.0.1:50051 ...
-pymap ... --admin-public 0.0.0.0:9090 ...
-```
-
-The `--admin-private` option will function exactly like the UNIX socket: all
-operations will succeed unencrypted and without authentication. As such, a
-"private" admin service port should be properly firewalled.
-
-The `--admin-public` option is safe to expose publicly. It is SSL/TLS encrypted
-using the same certificate as your IMAP sockets, and commands are authenticated
-on a per-user basis. For example, to append a message to a user's INBOX, that
-user must authenticate:
-
-```
-pymap-admin --password=... append user@example.com
-# or $PYMAP_ADMIN_PASSWORD
-# or --ask-password
-```
+Most requests are authenticated using [macaroon][6] tokens. Tokens are read
+from `~/.pymaprc`, `$PYMAP_ADMIN_TOKEN`, or the `--token` parameter.
 
 ## Commands
 
 #### [API Documentation](http://icgood.github.io/pymap-admin/)
+
+### `login` Command
+
+Sends login credentials and gets a bearer token.
+
+```
+$ pymap-admin login -is user@example.com
+user@example.com Password:
+result {
+  response: ". OK Login completed."
+}
+bearer_token: "MDAwZWxvY2F0aW9uIAowMDMwaWRlbnRpZmllciA0ZmM4MD..."
+```
+
+The `-s` flag causes the resulting token to be saved to the `~/.pymaprc` config
+file.
 
 ### `ping` Command
 
@@ -83,13 +81,11 @@ uid: 101
 These commands access and manipulate the users on the system:
 
 ```
-$ pymap-admin list-users --help
 $ pymap-admin set-user --help
 $ pymap-admin get-user --help
 $ pymap-admin delete-user --help
 ```
 
-The `list-users` command lists all usernames on the system, one per line.
 Passing a username to `get-user` will display that user's metadata, including
 the (securely hashed) password string. A username can be deleted with
 `delete-user`. The `set-user` command will create and update a username and its
@@ -103,3 +99,4 @@ If using pymap as part of the [slimta-docker][4] configuration, see its
 [3]: https://github.com/vmagamedov/grpclib
 [4]: https://github.com/slimta/slimta-docker
 [5]: https://github.com/slimta/slimta-docker#address-management
+[6]: https://github.com/ecordell/pymacaroons

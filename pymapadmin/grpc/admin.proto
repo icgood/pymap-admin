@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package admin;
+package pymapadmin.grpc;
 
 enum ResultCode {
   SUCCESS = 0;
@@ -13,24 +13,28 @@ message Result {
   string key = 3;
 }
 
-message PingRequest {
-  string client_version = 2;
+message LoginRequest {
+  string authcid = 1;
+  string secret = 2;
+  string authzid = 3;
+  double token_expiration = 4;
 }
+
+message LoginResponse {
+  Result result = 1;
+  string bearer_token = 2;
+}
+
+message PingRequest {}
 
 message PingResponse {
   Result result = 1;
-  string server_version = 2;
-  bool public_client = 3;
-}
-
-message Login {
-  string authcid = 1;
-  string authzid = 2;
-  string secret = 3;
+  string pymap_version = 2;
+  string pymap_admin_version = 3;
 }
 
 message AppendRequest {
-  Login login = 1;
+  string user = 1;
   string sender = 2;
   string recipient = 3;
   string mailbox = 4;
@@ -46,32 +50,22 @@ message AppendResponse {
   uint32 uid = 4;
 }
 
-message ListUsersRequest {
-  Login login = 1;
-  string match = 2;
-}
-
-message ListUsersResponse {
-  Result result = 1;
-  repeated string users = 2;
-}
-
 message UserData {
   string password = 1;
   map<string, string> params = 2;
 }
 
 message GetUserRequest {
-  Login login = 1;
+  string user = 1;
 }
 
 message SetUserRequest {
-  Login login = 1;
+  string user = 1;
   UserData data = 2;
 }
 
 message DeleteUserRequest {
-  Login login = 1;
+  string user = 1;
 }
 
 message UserResponse {
@@ -82,6 +76,7 @@ message UserResponse {
 
 service System {
   rpc Ping (PingRequest) returns (PingResponse) {}
+  rpc Login (LoginRequest) returns (LoginResponse) {}
 }
 
 service Mailbox {
@@ -89,7 +84,6 @@ service Mailbox {
 }
 
 service User {
-  rpc ListUsers (ListUsersRequest) returns (stream ListUsersResponse) {}
   rpc GetUser (GetUserRequest) returns (UserResponse) {}
   rpc SetUser (SetUserRequest) returns (UserResponse) {}
   rpc DeleteUser (DeleteUserRequest) returns (UserResponse) {}

@@ -3,47 +3,23 @@ from __future__ import annotations
 
 import getpass
 from argparse import ArgumentParser, FileType
-from typing import Any, Optional, Dict, TextIO
+from typing import Any, Optional, Dict
 
-from grpclib.client import Channel
-
-from .base import Command
+from .base import ClientCommand
 from ..typing import RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_grpc import UserStub
-from ..grpc.admin_pb2 import ListUsersRequest, ListUsersResponse, \
+from ..grpc.admin_pb2 import \
     UserData, UserResponse, GetUserRequest, SetUserRequest, DeleteUserRequest
 
-
-class UserCommand(Command[UserStub, RequestT, ResponseT]):
-
-    @classmethod
-    def get_client(self, channel: Channel) -> UserStub:
-        return UserStub(channel)
+__all__ = ['GetUserCommand', 'SetUserCommand',
+           'DeleteUserCommand']
 
 
-class ListUsersCommand(UserCommand[ListUsersRequest, ListUsersResponse]):
-    """List all matching users."""
-
-    @classmethod
-    def add_subparser(cls, name: str, subparsers: Any) \
-            -> ArgumentParser:  # pragma: no cover
-        subparser = subparsers.add_parser(
-            name, description=cls.__doc__,
-            help='list users')
-        subparser.add_argument('match', nargs='?',
-                               help='the user name match string')
-        return subparser
+class UserCommand(ClientCommand[UserStub, RequestT, ResponseT]):
 
     @property
-    def method(self) -> MethodProtocol[ListUsersRequest, ListUsersResponse]:
-        return self.client.ListUsers
-
-    def build_request(self) -> ListUsersRequest:
-        return ListUsersRequest(login=self.get_login(), match=self.args.match)
-
-    def print_success(self, res: ListUsersResponse, outfile: TextIO) -> None:
-        for user in res.users:
-            print(user, file=outfile)
+    def client(self) -> UserStub:
+        return UserStub(self.channel)
 
 
 class GetUserCommand(UserCommand[GetUserRequest, UserResponse]):
@@ -63,8 +39,7 @@ class GetUserCommand(UserCommand[GetUserRequest, UserResponse]):
         return self.client.GetUser
 
     def build_request(self) -> GetUserRequest:
-        login = self.get_login(self.args.username)
-        return GetUserRequest(login=login)
+        return GetUserRequest(user=self.args.username)
 
 
 class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
@@ -102,12 +77,10 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
 
     def build_request(self) -> SetUserRequest:
         args = self.args
-        login = self.get_login(args.username)
         params: Dict[str, str] = dict(args.param or [])
         password = self.getpass()
-        new_data = UserData(password=password,
-                            params=params)
-        return SetUserRequest(login=login, data=new_data)
+        new_data = UserData(password=password, params=params)
+        return SetUserRequest(user=args.username, data=new_data)
 
 
 class DeleteUserCommand(UserCommand[DeleteUserRequest, UserResponse]):
@@ -127,6 +100,4 @@ class DeleteUserCommand(UserCommand[DeleteUserRequest, UserResponse]):
         return self.client.DeleteUser
 
     def build_request(self) -> DeleteUserRequest:
-        args = self.args
-        login = self.get_login(args.username)
-        return DeleteUserRequest(login=login)
+        return DeleteUserRequest(user=self.args.username)

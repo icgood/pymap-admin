@@ -18,13 +18,23 @@ class SystemBase(abc.ABC):
     async def Ping(self, stream: 'grpclib.server.Stream[pymapadmin.grpc.admin_pb2.PingRequest, pymapadmin.grpc.admin_pb2.PingResponse]') -> None:
         pass
 
+    @abc.abstractmethod
+    async def Login(self, stream: 'grpclib.server.Stream[pymapadmin.grpc.admin_pb2.LoginRequest, pymapadmin.grpc.admin_pb2.LoginResponse]') -> None:
+        pass
+
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/admin.System/Ping': grpclib.const.Handler(
+            '/pymapadmin.grpc.System/Ping': grpclib.const.Handler(
                 self.Ping,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 pymapadmin.grpc.admin_pb2.PingRequest,
                 pymapadmin.grpc.admin_pb2.PingResponse,
+            ),
+            '/pymapadmin.grpc.System/Login': grpclib.const.Handler(
+                self.Login,
+                grpclib.const.Cardinality.UNARY_UNARY,
+                pymapadmin.grpc.admin_pb2.LoginRequest,
+                pymapadmin.grpc.admin_pb2.LoginResponse,
             ),
         }
 
@@ -34,9 +44,15 @@ class SystemStub:
     def __init__(self, channel: grpclib.client.Channel) -> None:
         self.Ping = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/admin.System/Ping',
+            '/pymapadmin.grpc.System/Ping',
             pymapadmin.grpc.admin_pb2.PingRequest,
             pymapadmin.grpc.admin_pb2.PingResponse,
+        )
+        self.Login = grpclib.client.UnaryUnaryMethod(
+            channel,
+            '/pymapadmin.grpc.System/Login',
+            pymapadmin.grpc.admin_pb2.LoginRequest,
+            pymapadmin.grpc.admin_pb2.LoginResponse,
         )
 
 
@@ -48,7 +64,7 @@ class MailboxBase(abc.ABC):
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/admin.Mailbox/Append': grpclib.const.Handler(
+            '/pymapadmin.grpc.Mailbox/Append': grpclib.const.Handler(
                 self.Append,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 pymapadmin.grpc.admin_pb2.AppendRequest,
@@ -62,17 +78,13 @@ class MailboxStub:
     def __init__(self, channel: grpclib.client.Channel) -> None:
         self.Append = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/admin.Mailbox/Append',
+            '/pymapadmin.grpc.Mailbox/Append',
             pymapadmin.grpc.admin_pb2.AppendRequest,
             pymapadmin.grpc.admin_pb2.AppendResponse,
         )
 
 
 class UserBase(abc.ABC):
-
-    @abc.abstractmethod
-    async def ListUsers(self, stream: 'grpclib.server.Stream[pymapadmin.grpc.admin_pb2.ListUsersRequest, pymapadmin.grpc.admin_pb2.ListUsersResponse]') -> None:
-        pass
 
     @abc.abstractmethod
     async def GetUser(self, stream: 'grpclib.server.Stream[pymapadmin.grpc.admin_pb2.GetUserRequest, pymapadmin.grpc.admin_pb2.UserResponse]') -> None:
@@ -88,25 +100,19 @@ class UserBase(abc.ABC):
 
     def __mapping__(self) -> typing.Dict[str, grpclib.const.Handler]:
         return {
-            '/admin.User/ListUsers': grpclib.const.Handler(
-                self.ListUsers,
-                grpclib.const.Cardinality.UNARY_STREAM,
-                pymapadmin.grpc.admin_pb2.ListUsersRequest,
-                pymapadmin.grpc.admin_pb2.ListUsersResponse,
-            ),
-            '/admin.User/GetUser': grpclib.const.Handler(
+            '/pymapadmin.grpc.User/GetUser': grpclib.const.Handler(
                 self.GetUser,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 pymapadmin.grpc.admin_pb2.GetUserRequest,
                 pymapadmin.grpc.admin_pb2.UserResponse,
             ),
-            '/admin.User/SetUser': grpclib.const.Handler(
+            '/pymapadmin.grpc.User/SetUser': grpclib.const.Handler(
                 self.SetUser,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 pymapadmin.grpc.admin_pb2.SetUserRequest,
                 pymapadmin.grpc.admin_pb2.UserResponse,
             ),
-            '/admin.User/DeleteUser': grpclib.const.Handler(
+            '/pymapadmin.grpc.User/DeleteUser': grpclib.const.Handler(
                 self.DeleteUser,
                 grpclib.const.Cardinality.UNARY_UNARY,
                 pymapadmin.grpc.admin_pb2.DeleteUserRequest,
@@ -118,27 +124,21 @@ class UserBase(abc.ABC):
 class UserStub:
 
     def __init__(self, channel: grpclib.client.Channel) -> None:
-        self.ListUsers = grpclib.client.UnaryStreamMethod(
-            channel,
-            '/admin.User/ListUsers',
-            pymapadmin.grpc.admin_pb2.ListUsersRequest,
-            pymapadmin.grpc.admin_pb2.ListUsersResponse,
-        )
         self.GetUser = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/admin.User/GetUser',
+            '/pymapadmin.grpc.User/GetUser',
             pymapadmin.grpc.admin_pb2.GetUserRequest,
             pymapadmin.grpc.admin_pb2.UserResponse,
         )
         self.SetUser = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/admin.User/SetUser',
+            '/pymapadmin.grpc.User/SetUser',
             pymapadmin.grpc.admin_pb2.SetUserRequest,
             pymapadmin.grpc.admin_pb2.UserResponse,
         )
         self.DeleteUser = grpclib.client.UnaryUnaryMethod(
             channel,
-            '/admin.User/DeleteUser',
+            '/pymapadmin.grpc.User/DeleteUser',
             pymapadmin.grpc.admin_pb2.DeleteUserRequest,
             pymapadmin.grpc.admin_pb2.UserResponse,
         )

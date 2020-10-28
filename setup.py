@@ -27,8 +27,9 @@ with open('README.md') as f:
 with open('LICENSE.md') as f:
     license = f.read()
 
+
 setup(name='pymap-admin',
-      version='0.4.3',
+      version='0.5.0',
       author='Ian Good',
       author_email='ian@icgood.net',
       description='Admin tool for running pymap instances.',
@@ -49,17 +50,18 @@ setup(name='pymap-admin',
       include_package_data=True,
       packages=find_packages(),
       install_requires=[
-          'grpclib', 'protobuf', 'typing-extensions'],
+          'grpclib', 'protobuf', 'pymacaroons', 'typing-extensions'],
       extras_require={
+          'optional': ['googleapis-common-protos'],
           'build': ['grpcio-tools', 'mypy-protobuf']},
       entry_points={
           'console_scripts': [
               'pymap-admin = pymapadmin.main:main'],
           'pymapadmin.commands': [
+              'login = pymapadmin.commands.system:LoginCommand',
               'ping = pymapadmin.commands.system:PingCommand',
               'append = pymapadmin.commands.mailbox:AppendCommand',
-              'list-users = pymapadmin.commands.user:ListUsersCommand',
               'get-user = pymapadmin.commands.user:GetUserCommand',
               'set-user = pymapadmin.commands.user:SetUserCommand',
               'delete-user = pymapadmin.commands.user:DeleteUserCommand'],
-          })
+      })

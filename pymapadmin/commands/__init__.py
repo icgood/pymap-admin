@@ -7,9 +7,11 @@ from pkg_resources import iter_entry_points, DistributionNotFound
 
 from .base import Command
 
+__all__ = ['load_commands']
+
 
 def load_commands(group: str = 'pymapadmin.commands') \
-        -> Mapping[str, Type[Command]]:
+        -> Mapping[str, Type[Command]]:  # pragma: no cover
     """Load and return a map of command name to implementation class.
 
     Args:
