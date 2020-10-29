@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin.commands &#8212; pymap-admin 0.5.0 documentation</title>
+    <title>pymapadmin.commands &#8212; pymap-admin 0.5.1 documentation</title>
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.5.0 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.5.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>
@@ -77,13 +77,169 @@
 <dd class="field-odd"><p><strong>group</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The setuptools entry point used to register commands.</p>
 </dd>
 <dt class="field-even">Return type</dt>
-<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code>]]</p>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Mapping" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Mapping</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Type" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Type</span></code></a>[<a class="reference internal" href="#pymapadmin.commands.base.Command" title="pymapadmin.commands.base.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">Command</span></code></a>]]</p>
 </dd>
 </dl>
 </dd></dl>
 
-<div class="section" id="pymapadmin-commands-load">
-<h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.load</span></code><a class="headerlink" href="#pymapadmin-commands-load" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-pymapadmin.commands.base">
+<span id="pymapadmin-commands-base"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.base</span></code><a class="headerlink" href="#module-pymapadmin.commands.base" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pymapadmin.commands.base.Command">
+<em class="property">class </em><code class="sig-prename descclassname">pymapadmin.commands.base.</code><code class="sig-name descname">Command</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em>, <em class="sig-param"><span class="n">channel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface for command implementations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.Namespace" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a>) – The command-line arguments.</p></li>
+<li><p><strong>channel</strong> (<a class="reference external" href="https://grpclib.readthedocs.io/en/latest/client.html#grpclib.client.Channel" title="(in grpclib)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Channel</span></code></a>) – The GRPC channel for executing commands.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pymapadmin.commands.base.Command.add_subparser">
+<em class="property">abstract classmethod </em><code class="sig-name descname">add_subparser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">subparsers</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.Command.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the command-line argument subparser for the command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name to use for the subparser.</p></li>
+<li><p><strong>subparsers</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The special action object as returned by
+<a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser.add_subparsers" title="(in Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The new sub-parser object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="pymapadmin.commands.base.ClientCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pymapadmin.commands.base.</code><code class="sig-name descname">ClientCommand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em>, <em class="sig-param"><span class="n">channel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Interface for client command implementations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.Namespace" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Namespace</span></code></a>) – The command line arguments.</p></li>
+<li><p><strong>client</strong> – The client object.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="pymapadmin.commands.base.ClientCommand.client">
+<em class="property">abstract property </em><code class="sig-name descname">client</code><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.client" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get the client object for the command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>channel</strong> – The GRPC channel for executing commands.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>~StubT</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymapadmin.commands.base.ClientCommand.method">
+<em class="property">abstract property </em><code class="sig-name descname">method</code><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.method" title="Permalink to this definition">¶</a></dt>
+<dd><p>The GRPC client method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="pymapadmin.html#pymapadmin.typing.MethodProtocol" title="pymapadmin.typing.MethodProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">MethodProtocol</span></code></a>[~RequestT, ~ResponseT]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymapadmin.commands.base.ClientCommand.build_request">
+<em class="property">abstract </em><code class="sig-name descname">build_request</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>~RequestT</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymapadmin.commands.base.ClientCommand.handle_response">
+<code class="sig-name descname">handle_response</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em>, <em class="sig-param"><span class="n">outfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle each response. For streaming responses, this will be
+called once for each streamed response as long as <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned.</p>
+<p>The default implementation calls <a class="reference internal" href="#pymapadmin.commands.base.ClientCommand.handle_success" title="pymapadmin.commands.base.ClientCommand.handle_success"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_success()</span></code></a> or
+<a class="reference internal" href="#pymapadmin.commands.base.ClientCommand.handle_failure" title="pymapadmin.commands.base.ClientCommand.handle_failure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_failure()</span></code></a> depending on the result code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> (<em>~ResponseT</em>) – The response from the server.</p></li>
+<li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code></a>) – The file object to print the output to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymapadmin.commands.base.ClientCommand.handle_success">
+<code class="sig-name descname">handle_success</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em>, <em class="sig-param"><span class="n">outfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_success" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a successful response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> (<em>~ResponseT</em>) – The response from the server.</p></li>
+<li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code></a>) – The file object to print the output to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymapadmin.commands.base.ClientCommand.handle_failure">
+<code class="sig-name descname">handle_failure</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">response</span></em>, <em class="sig-param"><span class="n">outfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_failure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print a failure response.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> (<em>~ResponseT</em>) – The response from the server.</p></li>
+<li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code></a>) – The file object to print the output to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="pymapadmin.commands.base.ClientCommand.handle_exception">
+<code class="sig-name descname">handle_exception</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">exc</span></em>, <em class="sig-param"><span class="n">outfile</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_exception" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle an exception that occurred while calling the RPC function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>exc</strong> (<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></a>) – The raised exception object.</p></li>
+<li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">TextIO</span></code></a>) – The file object to print the output to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">int</span></code></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 <div class="section" id="module-pymapadmin.commands.system">
 <span id="pymapadmin-commands-system"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.system</span></code><a class="headerlink" href="#module-pymapadmin.commands.system" title="Permalink to this headline">¶</a></h2>
@@ -468,7 +624,7 @@
     <h3><a href="index.html">Page contents</a></h3>
     <ul>
 <li><a class="reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a><ul>
-<li><a class="reference internal" href="#pymapadmin-commands-load"><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.load</span></code></a></li>
+<li><a class="reference internal" href="#module-pymapadmin.commands.base"><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.base</span></code></a></li>
 <li><a class="reference internal" href="#module-pymapadmin.commands.system"><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.system</span></code></a></li>
 <li><a class="reference internal" href="#module-pymapadmin.commands.mailbox"><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.mailbox</span></code></a></li>
 <li><a class="reference internal" href="#module-pymapadmin.commands.user"><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.user</span></code></a></li>
@@ -534,7 +690,7 @@
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.5.0 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.5.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>
