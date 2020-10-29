@@ -16,22 +16,17 @@ listening on a socket.
 ### Connections
 
 By default, the `pymap-admin` command will attempt to interact with a pymap
-admin server over a UNIX socket, typically in `/tmp/pymap/pymap-adin.sock`. See
-the `pymap-admin --help` commands for other connection options, depending on
-how the pymap admin service is configured.
-
-Most requests are authenticated using [macaroon][6] tokens. Tokens are read
-from `~/.pymaprc`, `$PYMAP_ADMIN_TOKEN`, or the `--token` parameter.
+admin server over a UNIX socket, typically in `/tmp/pymap/pymap-admin.sock`.
+See the `pymap-admin --help` commands for other connection options.
 
 ## Commands
 
-#### [API Documentation](http://icgood.github.io/pymap-admin/)
-
 ### `login` Command
 
-Sends login credentials and gets a bearer token.
+Sends login credentials and gets a bearer token. See
+[Authentication](#authentication) for more information.
 
-```
+```console
 $ pymap-admin login -is user@example.com
 user@example.com Password:
 result {
@@ -40,14 +35,11 @@ result {
 bearer_token: "MDAwZWxvY2F0aW9uIAowMDMwaWRlbnRpZmllciA0ZmM4MD..."
 ```
 
-The `-s` flag causes the resulting token to be saved to the `~/.pymaprc` config
-file.
-
 ### `ping` Command
 
 Pings the running server and reports its version string.
 
-```
+```console
 $ pymap-admin ping
 server_version: "0.14.1"
 ```
@@ -57,13 +49,13 @@ server_version: "0.14.1"
 To append a message directly to a mailbox, without using IMAP, use the
 `append` admin command. First, check out the help:
 
-```
+```console
 $ pymap-admin append --help
 ```
 
 As a basic example, you can append a message to a like this:
 
-```
+```console
 $ cat <<EOF | pymap-admin append demouser
 > From: user@example.com
 >
@@ -80,7 +72,7 @@ uid: 101
 
 These commands access and manipulate the users on the system:
 
-```
+```console
 $ pymap-admin set-user --help
 $ pymap-admin get-user --help
 $ pymap-admin delete-user --help
@@ -93,6 +85,54 @@ password.
 
 If using pymap as part of the [slimta-docker][4] configuration, see its
 [Address Management][5] documentation for additional options.
+
+## Authentication
+
+Every command except [`ping`](#ping-command) requires authentication to
+perform. Most commands will send a [macaroon][6] token to authenticate, except
+for [`login`](#login-command) which uses the credentials provided.
+
+When running `pymap-admin` and `pymap` on the same machine, a temporary file
+containing an admin token is used by default, allowing unrestricted access to
+all operations. This token is verified in-memory and is only valid for the
+*current* `pymap` process.
+
+To use this admin token on another machine, copy the `PYMAP_ADMIN_TOKEN=...`
+line printed out on `pymap` startup and prefix it to `pymap-admin` calls, e.g.:
+
+```console
+$ PYMAP_ADMIN_TOKEN=... pymap-admin get-user user@example.com
+```
+
+### Permanent Tokens
+
+For a token that is not tied to the current `pymap` process, use the
+[`login`](#login-command) with the credentials of a user in the system. The
+resulting token can be used to authenticate as that user in the future.
+
+```console
+$ pymap-admin login -is user@example.com
+```
+
+The `-s` flag will cause the token to be saved and used on future `pymap-admin`
+commands. Use `--token-file` or `$PYMAP_ADMIN_TOKEN_FILE` to specify a
+non-temporary location.
+
+If `-s` is not given, the `bearer_token` value from the output can provided to
+future `pymap-admin` commands with `--token` or `$PYMAP_ADMON_TOKEN`.
+
+### Admin Role
+
+The builtin pymap backends use a special key "role" to assign admin privileges
+to existing users, authorizing them to run `pymap-admin` commands on other
+users.
+
+```console
+$ pymap-admin set-user --param role=admin user@example.com
+```
+
+This role may only be assigned by users that already have it, or by
+authenticating using the admin token.
 
 [1]: https://github.com/icgood/pymap
 [2]: https://grpc.io/
