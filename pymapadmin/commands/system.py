@@ -7,6 +7,7 @@ from contextlib import closing
 from typing import Any, Optional, TextIO
 
 from .base import ClientCommand
+from ..local import get_token_file
 from ..typing import RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_grpc import SystemStub
 from ..grpc.admin_pb2 import LoginRequest, LoginResponse, \
@@ -70,8 +71,8 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
         super().handle_success(response, outfile)
         token = response.bearer_token
         if token and self.args.save:
-            self.config.token = token
-            self.config.flush()
+            token_file = get_token_file(self.args.token_file, mkdir=True)
+            token_file.write_text(token)
 
 
 class PingCommand(SystemCommand[PingRequest, PingResponse]):

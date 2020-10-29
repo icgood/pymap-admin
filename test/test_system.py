@@ -5,7 +5,6 @@ from argparse import Namespace
 import pytest  # type: ignore
 from grpclib.testing import ChannelFor
 from pymapadmin.commands.system import LoginCommand, PingCommand
-from pymapadmin.config import Config
 from pymapadmin.grpc.admin_grpc import SystemBase
 from pymapadmin.grpc.admin_pb2 import LoginRequest, LoginResponse, \
     PingRequest, PingResponse
@@ -29,7 +28,7 @@ class TestLoginCommand:
     async def test_login(self) -> None:
         handler = Handler(LoginRequest, [LoginResponse(
             bearer_token='123abc')])
-        args = Namespace(token=None, config=Config(),
+        args = Namespace(token=None, token_file=None,
                          user='testuser', password='testpass',
                          authzid=None, expiration=None, save=False,
                          ask_password=False, password_file=None)
@@ -48,7 +47,7 @@ class TestPingCommand:
     async def test_ping(self) -> None:
         handler = Handler(PingRequest, [PingResponse(
             pymap_version='test1', pymap_admin_version='test2')])
-        args = Namespace(token=None, config=Config())
+        args = Namespace(token=None, token_file=None)
         async with ChannelFor([handler]) as channel:
             command = PingCommand(args, channel)
             code = await command(StringIO())

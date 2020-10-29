@@ -8,7 +8,6 @@ from unittest.mock import MagicMock
 
 from pymapadmin.commands.user import GetUserCommand, SetUserCommand, \
     DeleteUserCommand
-from pymapadmin.config import Config
 from pymapadmin.grpc.admin_grpc import UserBase
 from pymapadmin.grpc.admin_pb2 import \
     GetUserRequest, SetUserRequest, DeleteUserRequest, UserResponse
@@ -35,7 +34,7 @@ class TestGetUserCommand:
     async def test_get_user(self) -> None:
         handler = Handler(GetUserRequest, [UserResponse(username='user1')])
         outfile = StringIO()
-        args = Namespace(token=None, config=Config(), username='user1')
+        args = Namespace(token=None, token_file=None, username='user1')
         async with ChannelFor([handler]) as channel:
             command = GetUserCommand(args, channel)
             code = await command(outfile)
@@ -51,7 +50,7 @@ class TestDeleteUserCommand:
     async def test_delete_user(self) -> None:
         handler = Handler(DeleteUserRequest, [UserResponse(username='user1')])
         outfile = StringIO()
-        args = Namespace(token=None, config=Config(), username='user1')
+        args = Namespace(token=None, token_file=None, username='user1')
         async with ChannelFor([handler]) as channel:
             command = DeleteUserCommand(args, channel)
             code = await command(outfile)
@@ -67,9 +66,9 @@ class TestSetUserCommand:
     async def test_set_user_no_password(self) -> None:
         handler = Handler(SetUserRequest, [UserResponse(username='user1')])
         outfile = StringIO()
-        args = Namespace(token=None, config=Config(),
+        args = Namespace(token=None, token_file=None,
                          username='user1', no_password=True,
-                         param=[['identity', 'test']])
+                         params=['identity=test'])
         async with ChannelFor([handler]) as channel:
             command = SetUserCommand(args, channel)
             code = await command(outfile)
@@ -86,9 +85,9 @@ class TestSetUserCommand:
         outfile = StringIO()
         pw_file = MagicMock()
         pw_file.readline.return_value = 'testpass'
-        args = Namespace(token=None, config=Config(),
+        args = Namespace(token=None, token_file=None,
                          username='user1', no_password=False,
-                         password_file=pw_file, param=[['identity', 'test']])
+                         password_file=pw_file, params=['identity=test'])
         async with ChannelFor([handler]) as channel:
             command = SetUserCommand(args, channel)
             code = await command(outfile)

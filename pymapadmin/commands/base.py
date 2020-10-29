@@ -11,7 +11,7 @@ from typing_extensions import Final
 from grpclib.client import Channel
 
 from .. import __version__ as client_version
-from ..config import Config
+from ..local import get_token_file
 from ..typing import StubT, RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_pb2 import SUCCESS
 
@@ -38,10 +38,6 @@ class Command(metaclass=ABCMeta):
         super().__init__()
         self.args: Final = args
         self.channel: Final = channel
-
-    @property
-    def config(self) -> Config:
-        return self.args.config
 
     @classmethod
     @abstractmethod
@@ -89,8 +85,12 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
         metadata = {'client-version': client_version}
         if self.args.token is not None:
             metadata['auth-token'] = self.args.token
-        elif self.config.token is not None:
-            metadata['auth-token'] = self.config.token
+        else:
+            token_file = get_token_file(self.args.token_file)
+            try:
+                metadata['auth-token'] = token_file.read_text()
+            except OSError:
+                pass
         return metadata
 
     @property

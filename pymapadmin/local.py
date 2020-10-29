@@ -2,28 +2,64 @@
 from __future__ import annotations
 
 import os
-import os.path
+from pathlib import Path
+from typing import Union
 
 from tempfile import gettempdir
 
-__all__ = ['get_admin_socket']
+__all__ = ['get_admin_socket', 'get_token_file']
 
 
-def get_admin_socket(*, mkdir: bool = False) -> str:
-    """Returns a path in :func:`~tempfile.gettempdir` that should be consistent
-    between a ``pymap-admin`` client and a ``pymap`` server.
+def _get_path(path: Union[None, str, Path], mkdir: bool,
+              envvar: str, name: str) -> Path:
+    if path is None:
+        if f'PYMAP_ADMIN_{envvar}' in os.environ:
+            path = Path(os.environ[f'PYMAP_ADMIN_{envvar}'])
+        else:
+            tmpdir = gettempdir()
+            path = Path(tmpdir, 'pymap', name)
+    elif isinstance(path, str):
+        path = Path(path)
+    path = path.expanduser()
+    if mkdir:
+        path.parent.mkdir(mode=0o700, exist_ok=True)
+    return path
 
-    Use the ``$PYMAP_ADMIN_SOCK`` environment variable to override this
-    behavior with an explicit value.
+
+def get_admin_socket(path: Union[None, str, Path], *,
+                     mkdir: bool = False) -> Path:
+    """Returns a path that should be consistent between a ``pymap-admin``
+    client and a ``pymap`` server.
+
+    Use *path* or the ``$PYMAP_ADMIN_SOCK`` environment variable to override
+    with an explicit path, otherwise the default is:
+
+    ```bash
+    $TMPDIR/pymap/pymap-admin.sock
+    ```
 
     Args:
+        path: Path provided by command-line arguments.
         mkdir: Whether the intermediate directory should be created.
 
     """
-    if 'PYMAP_ADMIN_SOCK' in os.environ:
-        return os.environ['PYMAP_ADMIN_SOCK']
-    tmpdir = gettempdir()
-    pymap_dir = os.path.join(tmpdir, 'pymap')
-    if mkdir and not os.path.isdir(pymap_dir):
-        os.mkdir(pymap_dir, mode=0o700)
-    return os.path.join(pymap_dir, 'pymap-admin.sock')
+    return _get_path(path, mkdir, 'SOCK', 'pymap-admin.sock')
+
+
+def get_token_file(path: Union[None, str, Path], *,
+                   mkdir: bool = False) -> Path:
+    """Returns the path that should be used to read and write the auth token
+    for use by the ``pymap-admin`` client.
+
+    Use *path* or the ``$PYMAP_ADMIN_TOKEN_FILE`` environment variable to
+    override with an explicit path, otherwise the default is:
+
+    ```bash
+    $TMPDIR/pymap/pymap-admin.token
+    ```
+
+    Args:
+        path: Path provided by command-line arguments.
+
+    """
+    return _get_path(path, mkdir, 'TOKEN_FILE', 'pymap-admin.token')

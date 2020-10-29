@@ -5,10 +5,10 @@
 .. automodule:: pymapadmin.commands
    :members:
 
-``pymapadmin.commands.load``
+``pymapadmin.commands.base``
 -------------------------------
 
-.. automodule:: pymapadmin.commands.load
+.. automodule:: pymapadmin.commands.base
    :members:
 
 ``pymapadmin.commands.system``

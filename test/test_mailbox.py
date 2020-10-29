@@ -5,7 +5,6 @@ from argparse import Namespace
 import pytest  # type: ignore
 from grpclib.testing import ChannelFor
 from pymapadmin.commands.mailbox import AppendCommand
-from pymapadmin.config import Config
 from pymapadmin.grpc.admin_grpc import MailboxBase
 from pymapadmin.grpc.admin_pb2 import Result, FAILURE, \
     AppendRequest, AppendResponse
@@ -26,7 +25,7 @@ class TestAppendCommand:
     async def test_append(self) -> None:
         handler = Handler(AppendRequest, [AppendResponse()])
         outfile = StringIO()
-        args = Namespace(token=None, config=Config(),
+        args = Namespace(token=None, token_file=None,
                          username='testuser', sender=None, recipient=None,
                          mailbox='INBOX', data=BytesIO(b'test data'),
                          flags=['\\Flagged', '\\Seen'],
@@ -47,7 +46,7 @@ class TestAppendCommand:
         handler = Handler(AppendRequest, [AppendResponse(
             result=Result(code=FAILURE, key='MailboxNotFound'))])
         outfile = StringIO()
-        args = Namespace(token=None, config=Config(),
+        args = Namespace(token=None, token_file=None,
                          username='testuser', sender=None, recipient=None,
                          mailbox='Bad', data=BytesIO(b'test data'),
                          flags=['\\Flagged', '\\Seen'],
@@ -64,7 +63,7 @@ class TestAppendCommand:
         handler = Handler(AppendRequest, [AppendResponse(
             result=Result(code=FAILURE, key='SomeUnknownKey'))])
         outfile = StringIO()
-        args = Namespace(token=None, config=Config(),
+        args = Namespace(token=None, token_file=None,
                          username='testuser', sender=None, recipient=None,
                          mailbox='INBOX', data=BytesIO(b'test data'),
                          flags=['\\Flagged', '\\Seen'],

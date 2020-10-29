@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import getpass
 from argparse import ArgumentParser, FileType
-from typing import Any, Optional, Dict
+from typing import Any, Optional, Sequence, Mapping
 
 from .base import ClientCommand
 from ..typing import RequestT, ResponseT, MethodProtocol
@@ -53,8 +53,8 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
         subparser.add_argument('--password-file', type=FileType('r'),
                                metavar='FILE',
                                help='read the password from a file')
-        subparser.add_argument('--param', action='append',
-                               nargs=2, metavar=('KEY', 'VAL'),
+        subparser.add_argument('--param', action='append', dest='params',
+                               default=[], metavar='KEY=VAL',
                                help='additional parameters for the request')
         subparser.add_argument('--no-password', action='store_true',
                                help='send the request with no password value')
@@ -76,10 +76,19 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
 
     def build_request(self) -> SetUserRequest:
         args = self.args
-        params: Dict[str, str] = dict(args.param or [])
+        params = self._parse_params(args.params)
         password = self.getpass()
         new_data = UserData(password=password, params=params)
         return SetUserRequest(user=args.username, data=new_data)
+
+    def _parse_params(self, params: Sequence[str]) -> Mapping[str, str]:
+        ret = {}
+        for param in params:
+            key, splitter, val = param.partition('=')
+            if not splitter:
+                raise ValueError(f'Expected key=val format: {param!r}')
+            ret[key] = val
+        return ret
 
 
 class DeleteUserCommand(UserCommand[DeleteUserRequest, UserResponse]):

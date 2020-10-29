@@ -7,7 +7,6 @@ Many arguments may also be given with a $PYMAP_ADMIN_* environment variable.
 from __future__ import annotations
 
 import os
-import os.path
 import sys
 import asyncio
 from argparse import ArgumentParser, Namespace, SUPPRESS
@@ -19,7 +18,6 @@ from pymapadmin import __version__
 
 from .commands import load_commands
 from .commands.base import Command
-from .config import Config
 from .local import get_admin_socket
 
 
@@ -27,17 +25,17 @@ def main() -> int:
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('--version', action='version',
                         version='%(prog)s' + __version__)
-    parser.add_argument('--config', metavar='PATH', type=Config,
-                        default=_def('CONFIG', '~/.pymaprc'),
-                        help='configuration file path')
     parser.add_argument('--host', metavar='HOST',
                         default=_def('HOST'), help='server host')
     parser.add_argument('--port', metavar='PORT',
                         default=_def('PORT'), help='server port')
     parser.add_argument('--path', metavar='FILE',
                         default=_def('PATH'), help=SUPPRESS)
-    parser.add_argument('--token', metavar='STR', default=_def('TOKEN'),
-                        help='auth token')
+
+    token = parser.add_mutually_exclusive_group()
+    token.add_argument('--token-file', metavar='FILE', help='auth token file')
+    token.add_argument('--token', metavar='STR',
+                       default=_def('TOKEN'), help='auth token')
 
     group = parser.add_argument_group('tls options')
     group.add_argument('--cert', metavar='FILE', default=_def('CERT'),
@@ -73,8 +71,8 @@ async def run(parser: ArgumentParser, args: Namespace,
     if args.host is not None or args.port is not None:
         channel = Channel(host=args.host, port=args.port, ssl=ssl)
     else:
-        path = args.path or get_admin_socket()
-        channel = Channel(path=path)
+        path = get_admin_socket(args.path)
+        channel = Channel(path=str(path))
     command = command_cls(args, channel)
     try:
         return await command(sys.stdout)
