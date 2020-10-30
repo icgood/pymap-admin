@@ -7,7 +7,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin &#8212; pymap-admin 0.5.1 documentation</title>
+    <title>pymapadmin &#8212; pymap-admin 0.5.2 documentation</title>
     <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="index.html" title="pymap-admin Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.5.1 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.5.2 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin</span></code></a></li> 
       </ul>
@@ -99,7 +99,7 @@ with the server version.</p>
 <span id="pymapadmin-local"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.local</span></code><a class="headerlink" href="#module-pymapadmin.local" title="Permalink to this headline">¶</a></h2>
 <dl class="py function">
 <dt id="pymapadmin.local.get_admin_socket">
-<code class="sig-prename descclassname">pymapadmin.local.</code><code class="sig-name descname">get_admin_socket</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.get_admin_socket" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pymapadmin.local.</code><code class="sig-name descname">get_admin_socket</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">user</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.get_admin_socket" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a path that should be consistent between a <code class="docutils literal notranslate"><span class="pre">pymap-admin</span></code>
 client and a <code class="docutils literal notranslate"><span class="pre">pymap</span></code> server.</p>
 <p>Use <em>path</em> or the <code class="docutils literal notranslate"><span class="pre">$PYMAP_ADMIN_SOCK</span></code> environment variable to override
@@ -112,6 +112,8 @@ with an explicit path, otherwise the default is:</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>]) – Path provided by command-line arguments.</p></li>
 <li><p><strong>mkdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the intermediate directory should be created.</p></li>
+<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If True, the default path will be in the current user’s home
+directory.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type</dt>
@@ -122,7 +124,7 @@ with an explicit path, otherwise the default is:</p>
 
 <dl class="py function">
 <dt id="pymapadmin.local.get_token_file">
-<code class="sig-prename descclassname">pymapadmin.local.</code><code class="sig-name descname">get_token_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.get_token_file" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">pymapadmin.local.</code><code class="sig-name descname">get_token_file</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">path</span></em>, <em class="sig-param"><span class="o">*</span></em>, <em class="sig-param"><span class="n">mkdir</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">user</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.get_token_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the path that should be used to read and write the auth token
 for use by the <code class="docutils literal notranslate"><span class="pre">pymap-admin</span></code> client.</p>
 <p>Use <em>path</em> or the <code class="docutils literal notranslate"><span class="pre">$PYMAP_ADMIN_TOKEN_FILE</span></code> environment variable to
@@ -132,7 +134,12 @@ override with an explicit path, otherwise the default is:</p>
 <span class="pre">`</span></code></p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>]) – Path provided by command-line arguments.</p>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Union" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Union</span></code></a>[<a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">None</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>, <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a>]) – Path provided by command-line arguments.</p></li>
+<li><p><strong>mkdir</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – Whether the intermediate directory should be created.</p></li>
+<li><p><strong>user</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">bool</span></code></a>) – If True, the default path will be in the current user’s home
+directory.</p></li>
+</ul>
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a></p>
@@ -284,7 +291,7 @@ expected to have.</p>
         <li class="right" >
           <a href="index.html" title="pymap-admin Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.5.1 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.5.2 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin</span></code></a></li> 
       </ul>
