@@ -116,7 +116,7 @@ $ pymap-admin login -is user@example.com
 
 The `-s` flag will cause the token to be saved and used on future `pymap-admin`
 commands. Use `--token-file` or `$PYMAP_ADMIN_TOKEN_FILE` to specify a
-non-temporary location.
+location, otherwise it is saved to `~/.pymap-admin.token`.
 
 If `-s` is not given, the `bearer_token` value from the output can provided to
 future `pymap-admin` commands with `--token` or `$PYMAP_ADMON_TOKEN`.
