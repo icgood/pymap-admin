@@ -41,7 +41,8 @@ Pings the running server and reports its version string.
 
 ```console
 $ pymap-admin ping
-server_version: "0.14.1"
+pymap_version: "0.21.1"
+pymap_admin_version: "0.5.2"
 ```
 
 ### `append` Command
