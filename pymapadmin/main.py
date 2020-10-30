@@ -24,7 +24,7 @@ from .local import get_admin_socket
 def main() -> int:
     parser = ArgumentParser(description=__doc__)
     parser.add_argument('--version', action='version',
-                        version='%(prog)s' + __version__)
+                        version='%(prog)s ' + __version__)
     parser.add_argument('--host', metavar='HOST',
                         default=_def('HOST'), help='server host')
     parser.add_argument('--port', metavar='PORT',

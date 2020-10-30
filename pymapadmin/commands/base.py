@@ -5,7 +5,8 @@ import sys
 import traceback
 from abc import abstractmethod, ABCMeta
 from argparse import ArgumentParser, Namespace
-from typing import Generic, Any, Mapping, TextIO
+from pathlib import Path
+from typing import Generic, Any, Optional, Mapping, TextIO
 from typing_extensions import Final
 
 from grpclib.client import Channel
@@ -81,16 +82,22 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
         """
         ...
 
+    def _find_token(self, *paths: Path) -> Optional[str]:
+        for path in paths:
+            if path.exists():
+                return path.read_text().strip()
+        return None
+
     def _get_metadata(self) -> Mapping[str, str]:
         metadata = {'client-version': client_version}
         if self.args.token is not None:
             metadata['auth-token'] = self.args.token
         else:
-            token_file = get_token_file(self.args.token_file)
-            try:
-                metadata['auth-token'] = token_file.read_text()
-            except OSError:
-                pass
+            user_token_file = get_token_file(self.args.token_file, user=True)
+            token_file = get_token_file(None)
+            token = self._find_token(user_token_file, token_file)
+            if token is not None:
+                metadata['auth-token'] = token
         return metadata
 
     @property

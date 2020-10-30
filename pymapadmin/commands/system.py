@@ -71,8 +71,9 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
         super().handle_success(response, outfile)
         token = response.bearer_token
         if token and self.args.save:
-            token_file = get_token_file(self.args.token_file, mkdir=True)
+            token_file = get_token_file(self.args.token_file, user=True)
             token_file.write_text(token)
+            token_file.chmod(0o600)
 
 
 class PingCommand(SystemCommand[PingRequest, PingResponse]):
