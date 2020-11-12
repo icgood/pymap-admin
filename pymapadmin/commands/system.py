@@ -6,14 +6,15 @@ from argparse import ArgumentParser, FileType
 from contextlib import closing
 from typing import Any, Optional, TextIO
 
-from .base import ClientCommand
-from ..local import get_token_file
+from .base import Command, ClientCommand
+from ..config import Config
+from ..local import config_file, token_file
 from ..typing import RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_grpc import SystemStub
 from ..grpc.admin_pb2 import LoginRequest, LoginResponse, \
     PingRequest, PingResponse
 
-__all__ = ['LoginCommand', 'PingCommand']
+__all__ = ['SaveArgsCommand', 'LoginCommand', 'PingCommand']
 
 
 class SystemCommand(ClientCommand[SystemStub, RequestT, ResponseT]):
@@ -21,6 +22,29 @@ class SystemCommand(ClientCommand[SystemStub, RequestT, ResponseT]):
     @property
     def client(self) -> SystemStub:
         return SystemStub(self.channel)
+
+
+class SaveArgsCommand(Command):
+    """Save the connection settings given as command-line arguments (e.g.
+    --host, --port, etc) to a config file.
+
+    """
+
+    @classmethod
+    def add_subparser(cls, name: str, subparsers: Any) \
+            -> ArgumentParser:  # pragma: no cover
+        subparser = subparsers.add_parser(
+            name, description=cls.__doc__,
+            help='save connection arguments to config file')
+        return subparser
+
+    async def __call__(self, outfile: TextIO) -> int:
+        path = config_file.get_home(mkdir=True)
+        parser = Config.build(self.args)
+        with open(path, 'w') as cfg:
+            parser.write(cfg)
+        print('Config file written:', path, file=outfile)
+        return 0
 
 
 class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
@@ -71,9 +95,9 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
         super().handle_success(response, outfile)
         token = response.bearer_token
         if token and self.args.save:
-            token_file = get_token_file(self.args.token_file, user=True)
-            token_file.write_text(token)
-            token_file.chmod(0o600)
+            path = token_file.get_home(mkdir=True)
+            path.write_text(token)
+            path.chmod(0o600)
 
 
 class PingCommand(SystemCommand[PingRequest, PingResponse]):

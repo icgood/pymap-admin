@@ -1,18 +1,18 @@
 
 from __future__ import annotations
 
+import os
 import sys
 import traceback
 from abc import abstractmethod, ABCMeta
 from argparse import ArgumentParser, Namespace
-from pathlib import Path
 from typing import Generic, Any, Optional, Mapping, TextIO
 from typing_extensions import Final
 
 from grpclib.client import Channel
 
 from .. import __version__ as client_version
-from ..local import get_token_file
+from ..local import token_file
 from ..typing import StubT, RequestT, ResponseT, MethodProtocol
 from ..grpc.admin_pb2 import SUCCESS
 
@@ -82,21 +82,16 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
         """
         ...
 
-    def _find_token(self, *paths: Path) -> Optional[str]:
-        for path in paths:
-            if path.exists():
-                return path.read_text().strip()
-        return None
-
     def _get_metadata(self) -> Mapping[str, str]:
         metadata = {'client-version': client_version}
-        if self.args.token is not None:
-            metadata['auth-token'] = self.args.token
+        if 'PYMAP_ADMIN_TOKEN' in os.environ:
+            metadata['auth-token'] = os.environ['PYMAP_ADMIN_TOKEN']
         else:
-            user_token_file = get_token_file(self.args.token_file, user=True)
-            token_file = get_token_file(None)
-            token = self._find_token(user_token_file, token_file)
-            if token is not None:
+            token: Optional[str] = None
+            path = token_file.find()
+            if path is not None:
+                token = path.read_text().strip()
+            if token:
                 metadata['auth-token'] = token
         return metadata
 

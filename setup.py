@@ -29,7 +29,7 @@ with open('LICENSE.md') as f:
 
 
 setup(name='pymap-admin',
-      version='0.5.2',
+      version='0.5.3',
       author='Ian Good',
       author_email='ian@icgood.net',
       description='Admin tool for running pymap instances.',
@@ -58,6 +58,7 @@ setup(name='pymap-admin',
           'console_scripts': [
               'pymap-admin = pymapadmin.main:main'],
           'pymapadmin.commands': [
+              'save-args = pymapadmin.commands.system:SaveArgsCommand',
               'login = pymapadmin.commands.system:LoginCommand',
               'ping = pymapadmin.commands.system:PingCommand',
               'append = pymapadmin.commands.mailbox:AppendCommand',
