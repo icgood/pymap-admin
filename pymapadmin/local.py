@@ -2,72 +2,155 @@
 from __future__ import annotations
 
 import os
+from argparse import Action, ArgumentParser, Namespace
+from functools import partial
 from pathlib import Path
-from typing import Union
+from typing import Any, Type, Union, Optional, Sequence, List
+from typing_extensions import Final
 
 from tempfile import gettempdir
 
-__all__ = ['get_admin_socket', 'get_token_file']
+__all__ = ['LocalFile', 'config_file', 'token_file', 'socket_file']
 
 
-def _get_path(path: Union[None, str, Path], mkdir: bool, user: bool,
-              envvar: str, tmp_name: str, user_name: str) -> Path:
-    if path is None:
-        if envvar in os.environ:
-            path = Path(os.environ[envvar])
-        elif user:
-            path = Path(Path.home(), user_name)
+class _AddAction(Action):
+
+    def __init__(self, local_file: LocalFile, *args, **kwargs) -> None:
+        kwargs['metavar'] = 'PATH'
+        super().__init__(*args, **kwargs)
+        self._local_file = local_file
+
+    def __call__(self, parser: ArgumentParser, namespace: Namespace,
+                 values: Any, option_string: str = None) -> None:
+        setattr(namespace, self.dest, values)
+        self._local_file.add(values)
+
+
+class LocalFile:
+    """Defines a file that is kept on the local filesystem but could be in a
+    number of different places.
+
+    Args:
+        envvar: The environment variable used to custom the file path.
+        filename: The default filename.
+
+    """
+
+    def __init__(self, envvar: str, filename: str) -> None:
+        super().__init__()
+        self.envvar: Final = envvar
+        self.filename: Final = filename
+        self._custom: List[Path] = []
+
+    @property
+    def add_action(self) -> Type[Action]:
+        """Use as an ``action=`` in :mod:`argparse` to add command-line
+        arguments as custom paths.
+
+        """
+        return partial(_AddAction, self)  # type: ignore
+
+    @property
+    def custom(self) -> Sequence[Path]:
+        """The custom paths added by :meth:`.add`, followed by any path
+        specified by environment variable.
+
+        """
+        try:
+            envvar_val = os.environ[self.envvar]
+        except KeyError:
+            return self._custom
         else:
-            path = Path(gettempdir(), 'pymap', tmp_name)
-    elif isinstance(path, str):
-        path = Path(path)
-    path = path.expanduser()
-    if mkdir and not user:
-        path.parent.mkdir(mode=0o700, exist_ok=True)
-    return path
+            return self._custom + [Path(envvar_val).expanduser()]
+
+    @property
+    def _config_home(self) -> Path:
+        try:
+            config_home = os.environ['XDG_CONFIG_HOME']
+        except KeyError:
+            return Path(Path.home(), '.config')
+        else:
+            return Path(config_home).expanduser()
+
+    @property
+    def _temp_path(self) -> Path:
+        return Path(gettempdir(), 'pymap', self.filename)
+
+    @property
+    def _home_path(self) -> Path:
+        return Path(self._config_home, 'pymap', self.filename)
+
+    def add(self, *custom: Union[None, str, Path]) -> None:
+        """Append the *custom* paths to :attr:`.custom`.
+
+        Args:
+            custom: The custom paths to the file, e.g. from config or
+                command-line.
+
+        """
+        new_custom = [*self._custom,
+                      *(Path(path).expanduser() for path in custom if path)]
+        self._custom = new_custom
+
+    def get_home(self, *, mkdir: bool = False) -> Path:
+        """Returns *filename* inside ``~/.config/pymap/``. If :attr:`.custom`
+        is not empty, its first value is returned instead.
+
+        Args:
+            mkdir: Whether any intermediate directories should be created.
+
+        """
+        try:
+            path = self.custom[0]
+        except IndexError:
+            path = self._home_path
+        if mkdir:
+            path.parent.mkdir(mode=0o700, exist_ok=True)
+        return path
+
+    def get_temp(self, *, mkdir: bool = False) -> Path:
+        """Returns *filename* inside the ``pymap/`` subdirectory of
+        :func:`~tempfile.gettempdir`. If :attr:`.custom` is not empty, its
+        first value is returned instead.
+
+        Args:
+            mkdir: Whether any intermediate directories should be created.
+
+        """
+        try:
+            path = self.custom[0]
+        except IndexError:
+            path = self._temp_path
+        if mkdir:
+            path.parent.mkdir(mode=0o700, exist_ok=True)
+        return path
+
+    def get_all(self) -> Sequence[Path]:
+        """Return all the paths that may contain the file."""
+        return list(self.custom) + [self._home_path, self._temp_path]
+
+    def find(self) -> Optional[Path]:
+        """Return the :class:`~pathlib.Path` of an existing file, if one
+        exists.
+
+        The order of searched paths looks like this:
+
+        1. The :attr:`.custom` paths.
+        2. A path defined in the *envvar* environment variable.
+        3. *filename* in ``~/.config/pymap/``.
+        4. *filename* in the ``pymap`` subdirectory of
+           :func:`tempfile.gettempdir`.
+
+        """
+        all_paths = self.get_all()
+        return next((path for path in all_paths if path.exists()), None)
 
 
-def get_admin_socket(path: Union[None, str, Path], *,
-                     mkdir: bool = False, user: bool = False) -> Path:
-    """Returns a path that should be consistent between a ``pymap-admin``
-    client and a ``pymap`` server.
+#: The config file for default command-line arguments.
+config_file = LocalFile('PYMAP_ADMIN_CONFIG', 'pymap-admin.conf')
 
-    Use *path* or the ``$PYMAP_ADMIN_SOCK`` environment variable to override
-    with an explicit path, otherwise the default is:
+#: The token file for pymap-admin authentication.
+token_file = LocalFile('PYMAP_ADMIN_TOKEN_FILE', 'pymap-admin.token')
 
-    ```bash
-    $TMPDIR/pymap/pymap-admin.sock
-    ```
-
-    Args:
-        path: Path provided by command-line arguments.
-        mkdir: Whether the intermediate directory should be created.
-        user: If True, the default path will be in the current user's home
-            directory.
-
-    """
-    return _get_path(path, mkdir, False, 'PYMAP_ADMIN_SOCK',
-                     'pymap-admin.sock', '.pymap-admin.sock')
-
-
-def get_token_file(path: Union[None, str, Path], *,
-                   mkdir: bool = False, user: bool = False) -> Path:
-    """Returns the path that should be used to read and write the auth token
-    for use by the ``pymap-admin`` client.
-
-    Use *path* or the ``$PYMAP_ADMIN_TOKEN_FILE`` environment variable to
-    override with an explicit path, otherwise the default is:
-
-    ```bash
-    $TMPDIR/pymap/pymap-admin.token
-    ```
-
-    Args:
-        path: Path provided by command-line arguments.
-        mkdir: Whether the intermediate directory should be created.
-        user: If True, the default path will be in the current user's home
-            directory.
-
-    """
-    return _get_path(path, mkdir, user, 'PYMAP_ADMIN_TOKEN_FILE',
-                     'pymap-admin.token', '.pymap-admin.token')
+#: The socket file for connecting to a running pymap server.
+socket_file = LocalFile('PYMAP_ADMIN_SOCKET', 'pymap-admin.sock')

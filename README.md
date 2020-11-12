@@ -21,6 +21,17 @@ See the `pymap-admin --help` commands for other connection options.
 
 ## Commands
 
+### `save-args` Command
+
+When administering remote pymap servers, it can be cumbersome to always supply
+connection arguments every time, such as `--host`. This command saves the
+arguments it is given to a config file.
+
+```console
+$ pymap-admin --host imap.example.com --port 50051 save-args
+Config file written: /home/user/.config/pymap/pymap-admin.conf
+```
+
 ### `login` Command
 
 Sends login credentials and gets a bearer token. See
@@ -120,7 +131,7 @@ commands. Use `--token-file` or `$PYMAP_ADMIN_TOKEN_FILE` to specify a
 location, otherwise it is saved to `~/.pymap-admin.token`.
 
 If `-s` is not given, the `bearer_token` value from the output can provided to
-future `pymap-admin` commands with `--token` or `$PYMAP_ADMON_TOKEN`.
+future `pymap-admin` commands with `$PYMAP_ADMON_TOKEN`.
 
 ### Admin Role
 
