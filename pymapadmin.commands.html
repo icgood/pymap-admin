@@ -7,9 +7,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin.commands &#8212; pymap-admin 0.5.2 documentation</title>
-    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <title>pymapadmin.commands &#8212; pymap-admin 0.5.3 documentation</title>
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.5.2 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.5.3 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>
@@ -243,6 +243,34 @@ called once for each streamed response as long as <code class="docutils literal 
 </div>
 <div class="section" id="module-pymapadmin.commands.system">
 <span id="pymapadmin-commands-system"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.system</span></code><a class="headerlink" href="#module-pymapadmin.commands.system" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="pymapadmin.commands.system.SaveArgsCommand">
+<em class="property">class </em><code class="sig-prename descclassname">pymapadmin.commands.system.</code><code class="sig-name descname">SaveArgsCommand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em>, <em class="sig-param"><span class="n">channel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.SaveArgsCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Save the connection settings given as command-line arguments (e.g.
+–host, –port, etc) to a config file.</p>
+<dl class="py method">
+<dt id="pymapadmin.commands.system.SaveArgsCommand.add_subparser">
+<em class="property">classmethod </em><code class="sig-name descname">add_subparser</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">name</span></em>, <em class="sig-param"><span class="n">subparsers</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.SaveArgsCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the command-line argument subparser for the command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">str</span></code></a>) – The name to use for the subparser.</p></li>
+<li><p><strong>subparsers</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.9)"><code class="xref py py-data docutils literal notranslate"><span class="pre">Any</span></code></a>) – The special action object as returned by
+<a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser.add_subparsers" title="(in Python v3.9)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArgumentParser</span></code></a></p>
+</dd>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>The new sub-parser object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt id="pymapadmin.commands.system.LoginCommand">
 <em class="property">class </em><code class="sig-prename descclassname">pymapadmin.commands.system.</code><code class="sig-name descname">LoginCommand</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">args</span></em>, <em class="sig-param"><span class="n">channel</span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand" title="Permalink to this definition">¶</a></dt>
@@ -690,7 +718,7 @@ called once for each streamed response as long as <code class="docutils literal 
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.5.2 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.5.3 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>
@@ -699,7 +727,7 @@ called once for each streamed response as long as <code class="docutils literal 
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ian Good.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.2.1.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.3.0.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
