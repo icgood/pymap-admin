@@ -1,5 +1,3 @@
--I.
---python_out=.
---python_grpc_out=.
---mypy_out=.
-pymapadmin/grpc/admin.proto
+-Ipymapadmin/grpc/
+--python_betterproto_out=pymapadmin/grpc/
+admin.proto

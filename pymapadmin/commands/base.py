@@ -14,7 +14,7 @@ from grpclib.client import Channel
 from .. import __version__ as client_version
 from ..local import token_file
 from ..typing import StubT, RequestT, ResponseT, MethodProtocol
-from ..grpc.admin_pb2 import SUCCESS
+from ..grpc.admin import ResultCode
 
 try:
     # This import ensures error details are displayed correctly
@@ -118,7 +118,7 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
             outfile: The file object to print the output to.
 
         """
-        if response.result.code == SUCCESS:
+        if response.result.code == ResultCode.SUCCESS:
             self.handle_success(response, outfile)
             return 0
         else:

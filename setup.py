@@ -50,10 +50,10 @@ setup(name='pymap-admin',
       include_package_data=True,
       packages=find_packages(),
       install_requires=[
-          'grpclib', 'protobuf', 'typing-extensions'],
+          'betterproto', 'typing-extensions'],
       extras_require={
           'optional': ['googleapis-common-protos'],
-          'build': ['grpcio-tools', 'mypy-protobuf']},
+          'build': ['grpcio-tools', 'betterproto[compiler]']},
       entry_points={
           'console_scripts': [
               'pymap-admin = pymapadmin.main:main'],

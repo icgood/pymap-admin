@@ -8,8 +8,7 @@ from typing import Any, TextIO
 
 from .base import ClientCommand
 from ..typing import RequestT, ResponseT, MethodProtocol
-from ..grpc.admin_grpc import MailboxStub
-from ..grpc.admin_pb2 import AppendRequest, AppendResponse
+from ..grpc.admin import MailboxStub, AppendRequest, AppendResponse
 
 __all__ = ['AppendCommand']
 

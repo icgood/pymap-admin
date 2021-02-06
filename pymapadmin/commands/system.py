@@ -10,8 +10,7 @@ from .base import Command, ClientCommand
 from ..config import Config
 from ..local import config_file, token_file
 from ..typing import RequestT, ResponseT, MethodProtocol
-from ..grpc.admin_grpc import SystemStub
-from ..grpc.admin_pb2 import LoginRequest, LoginResponse, \
+from ..grpc.admin import SystemStub, LoginRequest, LoginResponse, \
     PingRequest, PingResponse
 
 __all__ = ['SaveArgsCommand', 'LoginCommand', 'PingCommand']

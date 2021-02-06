@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package pymapadmin.grpc;
+package admin;
 
 enum ResultCode {
   SUCCESS = 0;

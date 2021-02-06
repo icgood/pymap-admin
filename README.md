@@ -8,8 +8,8 @@ pymap-admin
 [![PyPI](https://img.shields.io/pypi/l/pymap-admin.svg)](https://pypi.python.org/pypi/pymap-admin)
 
 The `pymap-admin` tool can be used to perform various admin functions against a
-running pymap server. This is a separate [grpc][2] service using [grpclib][3]
-listening on a socket.
+running pymap server. This is a separate [grpc][2] service using
+[betterproto][3] listening on a socket.
 
 #### [API Documentation](https://icgood.github.io/pymap-admin/)
 
@@ -148,7 +148,7 @@ authenticating using the admin token.
 
 [1]: https://github.com/icgood/pymap
 [2]: https://grpc.io/
-[3]: https://github.com/vmagamedov/grpclib
+[3]: https://github.com/danielgtaylor/python-betterproto
 [4]: https://github.com/slimta/slimta-docker
 [5]: https://github.com/slimta/slimta-docker#address-management
 [6]: https://github.com/ecordell/pymacaroons

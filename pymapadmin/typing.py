@@ -7,7 +7,7 @@ from typing_extensions import Protocol
 
 from grpclib.client import Stream
 
-from .grpc.admin_pb2 import Result
+from .grpc.admin import Result
 
 __all__ = ['StubT', 'RequestT', 'ResponseT', 'MethodProtocol',
            'RequestProtocol', 'ResponseProtocol']

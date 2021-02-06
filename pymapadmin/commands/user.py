@@ -7,8 +7,7 @@ from typing import Any, Optional, Sequence, Mapping
 
 from .base import ClientCommand
 from ..typing import RequestT, ResponseT, MethodProtocol
-from ..grpc.admin_grpc import UserStub
-from ..grpc.admin_pb2 import \
+from ..grpc.admin import UserStub, \
     UserData, UserResponse, GetUserRequest, SetUserRequest, DeleteUserRequest
 
 __all__ = ['GetUserCommand', 'SetUserCommand', 'DeleteUserCommand']
@@ -35,7 +34,7 @@ class GetUserCommand(UserCommand[GetUserRequest, UserResponse]):
 
     @property
     def method(self) -> MethodProtocol[GetUserRequest, UserResponse]:
-        return self.client.GetUser
+        return self.client.get_user
 
     def build_request(self) -> GetUserRequest:
         return GetUserRequest(user=self.args.username)
