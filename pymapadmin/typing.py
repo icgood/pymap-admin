@@ -2,8 +2,9 @@
 from __future__ import annotations
 
 from abc import abstractmethod
-from typing import TypeVar, Mapping, AsyncContextManager
-from typing_extensions import Protocol
+from collections.abc import Mapping
+from contextlib import AbstractAsyncContextManager
+from typing import TypeVar, Protocol
 
 from grpclib.client import Stream
 
@@ -27,7 +28,7 @@ class MethodProtocol(Protocol[RequestT, ResponseT]):
 
     @abstractmethod
     def open(self, *, metadata: Mapping[str, str]) \
-            -> AsyncContextManager[Stream[RequestT, ResponseT]]:
+            -> AbstractAsyncContextManager[Stream[RequestT, ResponseT]]:
         ...
 
 

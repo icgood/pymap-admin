@@ -3,10 +3,10 @@ from __future__ import annotations
 
 import os
 from argparse import Action, ArgumentParser, Namespace
+from collections.abc import Sequence
 from functools import partial
 from pathlib import Path
-from typing import Any, Type, Union, Optional, Sequence, List
-from typing_extensions import Final
+from typing import Any, Union, Final, Optional
 
 from tempfile import gettempdir
 
@@ -40,10 +40,10 @@ class LocalFile:
         super().__init__()
         self.envvar: Final = envvar
         self.filename: Final = filename
-        self._custom: List[Path] = []
+        self._custom: list[Path] = []
 
     @property
-    def add_action(self) -> Type[Action]:
+    def add_action(self) -> type[Action]:
         """Use as an ``action=`` in :mod:`argparse` to add command-line
         arguments as custom paths.
 

@@ -2,7 +2,7 @@
 from io import BytesIO, StringIO
 from argparse import Namespace
 
-import pytest  # type: ignore
+import pytest
 from grpclib.testing import ChannelFor
 from pymapadmin.commands.mailbox import AppendCommand
 from pymapadmin.grpc.admin_grpc import MailboxBase

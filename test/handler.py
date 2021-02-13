@@ -2,7 +2,8 @@
 from __future__ import annotations
 
 from abc import ABCMeta
-from typing import TypeVar, Generic, Type, Optional, Sequence
+from collections.abc import Sequence
+from typing import TypeVar, Generic, Optional
 
 from grpclib.server import Stream
 
@@ -12,7 +13,7 @@ ResponseT = TypeVar('ResponseT')
 
 class MockHandler(Generic[RequestT, ResponseT], metaclass=ABCMeta):
 
-    def __init__(self, req_type: Type[RequestT],
+    def __init__(self, req_type: type[RequestT],
                  responses: Sequence[ResponseT]) -> None:
         super().__init__()
         self.req_type = req_type

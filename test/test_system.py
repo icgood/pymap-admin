@@ -2,7 +2,7 @@
 from io import StringIO
 from argparse import Namespace
 
-import pytest  # type: ignore
+import pytest
 from grpclib.testing import ChannelFor
 from pymapadmin.commands.system import LoginCommand, PingCommand
 from pymapadmin.grpc.admin_grpc import SystemBase

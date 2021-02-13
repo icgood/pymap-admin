@@ -6,8 +6,8 @@ import sys
 import traceback
 from abc import abstractmethod, ABCMeta
 from argparse import ArgumentParser, Namespace
-from typing import Generic, Any, Optional, Mapping, TextIO
-from typing_extensions import Final
+from collections.abc import Mapping
+from typing import Generic, Any, Final, Optional, TextIO
 
 from grpclib.client import Channel
 
