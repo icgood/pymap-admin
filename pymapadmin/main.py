@@ -10,7 +10,6 @@ import sys
 import asyncio
 from argparse import ArgumentParser, Namespace
 from ssl import create_default_context, CERT_NONE
-from typing import Type
 
 from grpclib.client import Channel
 from pymapadmin import __version__
@@ -60,7 +59,7 @@ def main() -> int:
 
 
 async def run(parser: ArgumentParser, args: Namespace,
-              command_cls: Type[Command]) -> int:
+              command_cls: type[Command]) -> int:
     config = Config(args)
     ssl = create_default_context(cafile=config.cafile, capath=config.capath)
     if config.no_verify_cert:

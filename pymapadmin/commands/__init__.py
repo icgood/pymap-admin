@@ -1,7 +1,7 @@
 
 from __future__ import annotations
 
-from typing import Type, Mapping
+from collections.abc import Mapping
 
 from pkg_resources import iter_entry_points, DistributionNotFound
 
@@ -11,7 +11,7 @@ __all__ = ['load_commands']
 
 
 def load_commands(group: str = 'pymapadmin.commands') \
-        -> Mapping[str, Type[Command]]:  # pragma: no cover
+        -> Mapping[str, type[Command]]:  # pragma: no cover
     """Load and return a map of command name to implementation class.
 
     Args:

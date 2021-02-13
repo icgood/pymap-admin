@@ -3,7 +3,8 @@ from __future__ import annotations
 
 import getpass
 from argparse import ArgumentParser, FileType
-from typing import Any, Optional, Sequence, Mapping
+from collections.abc import Mapping, Sequence
+from typing import Any, Optional
 
 from .base import ClientCommand
 from ..typing import RequestT, ResponseT, MethodProtocol

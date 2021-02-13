@@ -2,7 +2,7 @@
 from io import StringIO
 from argparse import Namespace
 
-import pytest  # type: ignore
+import pytest
 from grpclib.testing import ChannelFor
 from unittest.mock import MagicMock
 
