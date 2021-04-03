@@ -79,7 +79,9 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
         args = self.args
         params = self._parse_params(args.params)
         password = self.getpass()
-        new_data = UserData(password=password, params=params)
+        new_data = UserData(params=params)
+        if password is not None:
+            new_data.password = password
         return SetUserRequest(user=args.username, data=new_data)
 
     def _parse_params(self, params: Sequence[str]) -> Mapping[str, str]:
