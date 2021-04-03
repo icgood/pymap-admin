@@ -71,7 +71,7 @@ message DeleteUserRequest {
 message UserResponse {
   Result result = 1;
   string username = 2;
-  UserData data = 3;
+  oneof optional_data { UserData data = 3; }
 }
 
 service System {
