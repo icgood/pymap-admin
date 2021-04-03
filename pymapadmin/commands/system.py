@@ -85,11 +85,15 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
             password = getpass.getpass(f'{username} Password: ')
         elif self.args.password_file is not None:
             with closing(self.args.password_file) as pw_file:
-                password = pw_file.read()
+                password = pw_file.readline().rstrip('\r\n')
         else:
             password = self.args.password
-        return LoginRequest(authcid=username, secret=password, authzid=authzid,
-                            token_expiration=expiration)
+        request = LoginRequest(authcid=username, secret=password)
+        if authzid is not None:
+            request.authzid = authzid
+        if expiration is not None:
+            request.token_expiration = expiration
+        return request
 
     def handle_success(self, response: LoginResponse, outfile: TextIO) -> None:
         super().handle_success(response, outfile)

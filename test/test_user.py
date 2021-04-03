@@ -4,7 +4,6 @@ from argparse import Namespace
 
 import pytest
 from grpclib.testing import ChannelFor
-from unittest.mock import MagicMock
 
 from pymapadmin.commands.user import GetUserCommand, SetUserCommand, \
     DeleteUserCommand
@@ -63,6 +62,17 @@ class TestDeleteUserCommand:
 
 class TestSetUserCommand:
 
+    async def test_set_user_bad_param(self) -> None:
+        handler = Handler(SetUserRequest, [UserResponse(username='user1')])
+        outfile = StringIO()
+        args = Namespace(token=None, token_file=None,
+                         username='user1', no_password=True,
+                         params=['identity=test', 'badparam'])
+        async with ChannelFor([handler]) as channel:
+            command = SetUserCommand(args, channel)
+            with pytest.raises(ValueError):
+                await command(outfile)
+
     async def test_set_user_no_password(self) -> None:
         handler = Handler(SetUserRequest, [UserResponse(username='user1')])
         outfile = StringIO()
@@ -83,8 +93,7 @@ class TestSetUserCommand:
     async def test_set_user_password_file(self) -> None:
         handler = Handler(SetUserRequest, [UserResponse(username='user1')])
         outfile = StringIO()
-        pw_file = MagicMock()
-        pw_file.readline.return_value = 'testpass'
+        pw_file = StringIO('testpass\n')
         args = Namespace(token=None, token_file=None,
                          username='user1', no_password=False,
                          password_file=pw_file, params=['identity=test'])

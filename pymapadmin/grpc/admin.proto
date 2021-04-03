@@ -16,13 +16,13 @@ message Result {
 message LoginRequest {
   string authcid = 1;
   string secret = 2;
-  string authzid = 3;
-  double token_expiration = 4;
+  oneof optional_authzid { string authzid = 3; }
+  oneof optional_token_expiration { double token_expiration = 4; }
 }
 
 message LoginResponse {
   Result result = 1;
-  string bearer_token = 2;
+  oneof optional_bearer_token { string bearer_token = 2; }
 }
 
 message PingRequest {}
@@ -35,9 +35,9 @@ message PingResponse {
 
 message AppendRequest {
   string user = 1;
-  string sender = 2;
-  string recipient = 3;
-  string mailbox = 4;
+  oneof optional_sender { string sender = 2; }
+  oneof optional_recipient { string recipient = 3; }
+  oneof optional_mailbox { string mailbox = 4; }
   bytes data = 5;
   repeated string flags = 6;
   uint64 when = 7;
@@ -51,7 +51,7 @@ message AppendResponse {
 }
 
 message UserData {
-  string password = 1;
+  oneof optional_password { string password = 1; }
   map<string, string> params = 2;
 }
 

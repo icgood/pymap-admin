@@ -39,6 +39,8 @@ class TestAppendCommand:
         assert 1234567890.0 == request.when
         assert ['\\Flagged', '\\Seen'] == request.flags
         assert 'testuser' == request.user
+        assert not request.HasField('sender')
+        assert not request.HasField('recipient')
         assert 'INBOX' == request.mailbox
         assert '2.0.0 Message delivered\n' == outfile.getvalue()
 

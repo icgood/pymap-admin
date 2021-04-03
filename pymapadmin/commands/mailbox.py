@@ -39,7 +39,7 @@ class AppendCommand(MailboxCommand[AppendRequest, AppendResponse]):
             name, description=cls.__doc__,
             help='append a message to a mailbox')
         subparser.add_argument('--from', metavar='ADDRESS', dest='sender',
-                               default='', help='the message envelope sender')
+                               help='the message envelope sender')
         subparser.add_argument('--to', metavar='ADDRESS', dest='recipient',
                                help='the message envelope recipient')
         subparser.add_argument('--mailbox', metavar='NAME',
@@ -71,12 +71,17 @@ class AppendCommand(MailboxCommand[AppendRequest, AppendResponse]):
 
     def build_request(self) -> AppendRequest:
         args = self.args
-        recipient = args.recipient or args.username
         data = args.data.read()
         when: int = args.timestamp or int(time.time())
-        return AppendRequest(user=args.username, sender=args.sender,
-                             recipient=recipient, mailbox=args.mailbox,
-                             data=data, flags=args.flags, when=when)
+        request = AppendRequest(user=args.username, data=data,
+                                flags=args.flags, when=when)
+        if args.sender is not None:
+            request.sender = args.sender
+        if args.recipient is not None:
+            request.recipient = args.recipient
+        if args.mailbox is not None:
+            request.mailbox = args.mailbox
+        return request
 
     def handle_success(self, res: AppendResponse, outfile: TextIO) -> None:
         print(res, file=sys.stderr)

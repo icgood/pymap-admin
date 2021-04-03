@@ -20,7 +20,7 @@ try:
     # This import ensures error details are displayed correctly
     # https://grpclib.readthedocs.io/en/latest/errors.html#error-details
     from google.rpc import error_details_pb2  # noqa
-except ImportError:
+except ImportError:  # pragma: no cover
     pass
 
 __all__ = ['Command', 'ClientCommand']
@@ -84,15 +84,15 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
 
     def _get_metadata(self) -> Mapping[str, str]:
         metadata = {'client-version': client_version}
+        token: Optional[str] = None
         if 'PYMAP_ADMIN_TOKEN' in os.environ:
-            metadata['auth-token'] = os.environ['PYMAP_ADMIN_TOKEN']
+            token = os.environ['PYMAP_ADMIN_TOKEN']
         else:
-            token: Optional[str] = None
             path = token_file.find()
             if path is not None:
                 token = path.read_text().strip()
-            if token:
-                metadata['auth-token'] = token
+        if token:
+            metadata['auth-token'] = token
         return metadata
 
     @property
