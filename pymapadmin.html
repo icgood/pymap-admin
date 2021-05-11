@@ -6,14 +6,14 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>pymapadmin &#8212; pymap-admin 0.7.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <title>pymapadmin &#8212; pymap-admin 0.7.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -57,7 +57,7 @@
         <li class="right" >
           <a href="index.html" title="pymap-admin Documentation"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.7.0 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.7.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin</span></code></a></li> 
       </ul>
@@ -78,8 +78,8 @@
 <p><a class="reference external" href="https://www.python.org/dev/peps/pep-0396/">PEP 396</a></p>
 </div>
 <dl class="py function">
-<dt id="pymapadmin.is_compatible">
-<code class="sig-prename descclassname"><span class="pre">pymapadmin.</span></code><code class="sig-name descname"><span class="pre">is_compatible</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.is_compatible" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.is_compatible">
+<span class="sig-prename descclassname"><span class="pre">pymapadmin.</span></span><span class="sig-name descname"><span class="pre">is_compatible</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">client_version</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">server_version</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.is_compatible" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the given client version is backwards- and forwards-compatible
 with the server version.</p>
 <dl class="field-list simple">
@@ -98,8 +98,8 @@ with the server version.</p>
 <section id="module-pymapadmin.local">
 <span id="pymapadmin-local"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.local</span></code><a class="headerlink" href="#module-pymapadmin.local" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="pymapadmin.local.LocalFile">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.local.</span></code><code class="sig-name descname"><span class="pre">LocalFile</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">envvar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.local.LocalFile">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.local.</span></span><span class="sig-name descname"><span class="pre">LocalFile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">envvar</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filename</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile" title="Permalink to this definition">¶</a></dt>
 <dd><p>Defines a file that is kept on the local filesystem but could be in a
 number of different places.</p>
 <dl class="field-list simple">
@@ -110,9 +110,9 @@ number of different places.</p>
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt id="pymapadmin.local.LocalFile.add_action">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">add_action</span></code><a class="headerlink" href="#pymapadmin.local.LocalFile.add_action" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.local.LocalFile.add_action">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">add_action</span></span><em class="property"><span class="pre">:</span> <span class="pre">type</span></em><a class="headerlink" href="#pymapadmin.local.LocalFile.add_action" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use as an <code class="docutils literal notranslate"><span class="pre">action=</span></code> in <a class="reference external" href="https://docs.python.org/3/library/argparse.html#module-argparse" title="(in Python v3.9)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">argparse</span></code></a> to add command-line
 arguments as custom paths.</p>
 <dl class="field-list simple">
@@ -122,9 +122,9 @@ arguments as custom paths.</p>
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="pymapadmin.local.LocalFile.custom">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">custom</span></code><a class="headerlink" href="#pymapadmin.local.LocalFile.custom" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.local.LocalFile.custom">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">custom</span></span><em class="property"><span class="pre">:</span> <span class="pre">collections.abc.Sequence[pathlib.Path]</span></em><a class="headerlink" href="#pymapadmin.local.LocalFile.custom" title="Permalink to this definition">¶</a></dt>
 <dd><p>The custom paths added by <a class="reference internal" href="#pymapadmin.local.LocalFile.add" title="pymapadmin.local.LocalFile.add"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add()</span></code></a>, followed by any path
 specified by environment variable.</p>
 <dl class="field-list simple">
@@ -135,8 +135,8 @@ specified by environment variable.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.local.LocalFile.add">
-<code class="sig-name descname"><span class="pre">add</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">custom</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.add" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.local.LocalFile.add">
+<span class="sig-name descname"><span class="pre">add</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">custom</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.add" title="Permalink to this definition">¶</a></dt>
 <dd><p>Append the <em>custom</em> paths to <a class="reference internal" href="#pymapadmin.local.LocalFile.custom" title="pymapadmin.local.LocalFile.custom"><code class="xref py py-attr docutils literal notranslate"><span class="pre">custom</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -150,8 +150,8 @@ command-line.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.local.LocalFile.get_home">
-<code class="sig-name descname"><span class="pre">get_home</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mkdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.get_home" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.local.LocalFile.get_home">
+<span class="sig-name descname"><span class="pre">get_home</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mkdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.get_home" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <em>filename</em> inside <code class="docutils literal notranslate"><span class="pre">~/.config/pymap/</span></code>. If <a class="reference internal" href="#pymapadmin.local.LocalFile.custom" title="pymapadmin.local.LocalFile.custom"><code class="xref py py-attr docutils literal notranslate"><span class="pre">custom</span></code></a>
 is not empty, its first value is returned instead.</p>
 <dl class="field-list simple">
@@ -165,8 +165,8 @@ is not empty, its first value is returned instead.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.local.LocalFile.get_temp">
-<code class="sig-name descname"><span class="pre">get_temp</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mkdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.get_temp" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.local.LocalFile.get_temp">
+<span class="sig-name descname"><span class="pre">get_temp</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mkdir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.get_temp" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns <em>filename</em> inside the <code class="docutils literal notranslate"><span class="pre">pymap/</span></code> subdirectory of
 <a class="reference external" href="https://docs.python.org/3/library/tempfile.html#tempfile.gettempdir" title="(in Python v3.9)"><code class="xref py py-func docutils literal notranslate"><span class="pre">gettempdir()</span></code></a>. If <a class="reference internal" href="#pymapadmin.local.LocalFile.custom" title="pymapadmin.local.LocalFile.custom"><code class="xref py py-attr docutils literal notranslate"><span class="pre">custom</span></code></a> is not empty, its
 first value is returned instead.</p>
@@ -181,8 +181,8 @@ first value is returned instead.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.local.LocalFile.get_all">
-<code class="sig-name descname"><span class="pre">get_all</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.get_all" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.local.LocalFile.get_all">
+<span class="sig-name descname"><span class="pre">get_all</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.get_all" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return all the paths that may contain the file.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -192,8 +192,8 @@ first value is returned instead.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.local.LocalFile.find">
-<code class="sig-name descname"><span class="pre">find</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.find" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.local.LocalFile.find">
+<span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.local.LocalFile.find" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return the <a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.9)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Path</span></code></a> of an existing file, if one
 exists.</p>
 <p>The order of searched paths looks like this:</p>
@@ -214,20 +214,20 @@ exists.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="pymapadmin.local.config_file">
-<code class="sig-prename descclassname"><span class="pre">pymapadmin.local.</span></code><code class="sig-name descname"><span class="pre">config_file</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;pymapadmin.local.LocalFile</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#pymapadmin.local.config_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.local.config_file">
+<span class="sig-prename descclassname"><span class="pre">pymapadmin.local.</span></span><span class="sig-name descname"><span class="pre">config_file</span></span><em class="property"> <span class="pre">=</span> <span class="pre">&lt;pymapadmin.local.LocalFile</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#pymapadmin.local.config_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>The config file for default command-line arguments.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="pymapadmin.local.token_file">
-<code class="sig-prename descclassname"><span class="pre">pymapadmin.local.</span></code><code class="sig-name descname"><span class="pre">token_file</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;pymapadmin.local.LocalFile</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#pymapadmin.local.token_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.local.token_file">
+<span class="sig-prename descclassname"><span class="pre">pymapadmin.local.</span></span><span class="sig-name descname"><span class="pre">token_file</span></span><em class="property"> <span class="pre">=</span> <span class="pre">&lt;pymapadmin.local.LocalFile</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#pymapadmin.local.token_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>The token file for pymap-admin authentication.</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="pymapadmin.local.socket_file">
-<code class="sig-prename descclassname"><span class="pre">pymapadmin.local.</span></code><code class="sig-name descname"><span class="pre">socket_file</span></code><em class="property"> <span class="pre">=</span> <span class="pre">&lt;pymapadmin.local.LocalFile</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#pymapadmin.local.socket_file" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.local.socket_file">
+<span class="sig-prename descclassname"><span class="pre">pymapadmin.local.</span></span><span class="sig-name descname"><span class="pre">socket_file</span></span><em class="property"> <span class="pre">=</span> <span class="pre">&lt;pymapadmin.local.LocalFile</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#pymapadmin.local.socket_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>The socket file for connecting to a running pymap server.</p>
 </dd></dl>
 
@@ -235,35 +235,35 @@ exists.</p>
 <section id="module-pymapadmin.typing">
 <span id="pymapadmin-typing"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.typing</span></code><a class="headerlink" href="#module-pymapadmin.typing" title="Permalink to this headline">¶</a></h2>
 <dl class="py data">
-<dt id="pymapadmin.typing.StubT">
-<code class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></code><code class="sig-name descname"><span class="pre">StubT</span></code><a class="headerlink" href="#pymapadmin.typing.StubT" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.typing.StubT">
+<span class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></span><span class="sig-name descname"><span class="pre">StubT</span></span><a class="headerlink" href="#pymapadmin.typing.StubT" title="Permalink to this definition">¶</a></dt>
 <dd><p>A type variable corresponding to an admin stub object.</p>
 <p>alias of TypeVar(‘StubT’)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="pymapadmin.typing.RequestT">
-<code class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></code><code class="sig-name descname"><span class="pre">RequestT</span></code><a class="headerlink" href="#pymapadmin.typing.RequestT" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.typing.RequestT">
+<span class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></span><span class="sig-name descname"><span class="pre">RequestT</span></span><a class="headerlink" href="#pymapadmin.typing.RequestT" title="Permalink to this definition">¶</a></dt>
 <dd><p>A type variable corresponding to an admin request object.</p>
-<p>alias of TypeVar(‘RequestT’)</p>
+<p>alias of TypeVar(‘RequestT’, bound=<a class="reference internal" href="#pymapadmin.typing.RequestProtocol" title="pymapadmin.typing.RequestProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">RequestProtocol</span></code></a>)</p>
 </dd></dl>
 
 <dl class="py data">
-<dt id="pymapadmin.typing.ResponseT">
-<code class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></code><code class="sig-name descname"><span class="pre">ResponseT</span></code><a class="headerlink" href="#pymapadmin.typing.ResponseT" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.typing.ResponseT">
+<span class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></span><span class="sig-name descname"><span class="pre">ResponseT</span></span><a class="headerlink" href="#pymapadmin.typing.ResponseT" title="Permalink to this definition">¶</a></dt>
 <dd><p>A type variable corresponding to an admin response object.</p>
-<p>alias of TypeVar(‘ResponseT’)</p>
+<p>alias of TypeVar(‘ResponseT’, bound=<a class="reference internal" href="#pymapadmin.typing.ResponseProtocol" title="pymapadmin.typing.ResponseProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">ResponseProtocol</span></code></a>)</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="pymapadmin.typing.MethodProtocol">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></code><code class="sig-name descname"><span class="pre">MethodProtocol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.MethodProtocol" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.typing.MethodProtocol">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></span><span class="sig-name descname"><span class="pre">MethodProtocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.MethodProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Protocol defining an admin method, for a command.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="pymapadmin.typing.RequestProtocol">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></code><code class="sig-name descname"><span class="pre">RequestProtocol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.RequestProtocol" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.typing.RequestProtocol">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></span><span class="sig-name descname"><span class="pre">RequestProtocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.RequestProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Protocol defining the fields that all admin request objects are expected
 to have.</p>
 <div class="admonition note">
@@ -273,13 +273,13 @@ to have.</p>
 </dd></dl>
 
 <dl class="py class">
-<dt id="pymapadmin.typing.ResponseProtocol">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></code><code class="sig-name descname"><span class="pre">ResponseProtocol</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.ResponseProtocol" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.typing.ResponseProtocol">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.typing.</span></span><span class="sig-name descname"><span class="pre">ResponseProtocol</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.typing.ResponseProtocol" title="Permalink to this definition">¶</a></dt>
 <dd><p>Protocol defining the fields that all admin response objects are
 expected to have.</p>
-<dl class="py method">
-<dt id="pymapadmin.typing.ResponseProtocol.result">
-<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">result</span></code><a class="headerlink" href="#pymapadmin.typing.ResponseProtocol.result" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.typing.ResponseProtocol.result">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">result</span></span><em class="property"><span class="pre">:</span> <span class="pre">pymapadmin.grpc.admin_pb2.Result</span></em><a class="headerlink" href="#pymapadmin.typing.ResponseProtocol.result" title="Permalink to this definition">¶</a></dt>
 <dd><p>The result protobuf, containing a code and additional data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -375,7 +375,7 @@ expected to have.</p>
         <li class="right" >
           <a href="index.html" title="pymap-admin Documentation"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.7.0 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.7.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin</span></code></a></li> 
       </ul>
@@ -384,7 +384,7 @@ expected to have.</p>
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ian Good.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

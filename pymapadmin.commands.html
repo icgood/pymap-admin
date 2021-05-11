@@ -6,14 +6,14 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>pymapadmin.commands &#8212; pymap-admin 0.7.0 documentation</title>
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="_static/cloud.css" type="text/css" />
+    <title>pymapadmin.commands &#8212; pymap-admin 0.7.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
     <script src="_static/underscore.js"></script>
     <script src="_static/doctools.js"></script>
@@ -53,7 +53,7 @@
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.7.0 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.7.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>
@@ -69,8 +69,8 @@
   <section id="module-pymapadmin.commands">
 <span id="pymapadmin-commands"></span><h1><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code><a class="headerlink" href="#module-pymapadmin.commands" title="Permalink to this headline">¶</a></h1>
 <dl class="py function">
-<dt id="pymapadmin.commands.load_commands">
-<code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.</span></code><code class="sig-name descname"><span class="pre">load_commands</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pymapadmin.commands'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.load_commands" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.load_commands">
+<span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.</span></span><span class="sig-name descname"><span class="pre">load_commands</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">group</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'pymapadmin.commands'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.load_commands" title="Permalink to this definition">¶</a></dt>
 <dd><p>Load and return a map of command name to implementation class.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -85,8 +85,8 @@
 <section id="module-pymapadmin.commands.base">
 <span id="pymapadmin-commands-base"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.base</span></code><a class="headerlink" href="#module-pymapadmin.commands.base" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="pymapadmin.commands.base.Command">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.base.</span></code><code class="sig-name descname"><span class="pre">Command</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.Command" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.base.Command">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.base.</span></span><span class="sig-name descname"><span class="pre">Command</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.Command" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface for command implementations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -97,8 +97,8 @@
 </dd>
 </dl>
 <dl class="py method">
-<dt id="pymapadmin.commands.base.Command.add_subparser">
-<em class="property"><span class="pre">abstract</span> <span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">add_subparser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.Command.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.base.Command.add_subparser">
+<em class="property"><span class="pre">abstract</span> <span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.Command.add_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the command-line argument subparser for the command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -120,8 +120,8 @@
 </dd></dl>
 
 <dl class="py class">
-<dt id="pymapadmin.commands.base.ClientCommand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.base.</span></code><code class="sig-name descname"><span class="pre">ClientCommand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.base.</span></span><span class="sig-name descname"><span class="pre">ClientCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Interface for client command implementations.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -131,9 +131,9 @@
 </ul>
 </dd>
 </dl>
-<dl class="py method">
-<dt id="pymapadmin.commands.base.ClientCommand.client">
-<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">client</span></code><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.client" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.client">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">client</span></span><em class="property"><span class="pre">:</span> <span class="pre">pymapadmin.typing.StubT</span></em><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.client" title="Permalink to this definition">¶</a></dt>
 <dd><p>Get the client object for the command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -145,9 +145,9 @@
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="pymapadmin.commands.base.ClientCommand.method">
-<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">method</span></code><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.method" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.method">
+<em class="property"><span class="pre">abstract</span> <span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">method</span></span><em class="property"><span class="pre">:</span> <span class="pre">pymapadmin.typing.MethodProtocol[pymapadmin.typing.RequestT,</span> <span class="pre">pymapadmin.typing.ResponseT]</span></em><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.method" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GRPC client method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -157,8 +157,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.base.ClientCommand.build_request">
-<em class="property"><span class="pre">abstract</span> </em><code class="sig-name descname"><span class="pre">build_request</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.build_request">
+<em class="property"><span class="pre">abstract</span> </em><span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.build_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -168,8 +168,8 @@
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.base.ClientCommand.handle_response">
-<code class="sig-name descname"><span class="pre">handle_response</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_response" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.handle_response">
+<span class="sig-name descname"><span class="pre">handle_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle each response. For streaming responses, this will be
 called once for each streamed response as long as <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned.</p>
 <p>The default implementation calls <a class="reference internal" href="#pymapadmin.commands.base.ClientCommand.handle_success" title="pymapadmin.commands.base.ClientCommand.handle_success"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_success()</span></code></a> or
@@ -188,8 +188,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.base.ClientCommand.handle_success">
-<code class="sig-name descname"><span class="pre">handle_success</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_success" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.handle_success">
+<span class="sig-name descname"><span class="pre">handle_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_success" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a successful response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -205,8 +205,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.base.ClientCommand.handle_failure">
-<code class="sig-name descname"><span class="pre">handle_failure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_failure" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.handle_failure">
+<span class="sig-name descname"><span class="pre">handle_failure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_failure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a failure response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -222,8 +222,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.base.ClientCommand.handle_exception">
-<code class="sig-name descname"><span class="pre">handle_exception</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_exception" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.handle_exception">
+<span class="sig-name descname"><span class="pre">handle_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_exception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle an exception that occurred while calling the RPC function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -244,13 +244,13 @@ called once for each streamed response as long as <code class="docutils literal 
 <section id="module-pymapadmin.commands.system">
 <span id="pymapadmin-commands-system"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.system</span></code><a class="headerlink" href="#module-pymapadmin.commands.system" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="pymapadmin.commands.system.SaveArgsCommand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.system.</span></code><code class="sig-name descname"><span class="pre">SaveArgsCommand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.SaveArgsCommand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.system.SaveArgsCommand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.system.</span></span><span class="sig-name descname"><span class="pre">SaveArgsCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.SaveArgsCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Save the connection settings given as command-line arguments (e.g.
 –host, –port, etc) to a config file.</p>
 <dl class="py method">
-<dt id="pymapadmin.commands.system.SaveArgsCommand.add_subparser">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">add_subparser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.SaveArgsCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.system.SaveArgsCommand.add_subparser">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.SaveArgsCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the command-line argument subparser for the command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -272,12 +272,12 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py class">
-<dt id="pymapadmin.commands.system.LoginCommand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.system.</span></code><code class="sig-name descname"><span class="pre">LoginCommand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.system.LoginCommand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.system.</span></span><span class="sig-name descname"><span class="pre">LoginCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Login as a user for future requests.</p>
 <dl class="py method">
-<dt id="pymapadmin.commands.system.LoginCommand.add_subparser">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">add_subparser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.system.LoginCommand.add_subparser">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the command-line argument subparser for the command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -296,9 +296,9 @@ called once for each streamed response as long as <code class="docutils literal 
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="pymapadmin.commands.system.LoginCommand.method">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">method</span></code><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.method" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.system.LoginCommand.method">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">method</span></span><em class="property"><span class="pre">:</span> <span class="pre">pymapadmin.typing.MethodProtocol[pymapadmin.grpc.admin_pb2.LoginRequest,</span> <span class="pre">pymapadmin.grpc.admin_pb2.LoginResponse]</span></em><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.method" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GRPC client method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -308,8 +308,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.system.LoginCommand.build_request">
-<code class="sig-name descname"><span class="pre">build_request</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.system.LoginCommand.build_request">
+<span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.build_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -319,8 +319,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.system.LoginCommand.handle_success">
-<code class="sig-name descname"><span class="pre">handle_success</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.handle_success" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.system.LoginCommand.handle_success">
+<span class="sig-name descname"><span class="pre">handle_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.handle_success" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a successful response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -338,12 +338,12 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py class">
-<dt id="pymapadmin.commands.system.PingCommand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.system.</span></code><code class="sig-name descname"><span class="pre">PingCommand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.PingCommand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.system.PingCommand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.system.</span></span><span class="sig-name descname"><span class="pre">PingCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.PingCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Ping the server.</p>
 <dl class="py method">
-<dt id="pymapadmin.commands.system.PingCommand.add_subparser">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">add_subparser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.PingCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.system.PingCommand.add_subparser">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.PingCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the command-line argument subparser for the command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -362,9 +362,9 @@ called once for each streamed response as long as <code class="docutils literal 
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="pymapadmin.commands.system.PingCommand.method">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">method</span></code><a class="headerlink" href="#pymapadmin.commands.system.PingCommand.method" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.system.PingCommand.method">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">method</span></span><em class="property"><span class="pre">:</span> <span class="pre">pymapadmin.typing.MethodProtocol[pymapadmin.grpc.admin_pb2.PingRequest,</span> <span class="pre">pymapadmin.grpc.admin_pb2.PingResponse]</span></em><a class="headerlink" href="#pymapadmin.commands.system.PingCommand.method" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GRPC client method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -374,8 +374,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.system.PingCommand.build_request">
-<code class="sig-name descname"><span class="pre">build_request</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.PingCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.system.PingCommand.build_request">
+<span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.system.PingCommand.build_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -390,12 +390,12 @@ called once for each streamed response as long as <code class="docutils literal 
 <section id="module-pymapadmin.commands.mailbox">
 <span id="pymapadmin-commands-mailbox"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.mailbox</span></code><a class="headerlink" href="#module-pymapadmin.commands.mailbox" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="pymapadmin.commands.mailbox.AppendCommand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.mailbox.</span></code><code class="sig-name descname"><span class="pre">AppendCommand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.mailbox.</span></span><span class="sig-name descname"><span class="pre">AppendCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Append a message directly to a user’s mailbox.</p>
 <dl class="py method">
-<dt id="pymapadmin.commands.mailbox.AppendCommand.add_subparser">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">add_subparser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand.add_subparser">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the command-line argument subparser for the command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -414,9 +414,9 @@ called once for each streamed response as long as <code class="docutils literal 
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="pymapadmin.commands.mailbox.AppendCommand.method">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">method</span></code><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.method" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand.method">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">method</span></span><em class="property"><span class="pre">:</span> <span class="pre">pymapadmin.typing.MethodProtocol[pymapadmin.grpc.admin_pb2.AppendRequest,</span> <span class="pre">pymapadmin.grpc.admin_pb2.AppendResponse]</span></em><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.method" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GRPC client method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -426,8 +426,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.mailbox.AppendCommand.build_request">
-<code class="sig-name descname"><span class="pre">build_request</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand.build_request">
+<span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.build_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -437,8 +437,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.mailbox.AppendCommand.handle_success">
-<code class="sig-name descname"><span class="pre">handle_success</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_success" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand.handle_success">
+<span class="sig-name descname"><span class="pre">handle_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_success" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a successful response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -454,8 +454,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.mailbox.AppendCommand.handle_failure">
-<code class="sig-name descname"><span class="pre">handle_failure</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_failure" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand.handle_failure">
+<span class="sig-name descname"><span class="pre">handle_failure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_failure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a failure response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -471,8 +471,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.mailbox.AppendCommand.handle_exception">
-<code class="sig-name descname"><span class="pre">handle_exception</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_exception" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand.handle_exception">
+<span class="sig-name descname"><span class="pre">handle_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_exception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle an exception that occurred while calling the RPC function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -493,12 +493,12 @@ called once for each streamed response as long as <code class="docutils literal 
 <section id="module-pymapadmin.commands.user">
 <span id="pymapadmin-commands-user"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.user</span></code><a class="headerlink" href="#module-pymapadmin.commands.user" title="Permalink to this headline">¶</a></h2>
 <dl class="py class">
-<dt id="pymapadmin.commands.user.GetUserCommand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.user.</span></code><code class="sig-name descname"><span class="pre">GetUserCommand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.GetUserCommand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.user.GetUserCommand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.user.</span></span><span class="sig-name descname"><span class="pre">GetUserCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.GetUserCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a user and its metadata.</p>
 <dl class="py method">
-<dt id="pymapadmin.commands.user.GetUserCommand.add_subparser">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">add_subparser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.GetUserCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.user.GetUserCommand.add_subparser">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.GetUserCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the command-line argument subparser for the command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -517,9 +517,9 @@ called once for each streamed response as long as <code class="docutils literal 
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="pymapadmin.commands.user.GetUserCommand.method">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">method</span></code><a class="headerlink" href="#pymapadmin.commands.user.GetUserCommand.method" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.GetUserCommand.method">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">method</span></span><em class="property"><span class="pre">:</span> <span class="pre">pymapadmin.typing.MethodProtocol[pymapadmin.grpc.admin_pb2.GetUserRequest,</span> <span class="pre">pymapadmin.grpc.admin_pb2.UserResponse]</span></em><a class="headerlink" href="#pymapadmin.commands.user.GetUserCommand.method" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GRPC client method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -529,8 +529,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.user.GetUserCommand.build_request">
-<code class="sig-name descname"><span class="pre">build_request</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.GetUserCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.user.GetUserCommand.build_request">
+<span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.GetUserCommand.build_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -542,12 +542,12 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py class">
-<dt id="pymapadmin.commands.user.SetUserCommand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.user.</span></code><code class="sig-name descname"><span class="pre">SetUserCommand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.SetUserCommand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.user.SetUserCommand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.user.</span></span><span class="sig-name descname"><span class="pre">SetUserCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.SetUserCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Set the metadata for a user, creating it if it does not exist.</p>
 <dl class="py method">
-<dt id="pymapadmin.commands.user.SetUserCommand.add_subparser">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">add_subparser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.SetUserCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.user.SetUserCommand.add_subparser">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.SetUserCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the command-line argument subparser for the command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -566,9 +566,9 @@ called once for each streamed response as long as <code class="docutils literal 
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="pymapadmin.commands.user.SetUserCommand.method">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">method</span></code><a class="headerlink" href="#pymapadmin.commands.user.SetUserCommand.method" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.SetUserCommand.method">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">method</span></span><em class="property"><span class="pre">:</span> <span class="pre">pymapadmin.typing.MethodProtocol[pymapadmin.grpc.admin_pb2.SetUserRequest,</span> <span class="pre">pymapadmin.grpc.admin_pb2.UserResponse]</span></em><a class="headerlink" href="#pymapadmin.commands.user.SetUserCommand.method" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GRPC client method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -578,8 +578,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.user.SetUserCommand.build_request">
-<code class="sig-name descname"><span class="pre">build_request</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.SetUserCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.user.SetUserCommand.build_request">
+<span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.SetUserCommand.build_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -591,12 +591,12 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py class">
-<dt id="pymapadmin.commands.user.DeleteUserCommand">
-<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">pymapadmin.commands.user.</span></code><code class="sig-name descname"><span class="pre">DeleteUserCommand</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.DeleteUserCommand" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.user.DeleteUserCommand">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.user.</span></span><span class="sig-name descname"><span class="pre">DeleteUserCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.DeleteUserCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a user and its mail data.</p>
 <dl class="py method">
-<dt id="pymapadmin.commands.user.DeleteUserCommand.add_subparser">
-<em class="property"><span class="pre">classmethod</span> </em><code class="sig-name descname"><span class="pre">add_subparser</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.DeleteUserCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.user.DeleteUserCommand.add_subparser">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.DeleteUserCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add the command-line argument subparser for the command.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -615,9 +615,9 @@ called once for each streamed response as long as <code class="docutils literal 
 </dl>
 </dd></dl>
 
-<dl class="py method">
-<dt id="pymapadmin.commands.user.DeleteUserCommand.method">
-<em class="property"><span class="pre">property</span> </em><code class="sig-name descname"><span class="pre">method</span></code><a class="headerlink" href="#pymapadmin.commands.user.DeleteUserCommand.method" title="Permalink to this definition">¶</a></dt>
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.DeleteUserCommand.method">
+<em class="property"><span class="pre">property</span> </em><span class="sig-name descname"><span class="pre">method</span></span><em class="property"><span class="pre">:</span> <span class="pre">pymapadmin.typing.MethodProtocol[pymapadmin.grpc.admin_pb2.DeleteUserRequest,</span> <span class="pre">pymapadmin.grpc.admin_pb2.UserResponse]</span></em><a class="headerlink" href="#pymapadmin.commands.user.DeleteUserCommand.method" title="Permalink to this definition">¶</a></dt>
 <dd><p>The GRPC client method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -627,8 +627,8 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py method">
-<dt id="pymapadmin.commands.user.DeleteUserCommand.build_request">
-<code class="sig-name descname"><span class="pre">build_request</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.DeleteUserCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dt class="sig sig-object py" id="pymapadmin.commands.user.DeleteUserCommand.build_request">
+<span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#pymapadmin.commands.user.DeleteUserCommand.build_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Build the request.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Return type</dt>
@@ -718,7 +718,7 @@ called once for each streamed response as long as <code class="docutils literal 
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.7.0 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.7.1 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>
@@ -727,7 +727,7 @@ called once for each streamed response as long as <code class="docutils literal 
 
     <div class="footer" role="contentinfo">
         &#169; Copyright 2020, Ian Good.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.3.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 4.0.1.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
