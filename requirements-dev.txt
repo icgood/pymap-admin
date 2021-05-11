@@ -6,4 +6,5 @@ pytest-asyncio
 pytest-cov
 rope
 
--e '.[optional,build]'
+-r requirements-all.txt
+-e '.[build]'
