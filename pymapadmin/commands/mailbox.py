@@ -6,15 +6,15 @@ import time
 from argparse import ArgumentParser, FileType
 from typing import Any, TextIO
 
-from .base import ClientCommand
-from ..typing import RequestT, ResponseT, MethodProtocol
+from .base import AdminCommand
+from ..typing import AdminRequestT, AdminResponseT, MethodProtocol
 from ..grpc.admin_grpc import MailboxStub
 from ..grpc.admin_pb2 import AppendRequest, AppendResponse
 
 __all__ = ['AppendCommand']
 
 
-class MailboxCommand(ClientCommand[MailboxStub, RequestT, ResponseT]):
+class MailboxCommand(AdminCommand[MailboxStub, AdminRequestT, AdminResponseT]):
 
     @property
     def client(self) -> MailboxStub:

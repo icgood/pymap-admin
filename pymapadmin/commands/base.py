@@ -13,7 +13,8 @@ from grpclib.client import Channel
 
 from .. import __version__ as client_version
 from ..local import token_file
-from ..typing import StubT, RequestT, ResponseT, MethodProtocol
+from ..typing import StubT, MethodProtocol, RequestT, ResponseT, \
+    AdminRequestT, AdminResponseT
 from ..grpc.admin_pb2 import SUCCESS
 
 try:
@@ -23,7 +24,7 @@ try:
 except ImportError:  # pragma: no cover
     pass
 
-__all__ = ['Command', 'ClientCommand']
+__all__ = ['Command', 'ClientCommand', 'AdminCommand']
 
 
 class Command(metaclass=ABCMeta):
@@ -106,6 +107,7 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
         """Build the request."""
         ...
 
+    @abstractmethod
     def handle_response(self, response: ResponseT, outfile: TextIO) -> int:
         """Handle each response. For streaming responses, this will be
         called once for each streamed response as long as ``0`` is returned.
@@ -118,32 +120,7 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
             outfile: The file object to print the output to.
 
         """
-        if response.result.code == SUCCESS:
-            self.handle_success(response, outfile)
-            return 0
-        else:
-            self.handle_failure(response, outfile)
-            return 1
-
-    def handle_success(self, response: ResponseT, outfile: TextIO) -> None:
-        """Print a successful response.
-
-        Args:
-            response: The response from the server.
-            outfile: The file object to print the output to.
-
-        """
-        print(response, file=outfile)
-
-    def handle_failure(self, response: ResponseT, outfile: TextIO) -> None:
-        """Print a failure response.
-
-        Args:
-            response: The response from the server.
-            outfile: The file object to print the output to.
-
-        """
-        print(response.result, file=sys.stderr)
+        ...
 
     def handle_exception(self, exc: Exception, outfile: TextIO) -> int:
         """Handle an exception that occurred while calling the RPC function.
@@ -170,3 +147,45 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
             return self.handle_exception(exc, outfile)
         else:
             return 0
+
+
+class AdminCommand(ClientCommand[StubT, AdminRequestT, AdminResponseT],
+                   metaclass=ABCMeta):
+    """Interface for client command implementations.
+
+    Args:
+        args: The command line arguments.
+        client: The client object.
+
+    """
+
+    def handle_response(self, response: AdminResponseT,
+                        outfile: TextIO) -> int:
+        if response.result.code == SUCCESS:
+            self.handle_success(response, outfile)
+            return 0
+        else:
+            self.handle_failure(response, outfile)
+            return 1
+
+    def handle_success(self, response: AdminResponseT,
+                       outfile: TextIO) -> None:
+        """Print a successful response.
+
+        Args:
+            response: The response from the server.
+            outfile: The file object to print the output to.
+
+        """
+        print(response, file=outfile)
+
+    def handle_failure(self, response: AdminResponseT,
+                       outfile: TextIO) -> None:
+        """Print a failure response.
+
+        Args:
+            response: The response from the server.
+            outfile: The file object to print the output to.
+
+        """
+        print(response.result, file=sys.stderr)

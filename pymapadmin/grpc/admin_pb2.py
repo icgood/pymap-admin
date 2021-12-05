@@ -20,7 +20,7 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   syntax='proto3',
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x1bpymapadmin/grpc/admin.proto\x12\x0fpymapadmin.grpc\"R\n\x06Result\x12)\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1b.pymapadmin.grpc.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"\x8f\x01\n\x0cLoginRequest\x12\x0f\n\x07\x61uthcid\x18\x01 \x01(\t\x12\x0e\n\x06secret\x18\x02 \x01(\t\x12\x11\n\x07\x61uthzid\x18\x03 \x01(\tH\x00\x12\x1a\n\x10token_expiration\x18\x04 \x01(\x01H\x01\x42\x12\n\x10optional_authzidB\x1b\n\x19optional_token_expiration\"i\n\rLoginResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x16\n\x0c\x62\x65\x61rer_token\x18\x02 \x01(\tH\x00\x42\x17\n\x15optional_bearer_token\"\r\n\x0bPingRequest\"k\n\x0cPingResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x15\n\rpymap_version\x18\x02 \x01(\t\x12\x1b\n\x13pymap_admin_version\x18\x03 \x01(\t\"\xbf\x01\n\rAppendRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\x10\n\x06sender\x18\x02 \x01(\tH\x00\x12\x13\n\trecipient\x18\x03 \x01(\tH\x01\x12\x11\n\x07mailbox\x18\x04 \x01(\tH\x02\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\x42\x11\n\x0foptional_senderB\x14\n\x12optional_recipientB\x12\n\x10optional_mailbox\"i\n\x0e\x41ppendResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x10\n\x08validity\x18\x03 \x01(\r\x12\x0b\n\x03uid\x18\x04 \x01(\r\"\x99\x01\n\x08UserData\x12\x12\n\x08password\x18\x01 \x01(\tH\x00\x12\x35\n\x06params\x18\x02 \x03(\x0b\x32%.pymapadmin.grpc.UserData.ParamsEntry\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x13\n\x11optional_password\"\x1e\n\x0eGetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"G\n\x0eSetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\'\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x19.pymapadmin.grpc.UserData\"!\n\x11\x44\x65leteUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"\x85\x01\n\x0cUserResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x10\n\x08username\x18\x02 \x01(\t\x12)\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x19.pymapadmin.grpc.UserDataH\x00\x42\x0f\n\roptional_data*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32\x99\x01\n\x06System\x12\x45\n\x04Ping\x12\x1c.pymapadmin.grpc.PingRequest\x1a\x1d.pymapadmin.grpc.PingResponse\"\x00\x12H\n\x05Login\x12\x1d.pymapadmin.grpc.LoginRequest\x1a\x1e.pymapadmin.grpc.LoginResponse\"\x00\x32V\n\x07Mailbox\x12K\n\x06\x41ppend\x12\x1e.pymapadmin.grpc.AppendRequest\x1a\x1f.pymapadmin.grpc.AppendResponse\"\x00\x32\xf3\x01\n\x04User\x12K\n\x07GetUser\x12\x1f.pymapadmin.grpc.GetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12K\n\x07SetUser\x12\x1f.pymapadmin.grpc.SetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12Q\n\nDeleteUser\x12\".pymapadmin.grpc.DeleteUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x1bpymapadmin/grpc/admin.proto\x12\x0fpymapadmin.grpc\"R\n\x06Result\x12)\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1b.pymapadmin.grpc.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"\x85\x01\n\x0cLoginRequest\x12\x0f\n\x07\x61uthcid\x18\x01 \x01(\t\x12\x0e\n\x06secret\x18\x02 \x01(\t\x12\x14\n\x07\x61uthzid\x18\x03 \x01(\tH\x00\x88\x01\x01\x12\x1d\n\x10token_expiration\x18\x04 \x01(\x01H\x01\x88\x01\x01\x42\n\n\x08_authzidB\x13\n\x11_token_expiration\"d\n\rLoginResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x19\n\x0c\x62\x65\x61rer_token\x18\x02 \x01(\tH\x00\x88\x01\x01\x42\x0f\n\r_bearer_token\"\r\n\x0bPingRequest\"k\n\x0cPingResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x15\n\rpymap_version\x18\x02 \x01(\t\x12\x1b\n\x13pymap_admin_version\x18\x03 \x01(\t\"\xb0\x01\n\rAppendRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\x13\n\x06sender\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x16\n\trecipient\x18\x03 \x01(\tH\x01\x88\x01\x01\x12\x14\n\x07mailbox\x18\x04 \x01(\tH\x02\x88\x01\x01\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\x42\t\n\x07_senderB\x0c\n\n_recipientB\n\n\x08_mailbox\"\x88\x01\n\x0e\x41ppendResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x15\n\x08validity\x18\x03 \x01(\rH\x00\x88\x01\x01\x12\x10\n\x03uid\x18\x04 \x01(\rH\x01\x88\x01\x01\x42\x0b\n\t_validityB\x06\n\x04_uid\"\x94\x01\n\x08UserData\x12\x15\n\x08password\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x35\n\x06params\x18\x02 \x03(\x0b\x32%.pymapadmin.grpc.UserData.ParamsEntry\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x0b\n\t_password\"\x1e\n\x0eGetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"G\n\x0eSetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\'\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x19.pymapadmin.grpc.UserData\"!\n\x11\x44\x65leteUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"\x84\x01\n\x0cUserResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x15\n\x08username\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\'\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x19.pymapadmin.grpc.UserDataB\x0b\n\t_username*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32\x99\x01\n\x06System\x12\x45\n\x04Ping\x12\x1c.pymapadmin.grpc.PingRequest\x1a\x1d.pymapadmin.grpc.PingResponse\"\x00\x12H\n\x05Login\x12\x1d.pymapadmin.grpc.LoginRequest\x1a\x1e.pymapadmin.grpc.LoginResponse\"\x00\x32V\n\x07Mailbox\x12K\n\x06\x41ppend\x12\x1e.pymapadmin.grpc.AppendRequest\x1a\x1f.pymapadmin.grpc.AppendResponse\"\x00\x32\xf3\x01\n\x04User\x12K\n\x07GetUser\x12\x1f.pymapadmin.grpc.GetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12K\n\x07SetUser\x12\x1f.pymapadmin.grpc.SetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12Q\n\nDeleteUser\x12\".pymapadmin.grpc.DeleteUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x62\x06proto3'
 )
 
 _RESULTCODE = _descriptor.EnumDescriptor(
@@ -43,8 +43,8 @@ _RESULTCODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   serialized_options=None,
-  serialized_start=1242,
-  serialized_end=1280,
+  serialized_start=1238,
+  serialized_end=1276,
 )
 _sym_db.RegisterEnumDescriptor(_RESULTCODE)
 
@@ -148,18 +148,18 @@ _LOGINREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
     _descriptor.OneofDescriptor(
-      name='optional_authzid', full_name='pymapadmin.grpc.LoginRequest.optional_authzid',
+      name='_authzid', full_name='pymapadmin.grpc.LoginRequest._authzid',
       index=0, containing_type=None,
       create_key=_descriptor._internal_create_key,
     fields=[]),
     _descriptor.OneofDescriptor(
-      name='optional_token_expiration', full_name='pymapadmin.grpc.LoginRequest.optional_token_expiration',
+      name='_token_expiration', full_name='pymapadmin.grpc.LoginRequest._token_expiration',
       index=1, containing_type=None,
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
   serialized_start=133,
-  serialized_end=276,
+  serialized_end=266,
 )
 
 
@@ -197,13 +197,13 @@ _LOGINRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
     _descriptor.OneofDescriptor(
-      name='optional_bearer_token', full_name='pymapadmin.grpc.LoginResponse.optional_bearer_token',
+      name='_bearer_token', full_name='pymapadmin.grpc.LoginResponse._bearer_token',
       index=0, containing_type=None,
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=278,
-  serialized_end=383,
+  serialized_start=268,
+  serialized_end=368,
 )
 
 
@@ -227,8 +227,8 @@ _PINGREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=385,
-  serialized_end=398,
+  serialized_start=370,
+  serialized_end=383,
 )
 
 
@@ -273,8 +273,8 @@ _PINGRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=400,
-  serialized_end=507,
+  serialized_start=385,
+  serialized_end=492,
 )
 
 
@@ -347,23 +347,23 @@ _APPENDREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
     _descriptor.OneofDescriptor(
-      name='optional_sender', full_name='pymapadmin.grpc.AppendRequest.optional_sender',
+      name='_sender', full_name='pymapadmin.grpc.AppendRequest._sender',
       index=0, containing_type=None,
       create_key=_descriptor._internal_create_key,
     fields=[]),
     _descriptor.OneofDescriptor(
-      name='optional_recipient', full_name='pymapadmin.grpc.AppendRequest.optional_recipient',
+      name='_recipient', full_name='pymapadmin.grpc.AppendRequest._recipient',
       index=1, containing_type=None,
       create_key=_descriptor._internal_create_key,
     fields=[]),
     _descriptor.OneofDescriptor(
-      name='optional_mailbox', full_name='pymapadmin.grpc.AppendRequest.optional_mailbox',
+      name='_mailbox', full_name='pymapadmin.grpc.AppendRequest._mailbox',
       index=2, containing_type=None,
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=510,
-  serialized_end=701,
+  serialized_start=495,
+  serialized_end=671,
 )
 
 
@@ -414,9 +414,19 @@ _APPENDRESPONSE = _descriptor.Descriptor(
   syntax='proto3',
   extension_ranges=[],
   oneofs=[
+    _descriptor.OneofDescriptor(
+      name='_validity', full_name='pymapadmin.grpc.AppendResponse._validity',
+      index=0, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
+    _descriptor.OneofDescriptor(
+      name='_uid', full_name='pymapadmin.grpc.AppendResponse._uid',
+      index=1, containing_type=None,
+      create_key=_descriptor._internal_create_key,
+    fields=[]),
   ],
-  serialized_start=703,
-  serialized_end=808,
+  serialized_start=674,
+  serialized_end=810,
 )
 
 
@@ -454,8 +464,8 @@ _USERDATA_PARAMSENTRY = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=898,
-  serialized_end=943,
+  serialized_start=903,
+  serialized_end=948,
 )
 
 _USERDATA = _descriptor.Descriptor(
@@ -492,13 +502,13 @@ _USERDATA = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
     _descriptor.OneofDescriptor(
-      name='optional_password', full_name='pymapadmin.grpc.UserData.optional_password',
+      name='_password', full_name='pymapadmin.grpc.UserData._password',
       index=0, containing_type=None,
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=811,
-  serialized_end=964,
+  serialized_start=813,
+  serialized_end=961,
 )
 
 
@@ -529,8 +539,8 @@ _GETUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=966,
-  serialized_end=996,
+  serialized_start=963,
+  serialized_end=993,
 )
 
 
@@ -568,8 +578,8 @@ _SETUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=998,
-  serialized_end=1069,
+  serialized_start=995,
+  serialized_end=1066,
 )
 
 
@@ -600,8 +610,8 @@ _DELETEUSERREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1071,
-  serialized_end=1104,
+  serialized_start=1068,
+  serialized_end=1101,
 )
 
 
@@ -646,48 +656,54 @@ _USERRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
     _descriptor.OneofDescriptor(
-      name='optional_data', full_name='pymapadmin.grpc.UserResponse.optional_data',
+      name='_username', full_name='pymapadmin.grpc.UserResponse._username',
       index=0, containing_type=None,
       create_key=_descriptor._internal_create_key,
     fields=[]),
   ],
-  serialized_start=1107,
-  serialized_end=1240,
+  serialized_start=1104,
+  serialized_end=1236,
 )
 
 _RESULT.fields_by_name['code'].enum_type = _RESULTCODE
-_LOGINREQUEST.oneofs_by_name['optional_authzid'].fields.append(
+_LOGINREQUEST.oneofs_by_name['_authzid'].fields.append(
   _LOGINREQUEST.fields_by_name['authzid'])
-_LOGINREQUEST.fields_by_name['authzid'].containing_oneof = _LOGINREQUEST.oneofs_by_name['optional_authzid']
-_LOGINREQUEST.oneofs_by_name['optional_token_expiration'].fields.append(
+_LOGINREQUEST.fields_by_name['authzid'].containing_oneof = _LOGINREQUEST.oneofs_by_name['_authzid']
+_LOGINREQUEST.oneofs_by_name['_token_expiration'].fields.append(
   _LOGINREQUEST.fields_by_name['token_expiration'])
-_LOGINREQUEST.fields_by_name['token_expiration'].containing_oneof = _LOGINREQUEST.oneofs_by_name['optional_token_expiration']
+_LOGINREQUEST.fields_by_name['token_expiration'].containing_oneof = _LOGINREQUEST.oneofs_by_name['_token_expiration']
 _LOGINRESPONSE.fields_by_name['result'].message_type = _RESULT
-_LOGINRESPONSE.oneofs_by_name['optional_bearer_token'].fields.append(
+_LOGINRESPONSE.oneofs_by_name['_bearer_token'].fields.append(
   _LOGINRESPONSE.fields_by_name['bearer_token'])
-_LOGINRESPONSE.fields_by_name['bearer_token'].containing_oneof = _LOGINRESPONSE.oneofs_by_name['optional_bearer_token']
+_LOGINRESPONSE.fields_by_name['bearer_token'].containing_oneof = _LOGINRESPONSE.oneofs_by_name['_bearer_token']
 _PINGRESPONSE.fields_by_name['result'].message_type = _RESULT
-_APPENDREQUEST.oneofs_by_name['optional_sender'].fields.append(
+_APPENDREQUEST.oneofs_by_name['_sender'].fields.append(
   _APPENDREQUEST.fields_by_name['sender'])
-_APPENDREQUEST.fields_by_name['sender'].containing_oneof = _APPENDREQUEST.oneofs_by_name['optional_sender']
-_APPENDREQUEST.oneofs_by_name['optional_recipient'].fields.append(
+_APPENDREQUEST.fields_by_name['sender'].containing_oneof = _APPENDREQUEST.oneofs_by_name['_sender']
+_APPENDREQUEST.oneofs_by_name['_recipient'].fields.append(
   _APPENDREQUEST.fields_by_name['recipient'])
-_APPENDREQUEST.fields_by_name['recipient'].containing_oneof = _APPENDREQUEST.oneofs_by_name['optional_recipient']
-_APPENDREQUEST.oneofs_by_name['optional_mailbox'].fields.append(
+_APPENDREQUEST.fields_by_name['recipient'].containing_oneof = _APPENDREQUEST.oneofs_by_name['_recipient']
+_APPENDREQUEST.oneofs_by_name['_mailbox'].fields.append(
   _APPENDREQUEST.fields_by_name['mailbox'])
-_APPENDREQUEST.fields_by_name['mailbox'].containing_oneof = _APPENDREQUEST.oneofs_by_name['optional_mailbox']
+_APPENDREQUEST.fields_by_name['mailbox'].containing_oneof = _APPENDREQUEST.oneofs_by_name['_mailbox']
 _APPENDRESPONSE.fields_by_name['result'].message_type = _RESULT
+_APPENDRESPONSE.oneofs_by_name['_validity'].fields.append(
+  _APPENDRESPONSE.fields_by_name['validity'])
+_APPENDRESPONSE.fields_by_name['validity'].containing_oneof = _APPENDRESPONSE.oneofs_by_name['_validity']
+_APPENDRESPONSE.oneofs_by_name['_uid'].fields.append(
+  _APPENDRESPONSE.fields_by_name['uid'])
+_APPENDRESPONSE.fields_by_name['uid'].containing_oneof = _APPENDRESPONSE.oneofs_by_name['_uid']
 _USERDATA_PARAMSENTRY.containing_type = _USERDATA
 _USERDATA.fields_by_name['params'].message_type = _USERDATA_PARAMSENTRY
-_USERDATA.oneofs_by_name['optional_password'].fields.append(
+_USERDATA.oneofs_by_name['_password'].fields.append(
   _USERDATA.fields_by_name['password'])
-_USERDATA.fields_by_name['password'].containing_oneof = _USERDATA.oneofs_by_name['optional_password']
+_USERDATA.fields_by_name['password'].containing_oneof = _USERDATA.oneofs_by_name['_password']
 _SETUSERREQUEST.fields_by_name['data'].message_type = _USERDATA
 _USERRESPONSE.fields_by_name['result'].message_type = _RESULT
 _USERRESPONSE.fields_by_name['data'].message_type = _USERDATA
-_USERRESPONSE.oneofs_by_name['optional_data'].fields.append(
-  _USERRESPONSE.fields_by_name['data'])
-_USERRESPONSE.fields_by_name['data'].containing_oneof = _USERRESPONSE.oneofs_by_name['optional_data']
+_USERRESPONSE.oneofs_by_name['_username'].fields.append(
+  _USERRESPONSE.fields_by_name['username'])
+_USERRESPONSE.fields_by_name['username'].containing_oneof = _USERRESPONSE.oneofs_by_name['_username']
 DESCRIPTOR.message_types_by_name['Result'] = _RESULT
 DESCRIPTOR.message_types_by_name['LoginRequest'] = _LOGINREQUEST
 DESCRIPTOR.message_types_by_name['LoginResponse'] = _LOGINRESPONSE
@@ -805,8 +821,8 @@ _SYSTEM = _descriptor.ServiceDescriptor(
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1283,
-  serialized_end=1436,
+  serialized_start=1279,
+  serialized_end=1432,
   methods=[
   _descriptor.MethodDescriptor(
     name='Ping',
@@ -841,8 +857,8 @@ _MAILBOX = _descriptor.ServiceDescriptor(
   index=1,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1438,
-  serialized_end=1524,
+  serialized_start=1434,
+  serialized_end=1520,
   methods=[
   _descriptor.MethodDescriptor(
     name='Append',
@@ -867,8 +883,8 @@ _USER = _descriptor.ServiceDescriptor(
   index=2,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=1527,
-  serialized_end=1770,
+  serialized_start=1523,
+  serialized_end=1766,
   methods=[
   _descriptor.MethodDescriptor(
     name='GetUser',

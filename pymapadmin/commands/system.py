@@ -6,10 +6,10 @@ from argparse import ArgumentParser, FileType
 from contextlib import closing
 from typing import Any, Optional, TextIO
 
-from .base import Command, ClientCommand
+from .base import Command, AdminCommand
 from ..config import Config
 from ..local import config_file, token_file
-from ..typing import RequestT, ResponseT, MethodProtocol
+from ..typing import AdminRequestT, AdminResponseT, MethodProtocol
 from ..grpc.admin_grpc import SystemStub
 from ..grpc.admin_pb2 import LoginRequest, LoginResponse, \
     PingRequest, PingResponse
@@ -17,7 +17,7 @@ from ..grpc.admin_pb2 import LoginRequest, LoginResponse, \
 __all__ = ['SaveArgsCommand', 'LoginCommand', 'PingCommand']
 
 
-class SystemCommand(ClientCommand[SystemStub, RequestT, ResponseT]):
+class SystemCommand(AdminCommand[SystemStub, AdminRequestT, AdminResponseT]):
 
     @property
     def client(self) -> SystemStub:
