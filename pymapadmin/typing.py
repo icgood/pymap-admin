@@ -11,16 +11,22 @@ from grpclib.client import Stream
 from .grpc.admin_pb2 import Result
 
 __all__ = ['StubT', 'RequestT', 'ResponseT', 'MethodProtocol',
-           'RequestProtocol', 'ResponseProtocol']
+           'AdminRequestProtocol', 'AdminResponseProtocol']
 
 #: A type variable corresponding to an admin stub object.
 StubT = TypeVar('StubT')
 
+#: A type variable corresponding to an request object.
+RequestT = TypeVar('RequestT')
+
+#: A type variable corresponding to an response object.
+ResponseT = TypeVar('ResponseT')
+
 #: A type variable corresponding to an admin request object.
-RequestT = TypeVar('RequestT', bound='RequestProtocol')
+AdminRequestT = TypeVar('AdminRequestT', bound='AdminRequestProtocol')
 
 #: A type variable corresponding to an admin response object.
-ResponseT = TypeVar('ResponseT', bound='ResponseProtocol')
+AdminResponseT = TypeVar('AdminResponseT', bound='AdminResponseProtocol')
 
 
 class MethodProtocol(Protocol[RequestT, ResponseT]):
@@ -32,7 +38,7 @@ class MethodProtocol(Protocol[RequestT, ResponseT]):
         ...
 
 
-class RequestProtocol(Protocol):
+class AdminRequestProtocol(Protocol):
     """Protocol defining the fields that all admin request objects are expected
     to have.
 
@@ -43,7 +49,7 @@ class RequestProtocol(Protocol):
     pass
 
 
-class ResponseProtocol(Protocol):
+class AdminResponseProtocol(Protocol):
     """Protocol defining the fields that all admin response objects are
     expected to have.
 

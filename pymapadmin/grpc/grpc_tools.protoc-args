@@ -1,5 +1,5 @@
 -I.
 --python_out=.
---python_grpc_out=.
+--grpclib_python_out=.
 --mypy_out=.
 pymapadmin/grpc/admin.proto

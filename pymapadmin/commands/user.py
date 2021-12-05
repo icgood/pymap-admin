@@ -6,8 +6,8 @@ from argparse import ArgumentParser, FileType
 from collections.abc import Mapping, Sequence
 from typing import Any, Optional
 
-from .base import ClientCommand
-from ..typing import RequestT, ResponseT, MethodProtocol
+from .base import AdminCommand
+from ..typing import AdminRequestT, AdminResponseT, MethodProtocol
 from ..grpc.admin_grpc import UserStub
 from ..grpc.admin_pb2 import \
     UserData, UserResponse, GetUserRequest, SetUserRequest, DeleteUserRequest
@@ -15,7 +15,7 @@ from ..grpc.admin_pb2 import \
 __all__ = ['GetUserCommand', 'SetUserCommand', 'DeleteUserCommand']
 
 
-class UserCommand(ClientCommand[UserStub, RequestT, ResponseT]):
+class UserCommand(AdminCommand[UserStub, AdminRequestT, AdminResponseT]):
 
     @property
     def client(self) -> UserStub:

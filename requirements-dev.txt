@@ -6,6 +6,10 @@ pytest-asyncio
 pytest-cov
 rope
 
+# unreleased typing changes
+grpclib == 0.4.3rc1
+
+# stubs
 types-setuptools
 
 -r requirements-all.txt
