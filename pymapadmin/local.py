@@ -6,7 +6,7 @@ from argparse import Action, ArgumentParser, Namespace
 from collections.abc import Sequence
 from functools import partial
 from pathlib import Path
-from typing import Any, Union, Final, Optional
+from typing import Any, Final
 
 from tempfile import gettempdir
 
@@ -80,7 +80,7 @@ class LocalFile:
     def _home_path(self) -> Path:
         return Path(self._config_home, 'pymap', self.filename)
 
-    def add(self, *custom: Union[None, str, Path]) -> None:
+    def add(self, *custom: None | str | Path) -> None:
         """Append the *custom* paths to :attr:`.custom`.
 
         Args:
@@ -129,7 +129,7 @@ class LocalFile:
         """Return all the paths that may contain the file."""
         return list(self.custom) + [self._home_path, self._temp_path]
 
-    def find(self) -> Optional[Path]:
+    def find(self) -> Path | None:
         """Return the :class:`~pathlib.Path` of an existing file, if one
         exists.
 

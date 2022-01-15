@@ -4,7 +4,7 @@ from __future__ import annotations
 import getpass
 from argparse import ArgumentParser, FileType
 from contextlib import closing
-from typing import Any, Optional, TextIO
+from typing import Any, TextIO
 
 from .base import Command, AdminCommand
 from ..config import Config
@@ -79,8 +79,8 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
 
     def build_request(self) -> LoginRequest:
         username: str = self.args.user
-        authzid: Optional[str] = self.args.authzid
-        expiration: Optional[float] = self.args.expiration
+        authzid: str | None = self.args.authzid
+        expiration: float | None = self.args.expiration
         if self.args.ask_password:
             password = getpass.getpass(f'{username} Password: ')
         elif self.args.password_file is not None:

@@ -4,7 +4,7 @@ from __future__ import annotations
 import getpass
 from argparse import ArgumentParser, FileType
 from collections.abc import Mapping, Sequence
-from typing import Any, Optional
+from typing import Any
 
 from .base import AdminCommand
 from ..typing import AdminRequestT, AdminResponseT, MethodProtocol
@@ -66,7 +66,7 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
     def method(self) -> MethodProtocol[SetUserRequest, UserResponse]:
         return self.client.SetUser
 
-    def getpass(self) -> Optional[str]:
+    def getpass(self) -> str | None:
         if self.args.no_password:
             return None
         elif self.args.password_file:

@@ -7,7 +7,7 @@ import traceback
 from abc import abstractmethod, ABCMeta
 from argparse import ArgumentParser, Namespace
 from collections.abc import Mapping
-from typing import Generic, Any, Final, Optional, TextIO
+from typing import Generic, Any, Final, TextIO
 
 from grpclib.client import Channel
 
@@ -85,7 +85,7 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
 
     def _get_metadata(self) -> Mapping[str, str]:
         metadata = {'client-version': client_version}
-        token: Optional[str] = None
+        token: str | None = None
         if 'PYMAP_ADMIN_TOKEN' in os.environ:
             token = os.environ['PYMAP_ADMIN_TOKEN']
         else:
