@@ -2,7 +2,6 @@
 from io import StringIO
 from argparse import Namespace
 
-import pytest
 from grpclib.testing import ChannelFor
 from pymapadmin.commands.system import LoginCommand, PingCommand
 from pymapadmin.grpc.admin_grpc import SystemBase
@@ -10,8 +9,6 @@ from pymapadmin.grpc.admin_pb2 import LoginRequest, LoginResponse, \
     PingRequest, PingResponse, Result, FAILURE
 
 from handler import RequestT, ResponseT, MockHandler
-
-pytestmark = pytest.mark.asyncio
 
 
 class Handler(SystemBase, MockHandler[RequestT, ResponseT]):

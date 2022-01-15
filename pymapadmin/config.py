@@ -4,7 +4,6 @@ from __future__ import annotations
 import os
 from argparse import Namespace
 from configparser import ConfigParser
-from typing import Optional
 
 from .local import config_file, token_file, socket_file
 
@@ -65,16 +64,16 @@ class Config:
             section['no_verify_cert'] = str(args.no_verify_cert)
         return parser
 
-    def _getstr(self, attr: str, envvar: str) -> Optional[str]:
-        val: Optional[str] = getattr(self._args, attr)
+    def _getstr(self, attr: str, envvar: str) -> str | None:
+        val: str | None = getattr(self._args, attr)
         if val is not None:
             return val
         if envvar in os.environ:
             return os.environ[envvar]
         return self._section.get(attr, fallback=None)
 
-    def _getint(self, attr: str, envvar: str) -> Optional[int]:
-        val: Optional[int] = getattr(self._args, attr)
+    def _getint(self, attr: str, envvar: str) -> int | None:
+        val: int | None = getattr(self._args, attr)
         if val is not None:
             return val
         if envvar in os.environ:
@@ -91,31 +90,31 @@ class Config:
         return self._section.getboolean(attr, fallback=False)
 
     @property
-    def host(self) -> Optional[str]:
+    def host(self) -> str | None:
         return self._getstr('host', 'PYMAP_ADMIN_HOST')
 
     @property
-    def port(self) -> Optional[int]:
+    def port(self) -> int | None:
         return self._getint('port', 'PYMAP_ADMIN_PORT')
 
     @property
-    def token(self) -> Optional[str]:
+    def token(self) -> str | None:
         return self._getstr('token', 'PYMAP_ADMIN_TOKEN')
 
     @property
-    def cert(self) -> Optional[str]:
+    def cert(self) -> str | None:
         return self._getstr('cert', 'PYMAP_ADMIN_CERT')
 
     @property
-    def key(self) -> Optional[str]:
+    def key(self) -> str | None:
         return self._getstr('key', 'PYMAP_ADMIN_KEY')
 
     @property
-    def cafile(self) -> Optional[str]:
+    def cafile(self) -> str | None:
         return self._getstr('cafile', 'PYMAP_ADMIN_CAFILE')
 
     @property
-    def capath(self) -> Optional[str]:
+    def capath(self) -> str | None:
         return self._getstr('capath', 'PYMAP_ADMIN_CAPATH')
 
     @property
