@@ -2,7 +2,6 @@
 from io import BytesIO, StringIO
 from argparse import Namespace
 
-import pytest
 from grpclib.testing import ChannelFor
 from pymapadmin.commands.mailbox import AppendCommand
 from pymapadmin.grpc.admin_grpc import MailboxBase
@@ -10,8 +9,6 @@ from pymapadmin.grpc.admin_pb2 import Result, FAILURE, \
     AppendRequest, AppendResponse
 
 from handler import RequestT, ResponseT, MockHandler
-
-pytestmark = pytest.mark.asyncio
 
 
 class Handler(MailboxBase, MockHandler[RequestT, ResponseT]):
