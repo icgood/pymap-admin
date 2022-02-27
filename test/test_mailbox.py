@@ -1,19 +1,24 @@
 
 from io import BytesIO, StringIO
 from argparse import Namespace
+from typing import Any
 
+from grpclib.server import Stream
 from grpclib.testing import ChannelFor
+
 from pymapadmin.commands.mailbox import AppendCommand
 from pymapadmin.grpc.admin_grpc import MailboxBase
 from pymapadmin.grpc.admin_pb2 import Result, FAILURE, \
     AppendRequest, AppendResponse
 
-from handler import RequestT, ResponseT, MockHandler
+from handler import MockHandler
+
+_AppendStream = Stream[AppendRequest, AppendResponse]
 
 
-class Handler(MailboxBase, MockHandler[RequestT, ResponseT]):
+class Handler(MailboxBase, MockHandler[Any, Any]):
 
-    async def Append(self, stream) -> None:
+    async def Append(self, stream: _AppendStream) -> None:
         await self._run(stream)
 
 

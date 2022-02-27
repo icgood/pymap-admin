@@ -1,22 +1,28 @@
 
 from io import StringIO
 from argparse import Namespace
+from typing import Any
 
-from grpclib.testing import ChannelFor
-from pymapadmin.commands.health import CheckCommand
 from grpclib.health.v1.health_grpc import HealthBase
 from grpclib.health.v1.health_pb2 import HealthCheckRequest, \
     HealthCheckResponse
+from grpclib.server import Stream
+from grpclib.testing import ChannelFor
 
-from handler import RequestT, ResponseT, MockHandler
+from pymapadmin.commands.health import CheckCommand
+
+from handler import MockHandler
+
+_CheckStream = Stream[HealthCheckRequest, HealthCheckResponse]
+_WatchStream = Stream[HealthCheckRequest, HealthCheckResponse]
 
 
-class Handler(HealthBase, MockHandler[RequestT, ResponseT]):
+class Handler(HealthBase, MockHandler[Any, Any]):
 
-    async def Check(self, stream) -> None:
+    async def Check(self, stream: _CheckStream) -> None:
         await self._run(stream)
 
-    async def Watch(self, stream) -> None:
+    async def Watch(self, stream: _WatchStream) -> None:
         raise NotImplementedError()
 
 

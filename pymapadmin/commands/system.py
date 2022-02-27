@@ -33,7 +33,7 @@ class SaveArgsCommand(Command):
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
             -> ArgumentParser:  # pragma: no cover
-        subparser = subparsers.add_parser(
+        subparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='save connection arguments to config file')
         return subparser
@@ -53,7 +53,7 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
             -> ArgumentParser:  # pragma: no cover
-        subparser = subparsers.add_parser(
+        subparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='login as a user')
         subparser.add_argument('-s', '--save', action='store_true',
@@ -110,9 +110,10 @@ class PingCommand(SystemCommand[PingRequest, PingResponse]):
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
             -> ArgumentParser:  # pragma: no cover
-        return subparsers.add_parser(
+        argparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='ping the server')
+        return argparser
 
     @property
     def method(self) -> MethodProtocol[PingRequest, PingResponse]:

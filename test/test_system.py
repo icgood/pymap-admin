@@ -1,22 +1,28 @@
 
 from io import StringIO
 from argparse import Namespace
+from typing import Any
 
+from grpclib.server import Stream
 from grpclib.testing import ChannelFor
+
 from pymapadmin.commands.system import LoginCommand, PingCommand
 from pymapadmin.grpc.admin_grpc import SystemBase
 from pymapadmin.grpc.admin_pb2 import LoginRequest, LoginResponse, \
     PingRequest, PingResponse, Result, FAILURE
 
-from handler import RequestT, ResponseT, MockHandler
+from handler import MockHandler
+
+_PingStream = Stream[PingRequest, PingResponse]
+_LoginStream = Stream[LoginRequest, LoginResponse]
 
 
-class Handler(SystemBase, MockHandler[RequestT, ResponseT]):
+class Handler(SystemBase, MockHandler[Any, Any]):
 
-    async def Ping(self, stream) -> None:
+    async def Ping(self, stream: _PingStream) -> None:
         await self._run(stream)
 
-    async def Login(self, stream) -> None:
+    async def Login(self, stream: _LoginStream) -> None:
         await self._run(stream)
 
 

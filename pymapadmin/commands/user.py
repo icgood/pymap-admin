@@ -28,7 +28,7 @@ class GetUserCommand(UserCommand[GetUserRequest, UserResponse]):
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
             -> ArgumentParser:  # pragma: no cover
-        subparser = subparsers.add_parser(
+        subparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='get a user')
         subparser.add_argument('username', help='the user name')
@@ -48,7 +48,7 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
             -> ArgumentParser:  # pragma: no cover
-        subparser = subparsers.add_parser(
+        subparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='assign a password to a user')
         subparser.add_argument('--password-file', type=FileType('r'),
@@ -70,7 +70,7 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
         if self.args.no_password:
             return None
         elif self.args.password_file:
-            line = self.args.password_file.readline()
+            line: str = self.args.password_file.readline()
             return line.rstrip('\r\n')
         else:
             return getpass.getpass()
@@ -100,7 +100,7 @@ class DeleteUserCommand(UserCommand[DeleteUserRequest, UserResponse]):
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
             -> ArgumentParser:  # pragma: no cover
-        subparser = subparsers.add_parser(
+        subparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='delete a user')
         subparser.add_argument('username', help='the user name')

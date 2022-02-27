@@ -15,13 +15,14 @@ __all__ = ['LocalFile', 'config_file', 'token_file', 'socket_file']
 
 class _AddAction(Action):
 
-    def __init__(self, local_file: LocalFile, *args, **kwargs) -> None:
+    def __init__(self, local_file: LocalFile,
+                 *args: Any, **kwargs: Any) -> None:
         kwargs['metavar'] = 'PATH'
         super().__init__(*args, **kwargs)
         self._local_file = local_file
 
     def __call__(self, parser: ArgumentParser, namespace: Namespace,
-                 values: Any, option_string: str = None) -> None:
+                 values: Any, option_string: str | None = None) -> None:
         setattr(namespace, self.dest, values)
         self._local_file.add(values)
 
