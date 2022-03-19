@@ -4,10 +4,11 @@ autopep8
 pytest
 pytest-asyncio
 pytest-cov
+bandit[toml]
 rope
 
 # unreleased typing changes
-grpclib == 0.4.3rc1
+grpclib == 0.4.3rc2
 
 # stubs
 types-setuptools

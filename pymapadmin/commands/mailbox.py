@@ -35,7 +35,7 @@ class AppendCommand(MailboxCommand[AppendRequest, AppendResponse]):
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
             -> ArgumentParser:  # pragma: no cover
-        subparser = subparsers.add_parser(
+        subparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='append a message to a mailbox')
         subparser.add_argument('--from', metavar='ADDRESS', dest='sender',

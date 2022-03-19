@@ -28,9 +28,10 @@ class CheckCommand(HealthCommand[HealthCheckRequest,
     @classmethod
     def add_subparser(cls, name: str, subparsers: Any) \
             -> ArgumentParser:  # pragma: no cover
-        return subparsers.add_parser(
+        argparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='check the server health')
+        return argparser
 
     @property
     def method(self) -> MethodProtocol[HealthCheckRequest,

@@ -48,7 +48,7 @@ setup(name='pymap-admin',
           'Programming Language :: Python :: 3.10'],
       python_requires='~=3.10',
       include_package_data=True,
-      packages=find_packages(),
+      packages=find_packages(include=('pymapadmin', 'pymapadmin.*')),
       install_requires=[
           'grpclib', 'protobuf', 'typing-extensions'],
       extras_require={

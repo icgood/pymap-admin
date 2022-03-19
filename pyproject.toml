@@ -1,0 +1,25 @@
+[build-system]
+requires = ['setuptools', 'wheel']
+
+[tool.mypy]
+strict = true
+files = ['pymapadmin', 'test']
+
+[[tool.mypy.overrides]]
+module = 'google.rpc.*'
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = 'test'
+asyncio_mode = 'auto'
+norecursedirs = 'doc'
+
+[tool.coverage.report]
+fail_under = 90
+omit = ['*/main.py', '*/config.py', '*/local.py', '*/grpc/*']
+exclude_lines = [
+    'pragma: no cover',
+    'NotImplemented',
+    '^\s*...\s*$',
+    'def __repr__',
+]

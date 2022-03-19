@@ -1,8 +1,10 @@
 
 from io import StringIO
 from argparse import Namespace
+from typing import Any
 
 import pytest
+from grpclib.server import Stream
 from grpclib.testing import ChannelFor
 
 from pymapadmin.commands.user import GetUserCommand, SetUserCommand, \
@@ -11,18 +13,22 @@ from pymapadmin.grpc.admin_grpc import UserBase
 from pymapadmin.grpc.admin_pb2 import \
     GetUserRequest, SetUserRequest, DeleteUserRequest, UserResponse
 
-from handler import RequestT, ResponseT, MockHandler
+from handler import MockHandler
+
+_GetUserStream = Stream[GetUserRequest, UserResponse]
+_SetUserStream = Stream[SetUserRequest, UserResponse]
+_DeleteUserStream = Stream[DeleteUserRequest, UserResponse]
 
 
-class Handler(UserBase, MockHandler[RequestT, ResponseT]):
+class Handler(UserBase, MockHandler[Any, UserResponse]):
 
-    async def GetUser(self, stream) -> None:
+    async def GetUser(self, stream: _GetUserStream) -> None:
         await self._run(stream)
 
-    async def SetUser(self, stream) -> None:
+    async def SetUser(self, stream: _SetUserStream) -> None:
         await self._run(stream)
 
-    async def DeleteUser(self, stream) -> None:
+    async def DeleteUser(self, stream: _DeleteUserStream) -> None:
         await self._run(stream)
 
 
