@@ -19,7 +19,7 @@
 # THE SOFTWARE.
 #
 
-from setuptools import setup, find_packages  # type: ignore
+from setuptools import setup, find_packages
 
 with open('README.md') as f:
     readme = f.read()
@@ -29,7 +29,7 @@ with open('LICENSE.md') as f:
 
 
 setup(name='pymap-admin',
-      version='0.8.0',
+      version='0.9.0',
       author='Ian Good',
       author_email='ian@icgood.net',
       description='Admin tool for running pymap instances.',
@@ -50,7 +50,9 @@ setup(name='pymap-admin',
       include_package_data=True,
       packages=find_packages(include=('pymapadmin', 'pymapadmin.*')),
       install_requires=[
-          'grpclib', 'protobuf', 'typing-extensions'],
+          'grpclib',
+          'protobuf',
+          'typing-extensions'],
       extras_require={
           'optional': ['googleapis-common-protos'],
           'build': ['grpcio-tools', 'mypy-protobuf']},
