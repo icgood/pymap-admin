@@ -1,11 +1,17 @@
 # type: ignore
 
+import inspect
 import os
 import os.path
 from shlex import join
+
+if not hasattr(inspect, 'getargspec'):
+    # https://github.com/pyinvoke/invoke/issues/833
+    inspect.getargspec = inspect.getfullargspec
+
 from invoke import task, Collection
 
-from . import check, doc, lint, test, types
+from . import check, doc, lint, proto, test, types
 
 
 @task
@@ -54,6 +60,7 @@ ns.add_collection(check)
 ns.add_collection(test)
 ns.add_collection(types)
 ns.add_collection(lint)
+ns.add_collection(proto)
 ns.add_collection(doc)
 
 ns.configure({

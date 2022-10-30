@@ -4,11 +4,9 @@ from __future__ import annotations
 from argparse import ArgumentParser
 from typing import Any, TextIO
 
-from grpclib.health.v1.health_grpc import HealthStub
-from grpclib.health.v1.health_pb2 import \
-    HealthCheckRequest, HealthCheckResponse
-
 from .base import ClientCommand
+from ..grpc.health_grpc import HealthStub
+from ..grpc.health_pb2 import HealthCheckRequest, HealthCheckResponse
 from ..typing import RequestT, ResponseT, MethodProtocol
 
 __all__ = ['CheckCommand']

@@ -3,13 +3,12 @@ from io import StringIO
 from argparse import Namespace
 from typing import Any
 
-from grpclib.health.v1.health_grpc import HealthBase
-from grpclib.health.v1.health_pb2 import HealthCheckRequest, \
-    HealthCheckResponse
 from grpclib.server import Stream
 from grpclib.testing import ChannelFor
 
 from pymapadmin.commands.health import CheckCommand
+from pymapadmin.grpc.health_grpc import HealthBase
+from pymapadmin.grpc.health_pb2 import HealthCheckRequest, HealthCheckResponse
 
 from handler import MockHandler
 

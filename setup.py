@@ -19,7 +19,7 @@
 # THE SOFTWARE.
 #
 
-from setuptools import setup, find_packages  # type: ignore
+from setuptools import setup, find_packages
 
 with open('README.md') as f:
     readme = f.read()
@@ -29,7 +29,7 @@ with open('LICENSE.md') as f:
 
 
 setup(name='pymap-admin',
-      version='0.8.0',
+      version='0.9.0.rc1',
       author='Ian Good',
       author_email='ian@icgood.net',
       description='Admin tool for running pymap instances.',
@@ -45,8 +45,8 @@ setup(name='pymap-admin',
           'Intended Audience :: Information Technology',
           'License :: OSI Approved :: MIT License',
           'Programming Language :: Python',
-          'Programming Language :: Python :: 3.10'],
-      python_requires='~=3.10',
+          'Programming Language :: Python :: 3.11'],
+      python_requires='~=3.11',
       include_package_data=True,
       packages=find_packages(include=('pymapadmin', 'pymapadmin.*')),
       install_requires=[
