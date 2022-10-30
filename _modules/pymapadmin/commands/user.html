@@ -1,0 +1,250 @@
+
+
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>pymapadmin.commands.user &#8212; pymap-admin 0.9.0rc1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
+    
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+
+    
+    
+     
+        <script src="../../../_static/jquery.cookie.js"></script>
+    
+
+    
+     
+        <script src="../../../_static/cloud.base.js"></script>
+    
+
+    
+     
+        <script src="../../../_static/cloud.js"></script>
+    
+
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head><body>
+    <div class="relbar-top">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+    <li><a href="../../../index.html">pymap-admin 0.9.0rc1 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../commands.html" accesskey="U">pymapadmin.commands</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pymapadmin.commands.user</a></li> 
+      </ul>
+    </div>
+    </div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for pymapadmin.commands.user</h1><div class="highlight"><pre>
+<span></span>
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">import</span> <span class="nn">getpass</span>
+<span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span><span class="p">,</span> <span class="n">FileType</span>
+<span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+
+<span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">AdminCommand</span>
+<span class="kn">from</span> <span class="nn">..typing</span> <span class="kn">import</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">,</span> <span class="n">MethodProtocol</span>
+<span class="kn">from</span> <span class="nn">..grpc.admin_grpc</span> <span class="kn">import</span> <span class="n">UserStub</span>
+<span class="kn">from</span> <span class="nn">..grpc.admin_pb2</span> <span class="kn">import</span> \
+    <span class="n">UserData</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">,</span> <span class="n">GetUserRequest</span><span class="p">,</span> <span class="n">SetUserRequest</span><span class="p">,</span> <span class="n">DeleteUserRequest</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GetUserCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;SetUserCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;DeleteUserCommand&#39;</span><span class="p">]</span>
+
+
+<span class="k">class</span> <span class="nc">UserCommand</span><span class="p">(</span><span class="n">AdminCommand</span><span class="p">[</span><span class="n">UserStub</span><span class="p">,</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">]):</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">client</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserStub</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">UserStub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="GetUserCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.GetUserCommand">[docs]</a><span class="k">class</span> <span class="nc">GetUserCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">GetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Print a user and its metadata.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="GetUserCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.GetUserCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">add_subparser</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subparsers</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="n">ArgumentParser</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="n">subparser</span><span class="p">:</span> <span class="n">ArgumentParser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;get a user&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the user name&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">subparser</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MethodProtocol</span><span class="p">[</span><span class="n">GetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">GetUser</span>
+
+<div class="viewcode-block" id="GetUserCommand.build_request"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.GetUserCommand.build_request">[docs]</a>    <span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GetUserRequest</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">GetUserRequest</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">username</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="SetUserCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.SetUserCommand">[docs]</a><span class="k">class</span> <span class="nc">SetUserCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">SetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Set the metadata for a user, creating it if it does not exist.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="SetUserCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.SetUserCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">add_subparser</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subparsers</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="n">ArgumentParser</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="n">subparser</span><span class="p">:</span> <span class="n">ArgumentParser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;assign a password to a user&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--password-file&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">FileType</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">),</span>
+                               <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;FILE&#39;</span><span class="p">,</span>
+                               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;read the password from a file&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--param&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;append&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;params&#39;</span><span class="p">,</span>
+                               <span class="n">default</span><span class="o">=</span><span class="p">[],</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;KEY=VAL&#39;</span><span class="p">,</span>
+                               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;additional parameters for the request&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--no-password&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+                               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;send the request with no password value&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the user name&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">subparser</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MethodProtocol</span><span class="p">[</span><span class="n">SetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">SetUser</span>
+
+    <span class="k">def</span> <span class="nf">getpass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">no_password</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">password_file</span><span class="p">:</span>
+            <span class="n">line</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">password_file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">()</span>
+
+<div class="viewcode-block" id="SetUserCommand.build_request"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.SetUserCommand.build_request">[docs]</a>    <span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SetUserRequest</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
+        <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_params</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getpass</span><span class="p">()</span>
+        <span class="n">new_data</span> <span class="o">=</span> <span class="n">UserData</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">new_data</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        <span class="k">return</span> <span class="n">SetUserRequest</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">new_data</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_parse_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">param</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+            <span class="n">key</span><span class="p">,</span> <span class="n">splitter</span><span class="p">,</span> <span class="n">val</span> <span class="o">=</span> <span class="n">param</span><span class="o">.</span><span class="n">partition</span><span class="p">(</span><span class="s1">&#39;=&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">splitter</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Expected key=val format: </span><span class="si">{</span><span class="n">param</span><span class="si">!r}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">ret</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="k">return</span> <span class="n">ret</span></div>
+
+
+<div class="viewcode-block" id="DeleteUserCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.DeleteUserCommand">[docs]</a><span class="k">class</span> <span class="nc">DeleteUserCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">DeleteUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Delete a user and its mail data.&quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="DeleteUserCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.DeleteUserCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">add_subparser</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subparsers</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="n">ArgumentParser</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="n">subparser</span><span class="p">:</span> <span class="n">ArgumentParser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;delete a user&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;username&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the user name&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">subparser</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MethodProtocol</span><span class="p">[</span><span class="n">DeleteUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">DeleteUser</span>
+
+<div class="viewcode-block" id="DeleteUserCommand.build_request"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.DeleteUserCommand.build_request">[docs]</a>    <span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DeleteUserRequest</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DeleteUserRequest</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">username</span><span class="p">)</span></div></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+    
+    
+        <div class="sidebar-toggle-group no-js">
+            
+            <button class="sidebar-toggle" id="sidebar-hide" title="Hide the sidebar menu">
+                 «
+                <span class="show-for-small">hide menu</span>
+                
+            </button>
+            <button class="sidebar-toggle" id="sidebar-show" title="Show the sidebar menu">
+                
+                <span class="show-for-small">menu</span>
+                <span class="hide-for-small">sidebar</span>
+                 »
+            </button>
+        </div>
+    
+      <div class="clearer"></div>
+    </div>
+    <div class="relbar-bottom">
+        
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> &nbsp; &nbsp;</li>
+    <li><a href="../../../index.html">pymap-admin 0.9.0rc1 documentation</a> &#187;</li>
+
+          <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="../commands.html" >pymapadmin.commands</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">pymapadmin.commands.user</a></li> 
+      </ul>
+    </div>
+    </div>
+
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Ian Good.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    </div>
+    <!-- cloud_sptheme 1.4 -->
+  </body>
+</html>
