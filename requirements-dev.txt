@@ -7,9 +7,6 @@ pytest-cov
 bandit[toml]
 rope
 
-# unreleased typing changes
-grpclib == 0.4.3rc2
-
 # stubs
 types-setuptools
 
