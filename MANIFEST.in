@@ -1,4 +1,4 @@
 include README.md LICENSE.md pyproject.toml pymapadmin/py.typed
-recursive-include pymapadmin *.pyi
+recursive-include pymapadmin *.pyi *.proto
 recursive-include test *.py
 prune tasks

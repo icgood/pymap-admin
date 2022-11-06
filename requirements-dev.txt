@@ -1,3 +1,6 @@
+-r requirements-all.txt
+-e '.[build]'
+
 mypy
 flake8
 autopep8
@@ -9,6 +12,3 @@ rope
 
 # stubs
 types-setuptools
-
--r requirements-all.txt
--e '.[build]'
