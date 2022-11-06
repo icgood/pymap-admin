@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Ian C. Good
+# Copyright (c) 2022 Ian C. Good
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ with open('LICENSE.md') as f:
 
 
 setup(name='pymap-admin',
-      version='0.9.0.rc1',
+      version='0.9.0',
       author='Ian Good',
       author_email='ian@icgood.net',
       description='Admin tool for running pymap instances.',
