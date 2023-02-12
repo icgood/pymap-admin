@@ -59,7 +59,7 @@ homepage = 'https://github.com/icgood/pymap-admin/'
 [project.scripts]
 pymap-admin = 'pymapadmin.main:main'
 
-[project.entry_points.'pymapadmin.commands']
+[project.entry-points.'pymapadmin.commands']
 check = 'pymapadmin.commands.health:CheckCommand'
 save-args = 'pymapadmin.commands.system:SaveArgsCommand'
 login = 'pymapadmin.commands.system:LoginCommand'
