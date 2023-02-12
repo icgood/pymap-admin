@@ -5,12 +5,12 @@ See Also:
 
 """
 
-import pkg_resources
+from importlib.metadata import distribution
 
 __all__ = ['__version__', 'is_compatible']
 
 #: The package version string.
-__version__: str = pkg_resources.require('pymap-admin')[0].version
+__version__: str = distribution('pymap-admin').version
 
 
 def is_compatible(client_version: str, server_version: str) -> bool:

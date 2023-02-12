@@ -2,8 +2,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-
-from pkg_resources import iter_entry_points, DistributionNotFound
+from importlib.metadata import entry_points
 
 from .base import Command
 
@@ -15,15 +14,11 @@ def load_commands(group: str = 'pymapadmin.commands') \
     """Load and return a map of command name to implementation class.
 
     Args:
-        group: The setuptools entry point used to register commands.
+        group: The entry point group used to register commands.
 
     """
     ret = {}
-    for entry_point in iter_entry_points(group):
-        try:
-            cls = entry_point.load()
-        except DistributionNotFound:
-            pass  # optional dependencies not installed
-        else:
-            ret[entry_point.name] = cls
+    for entry_point in entry_points(group=group):
+        cls = entry_point.load()
+        ret[entry_point.name] = cls
     return ret
