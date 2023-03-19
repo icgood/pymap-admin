@@ -1,2 +1,7 @@
 [flake8]
 exclude = pymapadmin/grpc
+extend-select = B901, B902, B903, B904
+extend-ignore = ANN101, ANN102
+per-file-ignores =
+    test/*: ANN
+    tasks/*: ANN, B028

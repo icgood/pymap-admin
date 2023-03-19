@@ -4,6 +4,8 @@
 build
 mypy
 flake8
+flake8-annotations
+flake8-bugbear
 autopep8
 pytest
 pytest-asyncio
