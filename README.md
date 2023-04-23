@@ -1,7 +1,7 @@
 pymap-admin
 ===========
 
-[![build](https://github.com/icgood/pymap-admin/actions/workflows/python-package.yml/badge.svg)](https://github.com/icgood/pymap-admin/actions/workflows/python-package.yml)
+[![build](https://github.com/icgood/pymap-admin/actions/workflows/python-check.yml/badge.svg)](https://github.com/icgood/pymap-admin/actions/workflows/python-check.yml)
 [![Coverage Status](https://coveralls.io/repos/icgood/pymap-admin/badge.svg)](https://coveralls.io/r/icgood/pymap-admin)
 [![PyPI](https://img.shields.io/pypi/v/pymap-admin.svg)](https://pypi.python.org/pypi/pymap-admin)
 [![PyPI](https://img.shields.io/pypi/pyversions/pymap-admin.svg)](https://pypi.python.org/pypi/pymap-admin)
