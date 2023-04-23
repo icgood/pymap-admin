@@ -11,7 +11,7 @@ from typing import Generic, Any, Final, TextIO
 
 from grpclib.client import Channel
 
-from .. import __version__ as client_version
+from ..__about__ import __version__ as client_version
 from ..local import token_file
 from ..typing import StubT, MethodProtocol, RequestT, ResponseT, \
     AdminRequestT, AdminResponseT

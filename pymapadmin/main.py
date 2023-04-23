@@ -12,7 +12,7 @@ from argparse import ArgumentParser, Namespace
 from ssl import create_default_context, CERT_NONE
 
 from grpclib.client import Channel
-from pymapadmin import __version__
+from pymapadmin.__about__ import __version__
 
 from .commands import load_commands
 from .commands.base import Command
