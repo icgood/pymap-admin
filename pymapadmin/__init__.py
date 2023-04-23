@@ -1,16 +1,5 @@
-"""Contains the package version string.
 
-See Also:
-    `PEP 396 <https://www.python.org/dev/peps/pep-0396/>`_
-
-"""
-
-from importlib.metadata import distribution
-
-__all__ = ['__version__', 'is_compatible']
-
-#: The package version string.
-__version__: str = distribution('pymap-admin').version
+__all__ = ['is_compatible']
 
 
 def is_compatible(client_version: str, server_version: str) -> bool:
@@ -19,7 +8,8 @@ def is_compatible(client_version: str, server_version: str) -> bool:
 
     Args:
         client_version: The provided client version string.
-        server_version: The server version string, usually :attr:`__version__`.
+        server_version: The server version string, usually found in
+            ``pymapadmin.__about__.__version__``.
 
     """
     major_server, _, extra_server = server_version.partition('.')
