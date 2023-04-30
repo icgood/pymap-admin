@@ -65,14 +65,16 @@ async def run(parser: ArgumentParser, args: Namespace,
     if config.no_verify_cert:
         ssl.check_hostname = False
         ssl.verify_mode = CERT_NONE
+    channel: Channel | None = None
     if config.host is not None or config.port is not None:
         channel = Channel(host=config.host, port=config.port, ssl=ssl)
     else:
         path = socket_file.find()
-        if path is None:
-            parser.error('Running server not found, please provide '
-                         '--host, --port, or --path.')
-        channel = Channel(path=str(path))
+        if path is not None:
+            channel = Channel(path=str(path))
+    if channel is None:
+        suggested = '--host, --port, or --path'
+        parser.error(f'Running server not found, please provide {suggested}.')
     command = command_cls(args, channel)
     try:
         return await command(sys.stdout)
