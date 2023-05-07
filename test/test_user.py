@@ -70,7 +70,7 @@ class TestSetUserCommand:
         handler = Handler(SetUserRequest, [UserResponse(username='user1')])
         outfile = StringIO()
         args = Namespace(token=None, token_file=None,
-                         username='user1', no_password=True,
+                         username='user1', no_password=True, roles=[],
                          params=['identity=test', 'badparam'])
         async with ChannelFor([handler]) as channel:
             command = SetUserCommand(args, channel)
@@ -81,7 +81,7 @@ class TestSetUserCommand:
         handler = Handler(SetUserRequest, [UserResponse(username='user1')])
         outfile = StringIO()
         args = Namespace(token=None, token_file=None,
-                         username='user1', no_password=True,
+                         username='user1', no_password=True, roles=['fancy'],
                          params=['identity=test'])
         async with ChannelFor([handler]) as channel:
             command = SetUserCommand(args, channel)
@@ -91,6 +91,7 @@ class TestSetUserCommand:
         assert request is not None
         assert 'user1' == request.user
         assert '' == request.data.password
+        assert ['fancy'] == request.data.roles
         assert {'identity': 'test'} == request.data.params
         assert 'username: "user1"\n\n' == outfile.getvalue()
 
@@ -99,7 +100,7 @@ class TestSetUserCommand:
         outfile = StringIO()
         pw_file = StringIO('testpass\n')
         args = Namespace(token=None, token_file=None,
-                         username='user1', no_password=False,
+                         username='user1', no_password=False, roles=[],
                          password_file=pw_file, params=['identity=test'])
         async with ChannelFor([handler]) as channel:
             command = SetUserCommand(args, channel)

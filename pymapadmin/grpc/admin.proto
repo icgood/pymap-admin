@@ -53,6 +53,7 @@ message AppendResponse {
 message UserData {
   optional string password = 1;
   map<string, string> params = 2;
+  repeated string roles = 3;
 }
 
 message GetUserRequest {
