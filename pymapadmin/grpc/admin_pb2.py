@@ -13,7 +13,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bpymapadmin/grpc/admin.proto\x12\x0fpymapadmin.grpc\"R\n\x06Result\x12)\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1b.pymapadmin.grpc.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"\x85\x01\n\x0cLoginRequest\x12\x0f\n\x07\x61uthcid\x18\x01 \x01(\t\x12\x0e\n\x06secret\x18\x02 \x01(\t\x12\x14\n\x07\x61uthzid\x18\x03 \x01(\tH\x00\x88\x01\x01\x12\x1d\n\x10token_expiration\x18\x04 \x01(\x01H\x01\x88\x01\x01\x42\n\n\x08_authzidB\x13\n\x11_token_expiration\"d\n\rLoginResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x19\n\x0c\x62\x65\x61rer_token\x18\x02 \x01(\tH\x00\x88\x01\x01\x42\x0f\n\r_bearer_token\"\r\n\x0bPingRequest\"k\n\x0cPingResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x15\n\rpymap_version\x18\x02 \x01(\t\x12\x1b\n\x13pymap_admin_version\x18\x03 \x01(\t\"\xb0\x01\n\rAppendRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\x13\n\x06sender\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x16\n\trecipient\x18\x03 \x01(\tH\x01\x88\x01\x01\x12\x14\n\x07mailbox\x18\x04 \x01(\tH\x02\x88\x01\x01\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\x42\t\n\x07_senderB\x0c\n\n_recipientB\n\n\x08_mailbox\"\x88\x01\n\x0e\x41ppendResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x15\n\x08validity\x18\x03 \x01(\rH\x00\x88\x01\x01\x12\x10\n\x03uid\x18\x04 \x01(\rH\x01\x88\x01\x01\x42\x0b\n\t_validityB\x06\n\x04_uid\"\xa3\x01\n\x08UserData\x12\x15\n\x08password\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x35\n\x06params\x18\x02 \x03(\x0b\x32%.pymapadmin.grpc.UserData.ParamsEntry\x12\r\n\x05roles\x18\x03 \x03(\t\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x0b\n\t_password\"\x1e\n\x0eGetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"G\n\x0eSetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\'\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x19.pymapadmin.grpc.UserData\"!\n\x11\x44\x65leteUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"\x84\x01\n\x0cUserResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x15\n\x08username\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\'\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x19.pymapadmin.grpc.UserDataB\x0b\n\t_username*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32\x99\x01\n\x06System\x12\x45\n\x04Ping\x12\x1c.pymapadmin.grpc.PingRequest\x1a\x1d.pymapadmin.grpc.PingResponse\"\x00\x12H\n\x05Login\x12\x1d.pymapadmin.grpc.LoginRequest\x1a\x1e.pymapadmin.grpc.LoginResponse\"\x00\x32V\n\x07Mailbox\x12K\n\x06\x41ppend\x12\x1e.pymapadmin.grpc.AppendRequest\x1a\x1f.pymapadmin.grpc.AppendResponse\"\x00\x32\xf3\x01\n\x04User\x12K\n\x07GetUser\x12\x1f.pymapadmin.grpc.GetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12K\n\x07SetUser\x12\x1f.pymapadmin.grpc.SetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12Q\n\nDeleteUser\x12\".pymapadmin.grpc.DeleteUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x1bpymapadmin/grpc/admin.proto\x12\x0fpymapadmin.grpc\"R\n\x06Result\x12)\n\x04\x63ode\x18\x01 \x01(\x0e\x32\x1b.pymapadmin.grpc.ResultCode\x12\x10\n\x08response\x18\x02 \x01(\x0c\x12\x0b\n\x03key\x18\x03 \x01(\t\"\x95\x01\n\x0cLoginRequest\x12\x0f\n\x07\x61uthcid\x18\x01 \x01(\t\x12\x13\n\x06secret\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x14\n\x07\x61uthzid\x18\x03 \x01(\tH\x01\x88\x01\x01\x12\x1d\n\x10token_expiration\x18\x04 \x01(\x01H\x02\x88\x01\x01\x42\t\n\x07_secretB\n\n\x08_authzidB\x13\n\x11_token_expiration\"d\n\rLoginResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x19\n\x0c\x62\x65\x61rer_token\x18\x02 \x01(\tH\x00\x88\x01\x01\x42\x0f\n\r_bearer_token\"\r\n\x0bPingRequest\"k\n\x0cPingResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x15\n\rpymap_version\x18\x02 \x01(\t\x12\x1b\n\x13pymap_admin_version\x18\x03 \x01(\t\"\xb0\x01\n\rAppendRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\x13\n\x06sender\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\x16\n\trecipient\x18\x03 \x01(\tH\x01\x88\x01\x01\x12\x14\n\x07mailbox\x18\x04 \x01(\tH\x02\x88\x01\x01\x12\x0c\n\x04\x64\x61ta\x18\x05 \x01(\x0c\x12\r\n\x05\x66lags\x18\x06 \x03(\t\x12\x0c\n\x04when\x18\x07 \x01(\x04\x42\t\n\x07_senderB\x0c\n\n_recipientB\n\n\x08_mailbox\"\x88\x01\n\x0e\x41ppendResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x0f\n\x07mailbox\x18\x02 \x01(\t\x12\x15\n\x08validity\x18\x03 \x01(\rH\x00\x88\x01\x01\x12\x10\n\x03uid\x18\x04 \x01(\rH\x01\x88\x01\x01\x42\x0b\n\t_validityB\x06\n\x04_uid\"\xa3\x01\n\x08UserData\x12\x15\n\x08password\x18\x01 \x01(\tH\x00\x88\x01\x01\x12\x35\n\x06params\x18\x02 \x03(\x0b\x32%.pymapadmin.grpc.UserData.ParamsEntry\x12\r\n\x05roles\x18\x03 \x03(\t\x1a-\n\x0bParamsEntry\x12\x0b\n\x03key\x18\x01 \x01(\t\x12\r\n\x05value\x18\x02 \x01(\t:\x02\x38\x01\x42\x0b\n\t_password\"\x1e\n\x0eGetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"G\n\x0eSetUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\x12\'\n\x04\x64\x61ta\x18\x02 \x01(\x0b\x32\x19.pymapadmin.grpc.UserData\"!\n\x11\x44\x65leteUserRequest\x12\x0c\n\x04user\x18\x01 \x01(\t\"\x84\x01\n\x0cUserResponse\x12\'\n\x06result\x18\x01 \x01(\x0b\x32\x17.pymapadmin.grpc.Result\x12\x15\n\x08username\x18\x02 \x01(\tH\x00\x88\x01\x01\x12\'\n\x04\x64\x61ta\x18\x03 \x01(\x0b\x32\x19.pymapadmin.grpc.UserDataB\x0b\n\t_username*&\n\nResultCode\x12\x0b\n\x07SUCCESS\x10\x00\x12\x0b\n\x07\x46\x41ILURE\x10\x01\x32\x99\x01\n\x06System\x12\x45\n\x04Ping\x12\x1c.pymapadmin.grpc.PingRequest\x1a\x1d.pymapadmin.grpc.PingResponse\"\x00\x12H\n\x05Login\x12\x1d.pymapadmin.grpc.LoginRequest\x1a\x1e.pymapadmin.grpc.LoginResponse\"\x00\x32V\n\x07Mailbox\x12K\n\x06\x41ppend\x12\x1e.pymapadmin.grpc.AppendRequest\x1a\x1f.pymapadmin.grpc.AppendResponse\"\x00\x32\xf3\x01\n\x04User\x12K\n\x07GetUser\x12\x1f.pymapadmin.grpc.GetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12K\n\x07SetUser\x12\x1f.pymapadmin.grpc.SetUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x12Q\n\nDeleteUser\x12\".pymapadmin.grpc.DeleteUserRequest\x1a\x1d.pymapadmin.grpc.UserResponse\"\x00\x62\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'pymapadmin.grpc.admin_pb2', globals())
@@ -22,38 +22,38 @@ if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _USERDATA_PARAMSENTRY._options = None
   _USERDATA_PARAMSENTRY._serialized_options = b'8\001'
-  _RESULTCODE._serialized_start=1253
-  _RESULTCODE._serialized_end=1291
+  _RESULTCODE._serialized_start=1269
+  _RESULTCODE._serialized_end=1307
   _RESULT._serialized_start=48
   _RESULT._serialized_end=130
   _LOGINREQUEST._serialized_start=133
-  _LOGINREQUEST._serialized_end=266
-  _LOGINRESPONSE._serialized_start=268
-  _LOGINRESPONSE._serialized_end=368
-  _PINGREQUEST._serialized_start=370
-  _PINGREQUEST._serialized_end=383
-  _PINGRESPONSE._serialized_start=385
-  _PINGRESPONSE._serialized_end=492
-  _APPENDREQUEST._serialized_start=495
-  _APPENDREQUEST._serialized_end=671
-  _APPENDRESPONSE._serialized_start=674
-  _APPENDRESPONSE._serialized_end=810
-  _USERDATA._serialized_start=813
-  _USERDATA._serialized_end=976
-  _USERDATA_PARAMSENTRY._serialized_start=918
-  _USERDATA_PARAMSENTRY._serialized_end=963
-  _GETUSERREQUEST._serialized_start=978
-  _GETUSERREQUEST._serialized_end=1008
-  _SETUSERREQUEST._serialized_start=1010
-  _SETUSERREQUEST._serialized_end=1081
-  _DELETEUSERREQUEST._serialized_start=1083
-  _DELETEUSERREQUEST._serialized_end=1116
-  _USERRESPONSE._serialized_start=1119
-  _USERRESPONSE._serialized_end=1251
-  _SYSTEM._serialized_start=1294
-  _SYSTEM._serialized_end=1447
-  _MAILBOX._serialized_start=1449
-  _MAILBOX._serialized_end=1535
-  _USER._serialized_start=1538
-  _USER._serialized_end=1781
+  _LOGINREQUEST._serialized_end=282
+  _LOGINRESPONSE._serialized_start=284
+  _LOGINRESPONSE._serialized_end=384
+  _PINGREQUEST._serialized_start=386
+  _PINGREQUEST._serialized_end=399
+  _PINGRESPONSE._serialized_start=401
+  _PINGRESPONSE._serialized_end=508
+  _APPENDREQUEST._serialized_start=511
+  _APPENDREQUEST._serialized_end=687
+  _APPENDRESPONSE._serialized_start=690
+  _APPENDRESPONSE._serialized_end=826
+  _USERDATA._serialized_start=829
+  _USERDATA._serialized_end=992
+  _USERDATA_PARAMSENTRY._serialized_start=934
+  _USERDATA_PARAMSENTRY._serialized_end=979
+  _GETUSERREQUEST._serialized_start=994
+  _GETUSERREQUEST._serialized_end=1024
+  _SETUSERREQUEST._serialized_start=1026
+  _SETUSERREQUEST._serialized_end=1097
+  _DELETEUSERREQUEST._serialized_start=1099
+  _DELETEUSERREQUEST._serialized_end=1132
+  _USERRESPONSE._serialized_start=1135
+  _USERRESPONSE._serialized_end=1267
+  _SYSTEM._serialized_start=1310
+  _SYSTEM._serialized_end=1463
+  _MAILBOX._serialized_start=1465
+  _MAILBOX._serialized_end=1551
+  _USER._serialized_start=1554
+  _USER._serialized_end=1797
 # @@protoc_insertion_point(module_scope)

@@ -15,7 +15,7 @@ message Result {
 
 message LoginRequest {
   string authcid = 1;
-  string secret = 2;
+  optional string secret = 2;
   optional string authzid = 3;
   optional double token_expiration = 4;
 }

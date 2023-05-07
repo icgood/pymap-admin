@@ -63,6 +63,8 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
         subparser.add_argument('--expiration', metavar='TIMESTAMP', type=float,
                                help='token expiration timestamp')
         password = subparser.add_mutually_exclusive_group(required=True)
+        password.add_argument('-t', '--token', action='store_true',
+                              help='use token authentication to login')
         password.add_argument('--password', metavar='VAL',
                               help='login password')
         password.add_argument('--password-file', metavar='PATH',
@@ -81,7 +83,9 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
         username: str = self.args.user
         authzid: str | None = self.args.authzid
         expiration: float | None = self.args.expiration
-        if self.args.ask_password:
+        if self.args.token:
+            password: str | None = None
+        elif self.args.ask_password:
             password = getpass.getpass(f'{username} Password: ')
         elif self.args.password_file is not None:
             with closing(self.args.password_file) as pw_file:
