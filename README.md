@@ -98,6 +98,17 @@ password.
 If using pymap as part of the [slimta-docker][4] configuration, see its
 [Address Management][5] documentation for additional options.
 
+#### Admin Role
+
+The builtin pymap backends use a special role string "admin" to assign admin
+privileges to existing users. Without the admin role, a user may only use
+`set-user` to change their own password. A user with the admin role (or using
+the admin token) can make any change to any user.
+
+```console
+$ pymap-admin set-user --role admin user@example.com
+```
+
 ## Authentication
 
 Every command except [`ping`](#ping-command) requires authentication to
@@ -132,19 +143,6 @@ location, otherwise it is saved to `~/.pymap-admin.token`.
 
 If `-s` is not given, the `bearer_token` value from the output can provided to
 future `pymap-admin` commands with `$PYMAP_ADMON_TOKEN`.
-
-### Admin Role
-
-The builtin pymap backends use a special key "role" to assign admin privileges
-to existing users, authorizing them to run `pymap-admin` commands on other
-users.
-
-```console
-$ pymap-admin set-user --param role=admin user@example.com
-```
-
-This role may only be assigned by users that already have it, or by
-authenticating using the admin token.
 
 [1]: https://github.com/icgood/pymap
 [2]: https://grpc.io/

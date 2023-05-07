@@ -54,11 +54,14 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
         subparser.add_argument('--password-file', type=FileType('r'),
                                metavar='FILE',
                                help='read the password from a file')
+        subparser.add_argument('--no-password', action='store_true',
+                               help='send the request with no password value')
         subparser.add_argument('--param', action='append', dest='params',
                                default=[], metavar='KEY=VAL',
                                help='additional parameters for the request')
-        subparser.add_argument('--no-password', action='store_true',
-                               help='send the request with no password value')
+        subparser.add_argument('--role', action='append', dest='roles',
+                               default=[], metavar='ROLE',
+                               help='assigned roles for the user')
         subparser.add_argument('username', help='the user name')
         return subparser
 
@@ -72,14 +75,14 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
         elif self.args.password_file:
             line: str = self.args.password_file.readline()
             return line.rstrip('\r\n')
-        else:
+        else:  # pragma: no cover
             return getpass.getpass()
 
     def build_request(self) -> SetUserRequest:
         args = self.args
         params = self._parse_params(args.params)
         password = self.getpass()
-        new_data = UserData(params=params)
+        new_data = UserData(params=params, roles=args.roles)
         if password is not None:
             new_data.password = password
         return SetUserRequest(user=args.username, data=new_data)
