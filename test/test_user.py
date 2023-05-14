@@ -35,9 +35,9 @@ class Handler(UserBase, MockHandler[Any, UserResponse]):
 class TestGetUserCommand:
 
     async def test_get_user(self) -> None:
-        handler = Handler(GetUserRequest, [UserResponse(username='user1')])
+        handler = Handler(GetUserRequest, [UserResponse(user='user1')])
         outfile = StringIO()
-        args = Namespace(token=None, token_file=None, username='user1')
+        args = Namespace(token=None, token_file=None, user='user1')
         async with ChannelFor([handler]) as channel:
             command = GetUserCommand(args, channel)
             code = await command(outfile)
@@ -45,15 +45,15 @@ class TestGetUserCommand:
         assert 0 == code
         assert request is not None
         assert 'user1' == request.user
-        assert 'username: "user1"\n\n' == outfile.getvalue()
+        assert 'user: "user1"\n\n' == outfile.getvalue()
 
 
 class TestDeleteUserCommand:
 
     async def test_delete_user(self) -> None:
-        handler = Handler(DeleteUserRequest, [UserResponse(username='user1')])
+        handler = Handler(DeleteUserRequest, [UserResponse(user='user1')])
         outfile = StringIO()
-        args = Namespace(token=None, token_file=None, username='user1')
+        args = Namespace(token=None, token_file=None, user='user1')
         async with ChannelFor([handler]) as channel:
             command = DeleteUserCommand(args, channel)
             code = await command(outfile)
@@ -61,16 +61,16 @@ class TestDeleteUserCommand:
         assert 0 == code
         assert request is not None
         assert 'user1' == request.user
-        assert 'username: "user1"\n\n' == outfile.getvalue()
+        assert 'user: "user1"\n\n' == outfile.getvalue()
 
 
 class TestSetUserCommand:
 
     async def test_set_user_bad_param(self) -> None:
-        handler = Handler(SetUserRequest, [UserResponse(username='user1')])
+        handler = Handler(SetUserRequest, [UserResponse(user='user1')])
         outfile = StringIO()
         args = Namespace(token=None, token_file=None,
-                         username='user1', no_password=True, roles=[],
+                         user='user1', no_password=True, roles=[],
                          params=['identity=test', 'badparam'])
         async with ChannelFor([handler]) as channel:
             command = SetUserCommand(args, channel)
@@ -78,10 +78,10 @@ class TestSetUserCommand:
                 await command(outfile)
 
     async def test_set_user_no_password(self) -> None:
-        handler = Handler(SetUserRequest, [UserResponse(username='user1')])
+        handler = Handler(SetUserRequest, [UserResponse(user='user1')])
         outfile = StringIO()
         args = Namespace(token=None, token_file=None,
-                         username='user1', no_password=True, roles=['fancy'],
+                         user='user1', no_password=True, roles=['fancy'],
                          params=['identity=test'])
         async with ChannelFor([handler]) as channel:
             command = SetUserCommand(args, channel)
@@ -93,14 +93,14 @@ class TestSetUserCommand:
         assert '' == request.data.password
         assert ['fancy'] == request.data.roles
         assert {'identity': 'test'} == request.data.params
-        assert 'username: "user1"\n\n' == outfile.getvalue()
+        assert 'user: "user1"\n\n' == outfile.getvalue()
 
     async def test_set_user_password_file(self) -> None:
-        handler = Handler(SetUserRequest, [UserResponse(username='user1')])
+        handler = Handler(SetUserRequest, [UserResponse(user='user1')])
         outfile = StringIO()
         pw_file = StringIO('testpass\n')
         args = Namespace(token=None, token_file=None,
-                         username='user1', no_password=False, roles=[],
+                         user='user1', no_password=False, roles=[],
                          password_file=pw_file, params=['identity=test'])
         async with ChannelFor([handler]) as channel:
             command = SetUserCommand(args, channel)
@@ -111,4 +111,4 @@ class TestSetUserCommand:
         assert 'user1' == request.user
         assert 'testpass' == request.data.password
         assert {'identity': 'test'} == request.data.params
-        assert 'username: "user1"\n\n' == outfile.getvalue()
+        assert 'user: "user1"\n\n' == outfile.getvalue()
