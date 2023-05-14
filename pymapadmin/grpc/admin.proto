@@ -51,9 +51,10 @@ message AppendResponse {
 }
 
 message UserData {
-  optional string password = 1;
-  map<string, string> params = 2;
+  uint64 entity_tag = 1;
+  optional string password = 2;
   repeated string roles = 3;
+  map<string, string> params = 4;
 }
 
 message GetUserRequest {
