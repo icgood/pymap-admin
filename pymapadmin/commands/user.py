@@ -31,7 +31,7 @@ class GetUserCommand(UserCommand[GetUserRequest, UserResponse]):
         subparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='get a user')
-        subparser.add_argument('username', help='the user name')
+        subparser.add_argument('user', help='the user name')
         return subparser
 
     @property
@@ -39,7 +39,7 @@ class GetUserCommand(UserCommand[GetUserRequest, UserResponse]):
         return self.client.GetUser
 
     def build_request(self) -> GetUserRequest:
-        return GetUserRequest(user=self.args.username)
+        return GetUserRequest(user=self.args.user)
 
 
 class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
@@ -62,7 +62,7 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
         subparser.add_argument('--role', action='append', dest='roles',
                                default=[], metavar='ROLE',
                                help='assigned roles for the user')
-        subparser.add_argument('username', help='the user name')
+        subparser.add_argument('user', help='the user name')
         return subparser
 
     @property
@@ -85,7 +85,7 @@ class SetUserCommand(UserCommand[SetUserRequest, UserResponse]):
         new_data = UserData(params=params, roles=args.roles)
         if password is not None:
             new_data.password = password
-        return SetUserRequest(user=args.username, data=new_data)
+        return SetUserRequest(user=args.user, data=new_data)
 
     def _parse_params(self, params: Sequence[str]) -> Mapping[str, str]:
         ret = {}
@@ -106,7 +106,7 @@ class DeleteUserCommand(UserCommand[DeleteUserRequest, UserResponse]):
         subparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='delete a user')
-        subparser.add_argument('username', help='the user name')
+        subparser.add_argument('user', help='the user name')
         return subparser
 
     @property
@@ -114,4 +114,4 @@ class DeleteUserCommand(UserCommand[DeleteUserRequest, UserResponse]):
         return self.client.DeleteUser
 
     def build_request(self) -> DeleteUserRequest:
-        return DeleteUserRequest(user=self.args.username)
+        return DeleteUserRequest(user=self.args.user)

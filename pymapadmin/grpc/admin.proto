@@ -51,29 +51,32 @@ message AppendResponse {
 }
 
 message UserData {
-  uint64 entity_tag = 1;
-  optional string password = 2;
-  repeated string roles = 3;
-  map<string, string> params = 4;
+  optional string password = 1;
+  repeated string roles = 2;
+  map<string, string> params = 3;
 }
 
 message GetUserRequest {
   string user = 1;
+  optional uint64 entity_tag = 2;
 }
 
 message SetUserRequest {
   string user = 1;
-  UserData data = 2;
+  optional uint64 entity_tag = 2;
+  UserData data = 3;
 }
 
 message DeleteUserRequest {
   string user = 1;
+  optional uint64 entity_tag = 2;
 }
 
 message UserResponse {
   Result result = 1;
-  optional string username = 2;
-  UserData data = 3;
+  optional string user = 2;
+  optional uint64 entity_tag = 3;
+  UserData data = 4;
 }
 
 service System {

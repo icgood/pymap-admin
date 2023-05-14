@@ -230,11 +230,9 @@ class UserData(google.protobuf.message.Message):
         ) -> None: ...
         def ClearField(self, field_name: typing_extensions.Literal["key", b"key", "value", b"value"]) -> None: ...
 
-    ENTITY_TAG_FIELD_NUMBER: builtins.int
     PASSWORD_FIELD_NUMBER: builtins.int
     ROLES_FIELD_NUMBER: builtins.int
     PARAMS_FIELD_NUMBER: builtins.int
-    entity_tag: builtins.int
     password: builtins.str
     @property
     def roles(self) -> google.protobuf.internal.containers.RepeatedScalarFieldContainer[builtins.str]: ...
@@ -243,13 +241,12 @@ class UserData(google.protobuf.message.Message):
     def __init__(
         self,
         *,
-        entity_tag: builtins.int = ...,
         password: builtins.str | None = ...,
         roles: collections.abc.Iterable[builtins.str] | None = ...,
         params: collections.abc.Mapping[builtins.str, builtins.str] | None = ...,
     ) -> None: ...
     def HasField(self, field_name: typing_extensions.Literal["_password", b"_password", "password", b"password"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_password", b"_password", "entity_tag", b"entity_tag", "params", b"params", "password", b"password", "roles", b"roles"]) -> None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_password", b"_password", "params", b"params", "password", b"password", "roles", b"roles"]) -> None: ...
     def WhichOneof(self, oneof_group: typing_extensions.Literal["_password", b"_password"]) -> typing_extensions.Literal["password"] | None: ...
 
 global___UserData = UserData
@@ -259,13 +256,18 @@ class GetUserRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_FIELD_NUMBER: builtins.int
+    ENTITY_TAG_FIELD_NUMBER: builtins.int
     user: builtins.str
+    entity_tag: builtins.int
     def __init__(
         self,
         *,
         user: builtins.str = ...,
+        entity_tag: builtins.int | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user", b"user"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "entity_tag", b"entity_tag"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "entity_tag", b"entity_tag", "user", b"user"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_entity_tag", b"_entity_tag"]) -> typing_extensions.Literal["entity_tag"] | None: ...
 
 global___GetUserRequest = GetUserRequest
 
@@ -274,18 +276,22 @@ class SetUserRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_FIELD_NUMBER: builtins.int
+    ENTITY_TAG_FIELD_NUMBER: builtins.int
     DATA_FIELD_NUMBER: builtins.int
     user: builtins.str
+    entity_tag: builtins.int
     @property
     def data(self) -> global___UserData: ...
     def __init__(
         self,
         *,
         user: builtins.str = ...,
+        entity_tag: builtins.int | None = ...,
         data: global___UserData | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["data", b"data"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["data", b"data", "user", b"user"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "data", b"data", "entity_tag", b"entity_tag"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "data", b"data", "entity_tag", b"entity_tag", "user", b"user"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_entity_tag", b"_entity_tag"]) -> typing_extensions.Literal["entity_tag"] | None: ...
 
 global___SetUserRequest = SetUserRequest
 
@@ -294,13 +300,18 @@ class DeleteUserRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_FIELD_NUMBER: builtins.int
+    ENTITY_TAG_FIELD_NUMBER: builtins.int
     user: builtins.str
+    entity_tag: builtins.int
     def __init__(
         self,
         *,
         user: builtins.str = ...,
+        entity_tag: builtins.int | None = ...,
     ) -> None: ...
-    def ClearField(self, field_name: typing_extensions.Literal["user", b"user"]) -> None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "entity_tag", b"entity_tag"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "entity_tag", b"entity_tag", "user", b"user"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_entity_tag", b"_entity_tag"]) -> typing_extensions.Literal["entity_tag"] | None: ...
 
 global___DeleteUserRequest = DeleteUserRequest
 
@@ -309,22 +320,28 @@ class UserResponse(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     RESULT_FIELD_NUMBER: builtins.int
-    USERNAME_FIELD_NUMBER: builtins.int
+    USER_FIELD_NUMBER: builtins.int
+    ENTITY_TAG_FIELD_NUMBER: builtins.int
     DATA_FIELD_NUMBER: builtins.int
     @property
     def result(self) -> global___Result: ...
-    username: builtins.str
+    user: builtins.str
+    entity_tag: builtins.int
     @property
     def data(self) -> global___UserData: ...
     def __init__(
         self,
         *,
         result: global___Result | None = ...,
-        username: builtins.str | None = ...,
+        user: builtins.str | None = ...,
+        entity_tag: builtins.int | None = ...,
         data: global___UserData | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["_username", b"_username", "data", b"data", "result", b"result", "username", b"username"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_username", b"_username", "data", b"data", "result", b"result", "username", b"username"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["_username", b"_username"]) -> typing_extensions.Literal["username"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "_user", b"_user", "data", b"data", "entity_tag", b"entity_tag", "result", b"result", "user", b"user"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "_user", b"_user", "data", b"data", "entity_tag", b"entity_tag", "result", b"result", "user", b"user"]) -> None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_entity_tag", b"_entity_tag"]) -> typing_extensions.Literal["entity_tag"] | None: ...
+    @typing.overload
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["_user", b"_user"]) -> typing_extensions.Literal["user"] | None: ...
 
 global___UserResponse = UserResponse
