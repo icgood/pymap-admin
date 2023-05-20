@@ -276,22 +276,25 @@ class SetUserRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_FIELD_NUMBER: builtins.int
-    ENTITY_TAG_FIELD_NUMBER: builtins.int
+    OVERWRITE_FIELD_NUMBER: builtins.int
+    PREVIOUS_ENTITY_TAG_FIELD_NUMBER: builtins.int
     DATA_FIELD_NUMBER: builtins.int
     user: builtins.str
-    entity_tag: builtins.int
+    overwrite: builtins.bool
+    previous_entity_tag: builtins.int
     @property
     def data(self) -> global___UserData: ...
     def __init__(
         self,
         *,
         user: builtins.str = ...,
-        entity_tag: builtins.int | None = ...,
+        overwrite: builtins.bool = ...,
+        previous_entity_tag: builtins.int = ...,
         data: global___UserData | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "data", b"data", "entity_tag", b"entity_tag"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "data", b"data", "entity_tag", b"entity_tag", "user", b"user"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["_entity_tag", b"_entity_tag"]) -> typing_extensions.Literal["entity_tag"] | None: ...
+    def HasField(self, field_name: typing_extensions.Literal["behavior", b"behavior", "data", b"data", "overwrite", b"overwrite", "previous_entity_tag", b"previous_entity_tag"]) -> builtins.bool: ...
+    def ClearField(self, field_name: typing_extensions.Literal["behavior", b"behavior", "data", b"data", "overwrite", b"overwrite", "previous_entity_tag", b"previous_entity_tag", "user", b"user"]) -> None: ...
+    def WhichOneof(self, oneof_group: typing_extensions.Literal["behavior", b"behavior"]) -> typing_extensions.Literal["overwrite", "previous_entity_tag"] | None: ...
 
 global___SetUserRequest = SetUserRequest
 
@@ -300,18 +303,13 @@ class DeleteUserRequest(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
 
     USER_FIELD_NUMBER: builtins.int
-    ENTITY_TAG_FIELD_NUMBER: builtins.int
     user: builtins.str
-    entity_tag: builtins.int
     def __init__(
         self,
         *,
         user: builtins.str = ...,
-        entity_tag: builtins.int | None = ...,
     ) -> None: ...
-    def HasField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "entity_tag", b"entity_tag"]) -> builtins.bool: ...
-    def ClearField(self, field_name: typing_extensions.Literal["_entity_tag", b"_entity_tag", "entity_tag", b"entity_tag", "user", b"user"]) -> None: ...
-    def WhichOneof(self, oneof_group: typing_extensions.Literal["_entity_tag", b"_entity_tag"]) -> typing_extensions.Literal["entity_tag"] | None: ...
+    def ClearField(self, field_name: typing_extensions.Literal["user", b"user"]) -> None: ...
 
 global___DeleteUserRequest = DeleteUserRequest
 
