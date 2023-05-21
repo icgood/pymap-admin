@@ -68,6 +68,7 @@ ping = 'pymapadmin.commands.system:PingCommand'
 append = 'pymapadmin.commands.mailbox:AppendCommand'
 get-user = 'pymapadmin.commands.user:GetUserCommand'
 set-user = 'pymapadmin.commands.user:SetUserCommand'
+change-password = 'pymapadmin.commands.user:ChangePasswordCommand'
 delete-user = 'pymapadmin.commands.user:DeleteUserCommand'
 
 [tool.hatch.version]
