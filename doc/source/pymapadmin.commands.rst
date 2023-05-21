@@ -11,6 +11,12 @@
 .. automodule:: pymapadmin.commands.base
    :members:
 
+``pymapadmin.commands.health``
+------------------------------
+
+.. automodule:: pymapadmin.commands.health
+   :members:
+
 ``pymapadmin.commands.system``
 -------------------------------
 

@@ -28,19 +28,29 @@ class Handler(HealthBase, MockHandler[Any, Any]):
 class TestCheckCommand:
 
     async def test_check(self) -> None:
-        handler = Handler(HealthCheckRequest, [HealthCheckResponse(
-            status=HealthCheckResponse.ServingStatus.SERVING)])
+        handler = Handler() \
+            .expect(HealthCheckRequest, [HealthCheckResponse(
+                status=HealthCheckResponse.ServingStatus.SERVING)])
+        outfile = StringIO()
+        errfile = StringIO()
         args = Namespace(token=None, token_file=None)
         async with ChannelFor([handler]) as channel:
             command = CheckCommand(args, channel)
-            code = await command(StringIO())
+            code = await command(outfile, errfile)
         assert 0 == code
+        assert 'status: SERVING\n\n' == outfile.getvalue()
+        assert '' == errfile.getvalue()
 
     async def test_check_not_serving(self) -> None:
-        handler = Handler(HealthCheckRequest, [HealthCheckResponse(
-            status=HealthCheckResponse.ServingStatus.NOT_SERVING)])
+        handler = Handler() \
+            .expect(HealthCheckRequest, [HealthCheckResponse(
+                status=HealthCheckResponse.ServingStatus.NOT_SERVING)])
+        outfile = StringIO()
+        errfile = StringIO()
         args = Namespace(token=None, token_file=None)
         async with ChannelFor([handler]) as channel:
             command = CheckCommand(args, channel)
-            code = await command(StringIO())
+            code = await command(outfile, errfile)
         assert 1 == code
+        assert '' == outfile.getvalue()
+        assert 'status: NOT_SERVING\n\n' == errfile.getvalue()

@@ -7,9 +7,10 @@ from argparse import ArgumentParser, FileType
 from typing import Any, TextIO
 
 from .base import AdminCommand
-from ..typing import AdminRequestT, AdminResponseT, MethodProtocol
 from ..grpc.admin_grpc import MailboxStub
 from ..grpc.admin_pb2 import AppendRequest, AppendResponse
+from ..operation import SingleOperation
+from ..typing import AdminRequestT, AdminResponseT, MethodProtocol
 
 __all__ = ['AppendCommand']
 
@@ -21,7 +22,8 @@ class MailboxCommand(AdminCommand[MailboxStub, AdminRequestT, AdminResponseT]):
         return MailboxStub(self.channel)
 
 
-class AppendCommand(MailboxCommand[AppendRequest, AppendResponse]):
+class AppendCommand(MailboxCommand[AppendRequest, AppendResponse],
+                    SingleOperation[AppendRequest, AppendResponse]):
     """Append a message directly to a user's mailbox."""
 
     success = '2.0.0 Message delivered'
@@ -83,15 +85,18 @@ class AppendCommand(MailboxCommand[AppendRequest, AppendResponse]):
             request.mailbox = args.mailbox
         return request
 
-    def handle_success(self, res: AppendResponse, outfile: TextIO) -> None:
-        print(res, file=sys.stderr)
+    def handle_success(self, res: AppendResponse,
+                       outfile: TextIO, errfile: TextIO) -> None:
+        print(res, file=errfile)
         print(self.success, file=outfile)
 
-    def handle_failure(self, res: AppendResponse, outfile: TextIO) -> None:
-        print(res.result, file=sys.stderr)
+    def handle_failure(self, res: AppendResponse,
+                       outfile: TextIO, errfile: TextIO) -> None:
+        print(res.result, file=errfile)
         print(self.messages[res.result.key], file=outfile)
 
-    def handle_exception(self, exc: Exception, outfile: TextIO) -> int:
-        ret = super().handle_exception(exc, outfile)
+    def handle_exception(self, exc: Exception,
+                         outfile: TextIO, errfile: TextIO) -> int:
+        ret = super().handle_exception(exc, outfile, errfile)
         print(self.messages['UnhandledError'], file=outfile)
         return ret

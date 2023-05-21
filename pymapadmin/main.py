@@ -77,6 +77,6 @@ async def run(parser: ArgumentParser, args: Namespace,
         parser.error(f'Running server not found, please provide {suggested}.')
     command = command_cls(args, channel)
     try:
-        return await command(sys.stdout)
+        return await command(sys.stdout, sys.stderr)
     finally:
         channel.close()

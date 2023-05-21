@@ -11,6 +11,12 @@
 .. automodule:: pymapadmin.local
    :members:
 
+``pymapadmin.operation``
+------------------------
+
+.. automodule:: pymapadmin.operation
+   :members:
+
 ``pymapadmin.typing``
 ---------------------
 

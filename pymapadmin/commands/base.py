@@ -2,7 +2,6 @@
 from __future__ import annotations
 
 import os
-import sys
 import traceback
 from abc import abstractmethod, ABCMeta
 from argparse import ArgumentParser, Namespace
@@ -13,7 +12,8 @@ from grpclib.client import Channel
 
 from ..__about__ import __version__ as client_version
 from ..local import token_file
-from ..typing import StubT, MethodProtocol, RequestT, ResponseT, \
+from ..operation import Operation
+from ..typing import StubT, RequestT, ResponseT, \
     AdminRequestT, AdminResponseT
 from ..grpc.admin_pb2 import SUCCESS
 
@@ -58,11 +58,12 @@ class Command(metaclass=ABCMeta):
         ...
 
     @abstractmethod
-    async def __call__(self, outfile: TextIO) -> int:
+    async def __call__(self, outfile: TextIO, errfile: TextIO) -> int:
         ...
 
 
-class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
+class ClientCommand(Command, Operation[RequestT, ResponseT],
+                    Generic[StubT, RequestT, ResponseT],
                     metaclass=ABCMeta):
     """Interface for client command implementations.
 
@@ -96,19 +97,14 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
             metadata['auth-token'] = token
         return metadata
 
-    @property
-    @abstractmethod
-    def method(self) -> MethodProtocol[RequestT, ResponseT]:
-        """The GRPC client method."""
-        ...
-
     @abstractmethod
     def build_request(self) -> RequestT:
         """Build the request."""
         ...
 
     @abstractmethod
-    def handle_response(self, response: ResponseT, outfile: TextIO) -> int:
+    def handle_response(self, response: ResponseT,
+                        outfile: TextIO, errfile: TextIO) -> int:
         """Handle each response. For streaming responses, this will be
         called once for each streamed response as long as ``0`` is returned.
 
@@ -118,33 +114,33 @@ class ClientCommand(Command, Generic[StubT, RequestT, ResponseT],
         Args:
             response: The response from the server.
             outfile: The file object to print the output to.
+            errfile: The file object to print errors to.
 
         """
         ...
 
-    def handle_exception(self, exc: Exception, outfile: TextIO) -> int:
+    def handle_exception(self, exc: Exception,
+                         outfile: TextIO, errfile: TextIO) -> int:
         """Handle an exception that occurred while calling the RPC function.
 
         Args:
             exc: The raised exception object.
             outfile: The file object to print the output to.
+            errfile: The file object to print errors to.
 
         """
         traceback.print_exc()
         return 1
 
-    async def __call__(self, outfile: TextIO) -> int:
+    async def __call__(self, outfile: TextIO, errfile: TextIO) -> int:
         req = self.build_request()
-        metadata = self._get_metadata()
         try:
-            async with self.method.open(metadata=metadata) as stream:
-                await stream.send_message(req, end=True)
-                async for res in stream:
-                    ret = self.handle_response(res, outfile)
-                    if ret != 0:
-                        return ret
+            response = await self.execute(req)
+            ret = self.handle_response(response, outfile, errfile)
+            if ret != 0:
+                return ret
         except Exception as exc:
-            return self.handle_exception(exc, outfile)
+            return self.handle_exception(exc, outfile, errfile)
         else:
             return 0
 
@@ -160,32 +156,34 @@ class AdminCommand(ClientCommand[StubT, AdminRequestT, AdminResponseT],
     """
 
     def handle_response(self, response: AdminResponseT,
-                        outfile: TextIO) -> int:
+                        outfile: TextIO, errfile: TextIO) -> int:
         if response.result.code == SUCCESS:
-            self.handle_success(response, outfile)
+            self.handle_success(response, outfile, errfile)
             return 0
         else:
-            self.handle_failure(response, outfile)
+            self.handle_failure(response, outfile, errfile)
             return 1
 
     def handle_success(self, response: AdminResponseT,
-                       outfile: TextIO) -> None:
+                       outfile: TextIO, errfile: TextIO) -> None:
         """Print a successful response.
 
         Args:
             response: The response from the server.
             outfile: The file object to print the output to.
+            errfile: The file object to print errors to.
 
         """
         print(response, file=outfile)
 
     def handle_failure(self, response: AdminResponseT,
-                       outfile: TextIO) -> None:
+                       outfile: TextIO, errfile: TextIO) -> None:
         """Print a failure response.
 
         Args:
             response: The response from the server.
             outfile: The file object to print the output to.
+            errfile: The file object to print errors to.
 
         """
-        print(response.result, file=sys.stderr)
+        print(response.result, file=errfile)

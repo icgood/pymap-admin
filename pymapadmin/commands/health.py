@@ -7,6 +7,7 @@ from typing import Any, TextIO
 from .base import ClientCommand
 from ..grpc.health_grpc import HealthStub
 from ..grpc.health_pb2 import HealthCheckRequest, HealthCheckResponse
+from ..operation import SingleOperation
 from ..typing import RequestT, ResponseT, MethodProtocol
 
 __all__ = ['CheckCommand']
@@ -19,8 +20,8 @@ class HealthCommand(ClientCommand[HealthStub, RequestT, ResponseT]):
         return HealthStub(self.channel)
 
 
-class CheckCommand(HealthCommand[HealthCheckRequest,
-                                 HealthCheckResponse]):
+class CheckCommand(HealthCommand[HealthCheckRequest, HealthCheckResponse],
+                   SingleOperation[HealthCheckRequest, HealthCheckResponse]):
     """Check the health of the server."""
 
     @classmethod
@@ -43,6 +44,11 @@ class CheckCommand(HealthCommand[HealthCheckRequest,
         return response.status == HealthCheckResponse.ServingStatus.SERVING
 
     def handle_response(self, response: HealthCheckResponse,
-                        outfile: TextIO) -> int:
-        print(response, file=outfile)
-        return 0 if self._is_serving(response) else 1
+                        outfile: TextIO, errfile: TextIO) -> int:
+        success = self._is_serving(response)
+        if success:
+            print(response, file=outfile)
+            return 0
+        else:
+            print(response, file=errfile)
+            return 1

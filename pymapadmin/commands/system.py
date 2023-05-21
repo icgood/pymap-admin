@@ -9,6 +9,7 @@ from typing import Any, TextIO
 from .base import Command, AdminCommand
 from ..config import Config
 from ..local import config_file, token_file
+from ..operation import SingleOperation
 from ..typing import AdminRequestT, AdminResponseT, MethodProtocol
 from ..grpc.admin_grpc import SystemStub
 from ..grpc.admin_pb2 import LoginRequest, LoginResponse, \
@@ -38,7 +39,7 @@ class SaveArgsCommand(Command):
             help='save connection arguments to config file')
         return subparser
 
-    async def __call__(self, outfile: TextIO) -> int:
+    async def __call__(self, outfile: TextIO, errfile: TextIO) -> int:
         path = config_file.get_home(mkdir=True)
         parser = Config.build(self.args)
         with open(path, 'w') as cfg:
@@ -47,7 +48,8 @@ class SaveArgsCommand(Command):
         return 0
 
 
-class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
+class LoginCommand(SystemCommand[LoginRequest, LoginResponse],
+                   SingleOperation[LoginRequest, LoginResponse]):
     """Login as a user for future requests."""
 
     @classmethod
@@ -99,8 +101,9 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
             request.token_expiration = expiration
         return request
 
-    def handle_success(self, response: LoginResponse, outfile: TextIO) -> None:
-        super().handle_success(response, outfile)
+    def handle_success(self, response: LoginResponse,
+                       outfile: TextIO, errfile: TextIO) -> None:
+        super().handle_success(response, outfile, errfile)
         token = response.bearer_token
         if token and self.args.save:
             path = token_file.get_home(mkdir=True)
@@ -108,7 +111,8 @@ class LoginCommand(SystemCommand[LoginRequest, LoginResponse]):
             path.chmod(0o600)
 
 
-class PingCommand(SystemCommand[PingRequest, PingResponse]):
+class PingCommand(SystemCommand[PingRequest, PingResponse],
+                  SingleOperation[PingRequest, PingResponse]):
     """Ping the server."""
 
     @classmethod
