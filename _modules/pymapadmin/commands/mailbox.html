@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin.commands.mailbox &#8212; pymap-admin 0.11.0rc2 documentation</title>
+    <title>pymapadmin.commands.mailbox &#8212; pymap-admin 0.11.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.11.0rc2 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
@@ -72,9 +72,10 @@
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">TextIO</span>
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">AdminCommand</span>
-<span class="kn">from</span> <span class="nn">..typing</span> <span class="kn">import</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">,</span> <span class="n">MethodProtocol</span>
 <span class="kn">from</span> <span class="nn">..grpc.admin_grpc</span> <span class="kn">import</span> <span class="n">MailboxStub</span>
 <span class="kn">from</span> <span class="nn">..grpc.admin_pb2</span> <span class="kn">import</span> <span class="n">AppendRequest</span><span class="p">,</span> <span class="n">AppendResponse</span>
+<span class="kn">from</span> <span class="nn">..operation</span> <span class="kn">import</span> <span class="n">SingleOperation</span>
+<span class="kn">from</span> <span class="nn">..typing</span> <span class="kn">import</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">,</span> <span class="n">MethodProtocol</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AppendCommand&#39;</span><span class="p">]</span>
 
@@ -86,7 +87,8 @@
         <span class="k">return</span> <span class="n">MailboxStub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="AppendCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.mailbox.AppendCommand">[docs]</a><span class="k">class</span> <span class="nc">AppendCommand</span><span class="p">(</span><span class="n">MailboxCommand</span><span class="p">[</span><span class="n">AppendRequest</span><span class="p">,</span> <span class="n">AppendResponse</span><span class="p">]):</span>
+<div class="viewcode-block" id="AppendCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.mailbox.AppendCommand">[docs]</a><span class="k">class</span> <span class="nc">AppendCommand</span><span class="p">(</span><span class="n">MailboxCommand</span><span class="p">[</span><span class="n">AppendRequest</span><span class="p">,</span> <span class="n">AppendResponse</span><span class="p">],</span>
+                    <span class="n">SingleOperation</span><span class="p">[</span><span class="n">AppendRequest</span><span class="p">,</span> <span class="n">AppendResponse</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Append a message directly to a user&#39;s mailbox.&quot;&quot;&quot;</span>
 
     <span class="n">success</span> <span class="o">=</span> <span class="s1">&#39;2.0.0 Message delivered&#39;</span>
@@ -148,16 +150,19 @@
             <span class="n">request</span><span class="o">.</span><span class="n">mailbox</span> <span class="o">=</span> <span class="n">args</span><span class="o">.</span><span class="n">mailbox</span>
         <span class="k">return</span> <span class="n">request</span></div>
 
-<div class="viewcode-block" id="AppendCommand.handle_success"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.mailbox.AppendCommand.handle_success">[docs]</a>    <span class="k">def</span> <span class="nf">handle_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">AppendResponse</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<div class="viewcode-block" id="AppendCommand.handle_success"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.mailbox.AppendCommand.handle_success">[docs]</a>    <span class="k">def</span> <span class="nf">handle_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">AppendResponse</span><span class="p">,</span>
+                       <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">errfile</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">success</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AppendCommand.handle_failure"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.mailbox.AppendCommand.handle_failure">[docs]</a>    <span class="k">def</span> <span class="nf">handle_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">AppendResponse</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">sys</span><span class="o">.</span><span class="n">stderr</span><span class="p">)</span>
+<div class="viewcode-block" id="AppendCommand.handle_failure"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.mailbox.AppendCommand.handle_failure">[docs]</a>    <span class="k">def</span> <span class="nf">handle_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">res</span><span class="p">:</span> <span class="n">AppendResponse</span><span class="p">,</span>
+                       <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">errfile</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">key</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AppendCommand.handle_exception"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.mailbox.AppendCommand.handle_exception">[docs]</a>    <span class="k">def</span> <span class="nf">handle_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">handle_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+<div class="viewcode-block" id="AppendCommand.handle_exception"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.mailbox.AppendCommand.handle_exception">[docs]</a>    <span class="k">def</span> <span class="nf">handle_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span>
+                         <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">ret</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">handle_exception</span><span class="p">(</span><span class="n">exc</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">errfile</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">messages</span><span class="p">[</span><span class="s1">&#39;UnhandledError&#39;</span><span class="p">],</span> <span class="n">file</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ret</span></div></div>
 </pre></div>
@@ -210,7 +215,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.11.0rc2 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>

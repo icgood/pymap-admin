@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pymapadmin.commands &#8212; pymap-admin 0.11.0rc2 documentation</title>
+    <title>pymapadmin.commands &#8212; pymap-admin 0.11.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -51,7 +51,7 @@
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.11.0rc2 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>
@@ -141,12 +141,6 @@
 </dl>
 </dd></dl>
 
-<dl class="py property">
-<dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.method">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">method</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="pymapadmin.html#pymapadmin.typing.MethodProtocol" title="pymapadmin.typing.MethodProtocol"><span class="pre">MethodProtocol</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="pymapadmin.html#pymapadmin.typing.RequestT" title="pymapadmin.typing.RequestT"><span class="pre">RequestT</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="pymapadmin.html#pymapadmin.typing.ResponseT" title="pymapadmin.typing.ResponseT"><span class="pre">ResponseT</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.method" title="Permalink to this definition">¶</a></dt>
-<dd><p>The GRPC client method.</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.build_request">
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#ClientCommand.build_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.build_request" title="Permalink to this definition">¶</a></dt>
@@ -160,7 +154,7 @@
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.handle_response">
-<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#ClientCommand.handle_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_response" title="Permalink to this definition">¶</a></dt>
+<em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#ClientCommand.handle_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle each response. For streaming responses, this will be
 called once for each streamed response as long as <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned.</p>
 <p>The default implementation calls <a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_success" title="pymapadmin.commands.base.AdminCommand.handle_success"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_success()</span></code></a> or
@@ -170,6 +164,7 @@ called once for each streamed response as long as <code class="docutils literal 
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>response</strong> (<a class="reference internal" href="pymapadmin.html#pymapadmin.typing.ResponseT" title="pymapadmin.typing.ResponseT"><em>ResponseT</em></a>) – The response from the server.</p></li>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -180,13 +175,14 @@ called once for each streamed response as long as <code class="docutils literal 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.base.ClientCommand.handle_exception">
-<span class="sig-name descname"><span class="pre">handle_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#ClientCommand.handle_exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_exception" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">handle_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#ClientCommand.handle_exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_exception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle an exception that occurred while calling the RPC function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>exc</strong> (<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><em>Exception</em></a>) – The raised exception object.</p></li>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -212,7 +208,7 @@ called once for each streamed response as long as <code class="docutils literal 
 </dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.base.AdminCommand.handle_response">
-<span class="sig-name descname"><span class="pre">handle_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#AdminCommand.handle_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.AdminCommand.handle_response" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">handle_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#AdminCommand.handle_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.AdminCommand.handle_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle each response. For streaming responses, this will be
 called once for each streamed response as long as <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned.</p>
 <p>The default implementation calls <a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_success" title="pymapadmin.commands.base.AdminCommand.handle_success"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_success()</span></code></a> or
@@ -222,6 +218,7 @@ called once for each streamed response as long as <code class="docutils literal 
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>response</strong> (<em>AdminResponseT</em>) – The response from the server.</p></li>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -232,13 +229,14 @@ called once for each streamed response as long as <code class="docutils literal 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.base.AdminCommand.handle_success">
-<span class="sig-name descname"><span class="pre">handle_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#AdminCommand.handle_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.AdminCommand.handle_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">handle_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#AdminCommand.handle_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.AdminCommand.handle_success" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a successful response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>response</strong> (<em>AdminResponseT</em>) – The response from the server.</p></li>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -249,17 +247,94 @@ called once for each streamed response as long as <code class="docutils literal 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.base.AdminCommand.handle_failure">
-<span class="sig-name descname"><span class="pre">handle_failure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#AdminCommand.handle_failure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.AdminCommand.handle_failure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">handle_failure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#AdminCommand.handle_failure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.AdminCommand.handle_failure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a failure response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>response</strong> (<em>AdminResponseT</em>) – The response from the server.</p></li>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
 <dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="module-pymapadmin.commands.health">
+<span id="pymapadmin-commands-health"></span><h2><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.health</span></code><a class="headerlink" href="#module-pymapadmin.commands.health" title="Permalink to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="pymapadmin.commands.health.CheckCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.health.</span></span><span class="sig-name descname"><span class="pre">CheckCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/health.html#CheckCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.health.CheckCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check the health of the server.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>Namespace</em>) – </p></li>
+<li><p><strong>channel</strong> (<em>Channel</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pymapadmin.commands.health.CheckCommand.add_subparser">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/health.html#CheckCommand.add_subparser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.health.CheckCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the command-line argument subparser for the command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The name to use for the subparser.</p></li>
+<li><p><strong>subparsers</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><em>Any</em></a>) – The special action object as returned by
+<a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser.add_subparsers" title="(in Python v3.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The new sub-parser object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser" title="(in Python v3.11)"><em>ArgumentParser</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.health.CheckCommand.method">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">method</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="pymapadmin.html#pymapadmin.typing.MethodProtocol" title="pymapadmin.typing.MethodProtocol"><span class="pre">MethodProtocol</span></a><span class="p"><span class="pre">[</span></span><span class="pre">HealthCheckRequest</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">HealthCheckResponse</span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#pymapadmin.commands.health.CheckCommand.method" title="Permalink to this definition">¶</a></dt>
+<dd><p>The GRPC client method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pymapadmin.commands.health.CheckCommand.build_request">
+<span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/health.html#CheckCommand.build_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.health.CheckCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>HealthCheckRequest</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pymapadmin.commands.health.CheckCommand.handle_response">
+<span class="sig-name descname"><span class="pre">handle_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/health.html#CheckCommand.handle_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.health.CheckCommand.handle_response" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handle each response. For streaming responses, this will be
+called once for each streamed response as long as <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned.</p>
+<p>The default implementation calls <a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_success" title="pymapadmin.commands.base.AdminCommand.handle_success"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_success()</span></code></a> or
+<a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_failure" title="pymapadmin.commands.base.AdminCommand.handle_failure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_failure()</span></code></a> depending on the result code.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>response</strong> (<em>HealthCheckResponse</em>) – The response from the server.</p></li>
+<li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.11)">int</a></p>
 </dd>
 </dl>
 </dd></dl>
@@ -357,13 +432,14 @@ called once for each streamed response as long as <code class="docutils literal 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.system.LoginCommand.handle_success">
-<span class="sig-name descname"><span class="pre">handle_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/system.html#LoginCommand.handle_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.handle_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">handle_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/system.html#LoginCommand.handle_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.system.LoginCommand.handle_success" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a successful response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>response</strong> (<em>LoginResponse</em>) – The response from the server.</p></li>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -481,13 +557,14 @@ called once for each streamed response as long as <code class="docutils literal 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand.handle_success">
-<span class="sig-name descname"><span class="pre">handle_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/mailbox.html#AppendCommand.handle_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_success" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">handle_success</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/mailbox.html#AppendCommand.handle_success"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_success" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a successful response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>response</strong> – The response from the server.</p></li>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
 <li><p><strong>res</strong> (<em>AppendResponse</em>) – </p></li>
 </ul>
 </dd>
@@ -499,13 +576,14 @@ called once for each streamed response as long as <code class="docutils literal 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand.handle_failure">
-<span class="sig-name descname"><span class="pre">handle_failure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/mailbox.html#AppendCommand.handle_failure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_failure" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">handle_failure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">res</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/mailbox.html#AppendCommand.handle_failure"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_failure" title="Permalink to this definition">¶</a></dt>
 <dd><p>Print a failure response.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>response</strong> – The response from the server.</p></li>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
 <li><p><strong>res</strong> (<em>AppendResponse</em>) – </p></li>
 </ul>
 </dd>
@@ -517,13 +595,14 @@ called once for each streamed response as long as <code class="docutils literal 
 
 <dl class="py method">
 <dt class="sig sig-object py" id="pymapadmin.commands.mailbox.AppendCommand.handle_exception">
-<span class="sig-name descname"><span class="pre">handle_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/mailbox.html#AppendCommand.handle_exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_exception" title="Permalink to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">handle_exception</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">exc</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/mailbox.html#AppendCommand.handle_exception"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.mailbox.AppendCommand.handle_exception" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle an exception that occurred while calling the RPC function.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>exc</strong> (<a class="reference external" href="https://docs.python.org/3/library/exceptions.html#Exception" title="(in Python v3.11)"><em>Exception</em></a>) – The raised exception object.</p></li>
 <li><p><strong>outfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print the output to.</p></li>
+<li><p><strong>errfile</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.TextIO" title="(in Python v3.11)"><em>TextIO</em></a>) – The file object to print errors to.</p></li>
 </ul>
 </dd>
 <dt class="field-even">Return type<span class="colon">:</span></dt>
@@ -642,6 +721,108 @@ called once for each streamed response as long as <code class="docutils literal 
 </dd></dl>
 
 <dl class="py class">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.ChangePasswordCommand">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.user.</span></span><span class="sig-name descname"><span class="pre">ChangePasswordCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/user.html#ChangePasswordCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.user.ChangePasswordCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Change a password for an existing user, without modifying any other
+metadata.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>args</strong> (<em>Namespace</em>) – </p></li>
+<li><p><strong>channel</strong> (<em>Channel</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.ChangePasswordCommand.add_subparser">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">add_subparser</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">subparsers</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/user.html#ChangePasswordCommand.add_subparser"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.user.ChangePasswordCommand.add_subparser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add the command-line argument subparser for the command.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.11)"><em>str</em></a>) – The name to use for the subparser.</p></li>
+<li><p><strong>subparsers</strong> (<a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.11)"><em>Any</em></a>) – The special action object as returned by
+<a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser.add_subparsers" title="(in Python v3.11)"><code class="xref py py-meth docutils literal notranslate"><span class="pre">add_subparsers()</span></code></a>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The new sub-parser object.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/argparse.html#argparse.ArgumentParser" title="(in Python v3.11)"><em>ArgumentParser</em></a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.ChangePasswordCommand.first">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">first</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pymapadmin.commands.user.GetUserCommand" title="pymapadmin.commands.user.GetUserCommand"><span class="pre">GetUserCommand</span></a></em><a class="headerlink" href="#pymapadmin.commands.user.ChangePasswordCommand.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>The first step in the compound operation.</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.ChangePasswordCommand.second">
+<em class="property"><span class="pre">property</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">second</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#pymapadmin.commands.user.SetUserCommand" title="pymapadmin.commands.user.SetUserCommand"><span class="pre">SetUserCommand</span></a></em><a class="headerlink" href="#pymapadmin.commands.user.ChangePasswordCommand.second" title="Permalink to this definition">¶</a></dt>
+<dd><p>The second step in the compound operation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.ChangePasswordCommand.build_first">
+<span class="sig-name descname"><span class="pre">build_first</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/user.html#ChangePasswordCommand.build_first"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.user.ChangePasswordCommand.build_first" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the request object for the first step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>request</strong> (<em>_ChangePasswordRequest</em>) – The compound operation request.</p>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><em>GetUserRequest</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.ChangePasswordCommand.build_second">
+<span class="sig-name descname"><span class="pre">build_second</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">request</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">first_response</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/user.html#ChangePasswordCommand.build_second"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.user.ChangePasswordCommand.build_second" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the request object for the second step.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>request</strong> (<em>_ChangePasswordRequest</em>) – The compound operation request.</p></li>
+<li><p><strong>first_response</strong> (<em>UserResponse</em>) – The response received by the first step.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><p>If the second step should proceed, returns a two-tuple where the
+first item is the request object for the second step and the second
+item is ignored.</p>
+<p>If the compound request should be aborted, returns a two-tuple
+where the first item is <code class="docutils literal notranslate"><span class="pre">None</span></code> and the second item can be a
+response to use instead of executing the second step.</p>
+<p>If both items in the tuple are <code class="docutils literal notranslate"><span class="pre">None</span></code>, the compound operation
+raises a <a class="reference external" href="https://docs.python.org/3/library/exceptions.html#RuntimeError" title="(in Python v3.11)"><code class="xref py py-exc docutils literal notranslate"><span class="pre">RuntimeError</span></code></a> displaying the response to the first
+step.</p>
+</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#tuple" title="(in Python v3.11)">tuple</a>[pymapadmin.grpc.admin_pb2.SetUserRequest | None, pymapadmin.grpc.admin_pb2.UserResponse | None]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="pymapadmin.commands.user.ChangePasswordCommand.build_request">
+<span class="sig-name descname"><span class="pre">build_request</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/user.html#ChangePasswordCommand.build_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.user.ChangePasswordCommand.build_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><em>_ChangePasswordRequest</em></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="pymapadmin.commands.user.DeleteUserCommand">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.user.</span></span><span class="sig-name descname"><span class="pre">DeleteUserCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/user.html#DeleteUserCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.user.DeleteUserCommand" title="Permalink to this definition">¶</a></dt>
 <dd><p>Delete a user and its mail data.</p>
@@ -714,7 +895,6 @@ called once for each streamed response as long as <code class="docutils literal 
 </li>
 <li><a class="reference internal" href="#pymapadmin.commands.base.ClientCommand"><code class="docutils literal notranslate"><span class="pre">ClientCommand</span></code></a><ul>
 <li><a class="reference internal" href="#pymapadmin.commands.base.ClientCommand.client"><code class="docutils literal notranslate"><span class="pre">ClientCommand.client</span></code></a></li>
-<li><a class="reference internal" href="#pymapadmin.commands.base.ClientCommand.method"><code class="docutils literal notranslate"><span class="pre">ClientCommand.method</span></code></a></li>
 <li><a class="reference internal" href="#pymapadmin.commands.base.ClientCommand.build_request"><code class="docutils literal notranslate"><span class="pre">ClientCommand.build_request()</span></code></a></li>
 <li><a class="reference internal" href="#pymapadmin.commands.base.ClientCommand.handle_response"><code class="docutils literal notranslate"><span class="pre">ClientCommand.handle_response()</span></code></a></li>
 <li><a class="reference internal" href="#pymapadmin.commands.base.ClientCommand.handle_exception"><code class="docutils literal notranslate"><span class="pre">ClientCommand.handle_exception()</span></code></a></li>
@@ -724,6 +904,16 @@ called once for each streamed response as long as <code class="docutils literal 
 <li><a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_response"><code class="docutils literal notranslate"><span class="pre">AdminCommand.handle_response()</span></code></a></li>
 <li><a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_success"><code class="docutils literal notranslate"><span class="pre">AdminCommand.handle_success()</span></code></a></li>
 <li><a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_failure"><code class="docutils literal notranslate"><span class="pre">AdminCommand.handle_failure()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#module-pymapadmin.commands.health"><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands.health</span></code></a><ul>
+<li><a class="reference internal" href="#pymapadmin.commands.health.CheckCommand"><code class="docutils literal notranslate"><span class="pre">CheckCommand</span></code></a><ul>
+<li><a class="reference internal" href="#pymapadmin.commands.health.CheckCommand.add_subparser"><code class="docutils literal notranslate"><span class="pre">CheckCommand.add_subparser()</span></code></a></li>
+<li><a class="reference internal" href="#pymapadmin.commands.health.CheckCommand.method"><code class="docutils literal notranslate"><span class="pre">CheckCommand.method</span></code></a></li>
+<li><a class="reference internal" href="#pymapadmin.commands.health.CheckCommand.build_request"><code class="docutils literal notranslate"><span class="pre">CheckCommand.build_request()</span></code></a></li>
+<li><a class="reference internal" href="#pymapadmin.commands.health.CheckCommand.handle_response"><code class="docutils literal notranslate"><span class="pre">CheckCommand.handle_response()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -771,6 +961,15 @@ called once for each streamed response as long as <code class="docutils literal 
 <li><a class="reference internal" href="#pymapadmin.commands.user.SetUserCommand.add_subparser"><code class="docutils literal notranslate"><span class="pre">SetUserCommand.add_subparser()</span></code></a></li>
 <li><a class="reference internal" href="#pymapadmin.commands.user.SetUserCommand.method"><code class="docutils literal notranslate"><span class="pre">SetUserCommand.method</span></code></a></li>
 <li><a class="reference internal" href="#pymapadmin.commands.user.SetUserCommand.build_request"><code class="docutils literal notranslate"><span class="pre">SetUserCommand.build_request()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#pymapadmin.commands.user.ChangePasswordCommand"><code class="docutils literal notranslate"><span class="pre">ChangePasswordCommand</span></code></a><ul>
+<li><a class="reference internal" href="#pymapadmin.commands.user.ChangePasswordCommand.add_subparser"><code class="docutils literal notranslate"><span class="pre">ChangePasswordCommand.add_subparser()</span></code></a></li>
+<li><a class="reference internal" href="#pymapadmin.commands.user.ChangePasswordCommand.first"><code class="docutils literal notranslate"><span class="pre">ChangePasswordCommand.first</span></code></a></li>
+<li><a class="reference internal" href="#pymapadmin.commands.user.ChangePasswordCommand.second"><code class="docutils literal notranslate"><span class="pre">ChangePasswordCommand.second</span></code></a></li>
+<li><a class="reference internal" href="#pymapadmin.commands.user.ChangePasswordCommand.build_first"><code class="docutils literal notranslate"><span class="pre">ChangePasswordCommand.build_first()</span></code></a></li>
+<li><a class="reference internal" href="#pymapadmin.commands.user.ChangePasswordCommand.build_second"><code class="docutils literal notranslate"><span class="pre">ChangePasswordCommand.build_second()</span></code></a></li>
+<li><a class="reference internal" href="#pymapadmin.commands.user.ChangePasswordCommand.build_request"><code class="docutils literal notranslate"><span class="pre">ChangePasswordCommand.build_request()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#pymapadmin.commands.user.DeleteUserCommand"><code class="docutils literal notranslate"><span class="pre">DeleteUserCommand</span></code></a><ul>
@@ -843,7 +1042,7 @@ called once for each streamed response as long as <code class="docutils literal 
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.11.0rc2 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>

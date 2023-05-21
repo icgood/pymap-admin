@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin.commands.user &#8212; pymap-admin 0.11.0rc2 documentation</title>
+    <title>pymapadmin.commands.user &#8212; pymap-admin 0.11.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.11.0rc2 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
@@ -69,15 +69,27 @@
 <span class="kn">import</span> <span class="nn">getpass</span>
 <span class="kn">from</span> <span class="nn">argparse</span> <span class="kn">import</span> <span class="n">ArgumentParser</span><span class="p">,</span> <span class="n">FileType</span>
 <span class="kn">from</span> <span class="nn">collections.abc</span> <span class="kn">import</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Sequence</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span>
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">TypeAlias</span>
 
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">AdminCommand</span>
-<span class="kn">from</span> <span class="nn">..typing</span> <span class="kn">import</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">,</span> <span class="n">MethodProtocol</span>
 <span class="kn">from</span> <span class="nn">..grpc.admin_grpc</span> <span class="kn">import</span> <span class="n">UserStub</span>
 <span class="kn">from</span> <span class="nn">..grpc.admin_pb2</span> <span class="kn">import</span> \
-    <span class="n">UserData</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">,</span> <span class="n">GetUserRequest</span><span class="p">,</span> <span class="n">SetUserRequest</span><span class="p">,</span> <span class="n">DeleteUserRequest</span>
+    <span class="n">SUCCESS</span><span class="p">,</span> <span class="n">UserData</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">,</span> <span class="n">GetUserRequest</span><span class="p">,</span> <span class="n">SetUserRequest</span><span class="p">,</span> \
+    <span class="n">DeleteUserRequest</span>
+<span class="kn">from</span> <span class="nn">..operation</span> <span class="kn">import</span> <span class="n">SingleOperation</span><span class="p">,</span> <span class="n">CompoundOperation</span>
+<span class="kn">from</span> <span class="nn">..typing</span> <span class="kn">import</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">,</span> <span class="n">MethodProtocol</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GetUserCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;SetUserCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;DeleteUserCommand&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;GetUserCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;SetUserCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;ChangePasswordCommand&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;DeleteUserCommand&#39;</span><span class="p">]</span>
+
+<span class="n">_Password</span><span class="p">:</span> <span class="n">TypeAlias</span> <span class="o">=</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+
+
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">_ChangePasswordRequest</span><span class="p">:</span>
+    <span class="n">user</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">password</span><span class="p">:</span> <span class="n">_Password</span>
 
 
 <span class="k">class</span> <span class="nc">UserCommand</span><span class="p">(</span><span class="n">AdminCommand</span><span class="p">[</span><span class="n">UserStub</span><span class="p">,</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">]):</span>
@@ -86,8 +98,18 @@
     <span class="k">def</span> <span class="nf">client</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UserStub</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">UserStub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">getpass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_Password</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">no_password</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">password_file</span><span class="p">:</span>
+            <span class="n">line</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">password_file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+            <span class="k">return</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">()</span>
 
-<div class="viewcode-block" id="GetUserCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.GetUserCommand">[docs]</a><span class="k">class</span> <span class="nc">GetUserCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">GetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
+
+<div class="viewcode-block" id="GetUserCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.GetUserCommand">[docs]</a><span class="k">class</span> <span class="nc">GetUserCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">GetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">],</span>
+                     <span class="n">SingleOperation</span><span class="p">[</span><span class="n">GetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Print a user and its metadata.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="GetUserCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.GetUserCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
@@ -107,7 +129,8 @@
         <span class="k">return</span> <span class="n">GetUserRequest</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">user</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="SetUserCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.SetUserCommand">[docs]</a><span class="k">class</span> <span class="nc">SetUserCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">SetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
+<div class="viewcode-block" id="SetUserCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.SetUserCommand">[docs]</a><span class="k">class</span> <span class="nc">SetUserCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">SetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">],</span>
+                     <span class="n">SingleOperation</span><span class="p">[</span><span class="n">SetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the metadata for a user, creating it if it does not exist.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="SetUserCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.SetUserCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
@@ -115,9 +138,12 @@
             <span class="o">-&gt;</span> <span class="n">ArgumentParser</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
         <span class="n">subparser</span><span class="p">:</span> <span class="n">ArgumentParser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
             <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span>
-            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;assign a password to a user&#39;</span><span class="p">)</span>
-        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--password-file&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">FileType</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">),</span>
-                               <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;FILE&#39;</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;add or overwrite a user&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--no-overwrite&#39;</span><span class="p">,</span>
+                               <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_false&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;overwrite&#39;</span><span class="p">,</span>
+                               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;do not overwrite existing users&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--password-file&#39;</span><span class="p">,</span>
+                               <span class="nb">type</span><span class="o">=</span><span class="n">FileType</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">),</span> <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;FILE&#39;</span><span class="p">,</span>
                                <span class="n">help</span><span class="o">=</span><span class="s1">&#39;read the password from a file&#39;</span><span class="p">)</span>
         <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--no-password&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
                                <span class="n">help</span><span class="o">=</span><span class="s1">&#39;send the request with no password value&#39;</span><span class="p">)</span>
@@ -134,15 +160,6 @@
     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MethodProtocol</span><span class="p">[</span><span class="n">SetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">SetUser</span>
 
-    <span class="k">def</span> <span class="nf">getpass</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">no_password</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">password_file</span><span class="p">:</span>
-            <span class="n">line</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">password_file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
-            <span class="k">return</span> <span class="n">line</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\r\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
-            <span class="k">return</span> <span class="n">getpass</span><span class="o">.</span><span class="n">getpass</span><span class="p">()</span>
-
 <div class="viewcode-block" id="SetUserCommand.build_request"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.SetUserCommand.build_request">[docs]</a>    <span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SetUserRequest</span><span class="p">:</span>
         <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
         <span class="n">params</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_parse_params</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">params</span><span class="p">)</span>
@@ -150,7 +167,9 @@
         <span class="n">new_data</span> <span class="o">=</span> <span class="n">UserData</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">roles</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">roles</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">new_data</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
-        <span class="k">return</span> <span class="n">SetUserRequest</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">new_data</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">SetUserRequest</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+                              <span class="n">overwrite</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">overwrite</span><span class="p">,</span>
+                              <span class="n">data</span><span class="o">=</span><span class="n">new_data</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">_parse_params</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="p">{}</span>
@@ -162,7 +181,65 @@
         <span class="k">return</span> <span class="n">ret</span></div>
 
 
-<div class="viewcode-block" id="DeleteUserCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.DeleteUserCommand">[docs]</a><span class="k">class</span> <span class="nc">DeleteUserCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">DeleteUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
+<div class="viewcode-block" id="ChangePasswordCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.ChangePasswordCommand">[docs]</a><span class="k">class</span> <span class="nc">ChangePasswordCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">_ChangePasswordRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">],</span>
+                            <span class="n">CompoundOperation</span><span class="p">[</span><span class="n">_ChangePasswordRequest</span><span class="p">,</span>
+                                              <span class="n">GetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">,</span>
+                                              <span class="n">SetUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Change a password for an existing user, without modifying any other</span>
+<span class="sd">    metadata.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="ChangePasswordCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.ChangePasswordCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">add_subparser</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subparsers</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="n">ArgumentParser</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
+        <span class="n">subparser</span><span class="p">:</span> <span class="n">ArgumentParser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span>
+            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;assign a new password to a user&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--password-file&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">FileType</span><span class="p">(</span><span class="s1">&#39;r&#39;</span><span class="p">),</span>
+                               <span class="n">metavar</span><span class="o">=</span><span class="s1">&#39;FILE&#39;</span><span class="p">,</span>
+                               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;read the password from a file&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--no-password&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+                               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;send the request with no password value&#39;</span><span class="p">)</span>
+        <span class="n">subparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s1">&#39;the user name&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">subparser</span></div>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">first</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GetUserCommand</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">GetUserCommand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">second</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SetUserCommand</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SetUserCommand</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
+
+<div class="viewcode-block" id="ChangePasswordCommand.build_first"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.ChangePasswordCommand.build_first">[docs]</a>    <span class="k">def</span> <span class="nf">build_first</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">_ChangePasswordRequest</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GetUserRequest</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">GetUserRequest</span><span class="p">(</span><span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="ChangePasswordCommand.build_second"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.ChangePasswordCommand.build_second">[docs]</a>    <span class="k">def</span> <span class="nf">build_second</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">_ChangePasswordRequest</span><span class="p">,</span>
+                     <span class="n">first_response</span><span class="p">:</span> <span class="n">UserResponse</span><span class="p">)</span> \
+            <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">SetUserRequest</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">UserResponse</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">password</span>
+        <span class="k">if</span> <span class="n">first_response</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">code</span> <span class="o">!=</span> <span class="n">SUCCESS</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span><span class="p">,</span> <span class="n">first_response</span>
+        <span class="n">user_data</span> <span class="o">=</span> <span class="n">first_response</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">user_data</span><span class="o">.</span><span class="n">ClearField</span><span class="p">(</span><span class="s1">&#39;password&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">user_data</span><span class="o">.</span><span class="n">password</span> <span class="o">=</span> <span class="n">password</span>
+        <span class="n">second_request</span> <span class="o">=</span> <span class="n">SetUserRequest</span><span class="p">(</span>
+            <span class="n">user</span><span class="o">=</span><span class="n">request</span><span class="o">.</span><span class="n">user</span><span class="p">,</span>
+            <span class="n">previous_entity_tag</span><span class="o">=</span><span class="n">first_response</span><span class="o">.</span><span class="n">entity_tag</span><span class="p">,</span>
+            <span class="n">data</span><span class="o">=</span><span class="n">user_data</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">second_request</span><span class="p">,</span> <span class="kc">None</span></div>
+
+<div class="viewcode-block" id="ChangePasswordCommand.build_request"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.ChangePasswordCommand.build_request">[docs]</a>    <span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">_ChangePasswordRequest</span><span class="p">:</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span>
+        <span class="n">password</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getpass</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">_ChangePasswordRequest</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">user</span><span class="p">,</span> <span class="n">password</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="DeleteUserCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.DeleteUserCommand">[docs]</a><span class="k">class</span> <span class="nc">DeleteUserCommand</span><span class="p">(</span><span class="n">UserCommand</span><span class="p">[</span><span class="n">DeleteUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">],</span>
+                        <span class="n">SingleOperation</span><span class="p">[</span><span class="n">DeleteUserRequest</span><span class="p">,</span> <span class="n">UserResponse</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete a user and its mail data.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="DeleteUserCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.user.DeleteUserCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
@@ -230,7 +307,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.11.0rc2 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>

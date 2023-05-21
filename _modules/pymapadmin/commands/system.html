@@ -6,7 +6,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin.commands.system &#8212; pymap-admin 0.11.0rc2 documentation</title>
+    <title>pymapadmin.commands.system &#8212; pymap-admin 0.11.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.11.0rc2 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
@@ -74,6 +74,7 @@
 <span class="kn">from</span> <span class="nn">.base</span> <span class="kn">import</span> <span class="n">Command</span><span class="p">,</span> <span class="n">AdminCommand</span>
 <span class="kn">from</span> <span class="nn">..config</span> <span class="kn">import</span> <span class="n">Config</span>
 <span class="kn">from</span> <span class="nn">..local</span> <span class="kn">import</span> <span class="n">config_file</span><span class="p">,</span> <span class="n">token_file</span>
+<span class="kn">from</span> <span class="nn">..operation</span> <span class="kn">import</span> <span class="n">SingleOperation</span>
 <span class="kn">from</span> <span class="nn">..typing</span> <span class="kn">import</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">,</span> <span class="n">MethodProtocol</span>
 <span class="kn">from</span> <span class="nn">..grpc.admin_grpc</span> <span class="kn">import</span> <span class="n">SystemStub</span>
 <span class="kn">from</span> <span class="nn">..grpc.admin_pb2</span> <span class="kn">import</span> <span class="n">LoginRequest</span><span class="p">,</span> <span class="n">LoginResponse</span><span class="p">,</span> \
@@ -103,7 +104,7 @@
             <span class="n">help</span><span class="o">=</span><span class="s1">&#39;save connection arguments to config file&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">subparser</span></div>
 
-    <span class="k">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">config_file</span><span class="o">.</span><span class="n">get_home</span><span class="p">(</span><span class="n">mkdir</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">parser</span> <span class="o">=</span> <span class="n">Config</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">cfg</span><span class="p">:</span>
@@ -112,7 +113,8 @@
         <span class="k">return</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="LoginCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.system.LoginCommand">[docs]</a><span class="k">class</span> <span class="nc">LoginCommand</span><span class="p">(</span><span class="n">SystemCommand</span><span class="p">[</span><span class="n">LoginRequest</span><span class="p">,</span> <span class="n">LoginResponse</span><span class="p">]):</span>
+<div class="viewcode-block" id="LoginCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.system.LoginCommand">[docs]</a><span class="k">class</span> <span class="nc">LoginCommand</span><span class="p">(</span><span class="n">SystemCommand</span><span class="p">[</span><span class="n">LoginRequest</span><span class="p">,</span> <span class="n">LoginResponse</span><span class="p">],</span>
+                   <span class="n">SingleOperation</span><span class="p">[</span><span class="n">LoginRequest</span><span class="p">,</span> <span class="n">LoginResponse</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Login as a user for future requests.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="LoginCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.system.LoginCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
@@ -164,8 +166,9 @@
             <span class="n">request</span><span class="o">.</span><span class="n">token_expiration</span> <span class="o">=</span> <span class="n">expiration</span>
         <span class="k">return</span> <span class="n">request</span></div>
 
-<div class="viewcode-block" id="LoginCommand.handle_success"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.system.LoginCommand.handle_success">[docs]</a>    <span class="k">def</span> <span class="nf">handle_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">LoginResponse</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">handle_success</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">outfile</span><span class="p">)</span>
+<div class="viewcode-block" id="LoginCommand.handle_success"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.system.LoginCommand.handle_success">[docs]</a>    <span class="k">def</span> <span class="nf">handle_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">LoginResponse</span><span class="p">,</span>
+                       <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">handle_success</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">errfile</span><span class="p">)</span>
         <span class="n">token</span> <span class="o">=</span> <span class="n">response</span><span class="o">.</span><span class="n">bearer_token</span>
         <span class="k">if</span> <span class="n">token</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">save</span><span class="p">:</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">token_file</span><span class="o">.</span><span class="n">get_home</span><span class="p">(</span><span class="n">mkdir</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -173,7 +176,8 @@
             <span class="n">path</span><span class="o">.</span><span class="n">chmod</span><span class="p">(</span><span class="mo">0o600</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="PingCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.system.PingCommand">[docs]</a><span class="k">class</span> <span class="nc">PingCommand</span><span class="p">(</span><span class="n">SystemCommand</span><span class="p">[</span><span class="n">PingRequest</span><span class="p">,</span> <span class="n">PingResponse</span><span class="p">]):</span>
+<div class="viewcode-block" id="PingCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.system.PingCommand">[docs]</a><span class="k">class</span> <span class="nc">PingCommand</span><span class="p">(</span><span class="n">SystemCommand</span><span class="p">[</span><span class="n">PingRequest</span><span class="p">,</span> <span class="n">PingResponse</span><span class="p">],</span>
+                  <span class="n">SingleOperation</span><span class="p">[</span><span class="n">PingRequest</span><span class="p">,</span> <span class="n">PingResponse</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Ping the server.&quot;&quot;&quot;</span>
 
 <div class="viewcode-block" id="PingCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.system.PingCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
@@ -240,7 +244,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.11.0rc2 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
