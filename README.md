@@ -86,14 +86,16 @@ These commands access and manipulate the users on the system:
 
 ```console
 $ pymap-admin set-user --help
+$ pymap-admin change-password --help
 $ pymap-admin get-user --help
 $ pymap-admin delete-user --help
 ```
 
 Passing a username to `get-user` will display that user's metadata, including
 the (securely hashed) password string. A username can be deleted with
-`delete-user`. The `set-user` command will create and update a username and its
-password.
+`delete-user`. The `set-user` command will create or overwrite a username, its
+password, and other metadata. The `change-password` command can update only the
+password of an existing username.
 
 If using pymap as part of the [slimta-docker][4] configuration, see its
 [Address Management][5] documentation for additional options.
