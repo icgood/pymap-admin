@@ -7,7 +7,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>pymapadmin.commands &#8212; pymap-admin 0.11.0 documentation</title>
+    <title>pymapadmin.commands &#8212; pymap-admin 0.12.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="_static/cloud.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
@@ -51,7 +51,7 @@
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              accesskey="P">previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.12.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>
@@ -157,8 +157,6 @@
 <em class="property"><span class="pre">abstract</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">handle_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#ClientCommand.handle_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.ClientCommand.handle_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle each response. For streaming responses, this will be
 called once for each streamed response as long as <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned.</p>
-<p>The default implementation calls <a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_success" title="pymapadmin.commands.base.AdminCommand.handle_success"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_success()</span></code></a> or
-<a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_failure" title="pymapadmin.commands.base.AdminCommand.handle_failure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_failure()</span></code></a> depending on the result code.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -196,7 +194,13 @@ called once for each streamed response as long as <code class="docutils literal 
 <dl class="py class">
 <dt class="sig sig-object py" id="pymapadmin.commands.base.AdminCommand">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">pymapadmin.commands.base.</span></span><span class="sig-name descname"><span class="pre">AdminCommand</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">channel</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#AdminCommand"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.AdminCommand" title="Permalink to this definition">¶</a></dt>
-<dd><p>Interface for client command implementations.</p>
+<dd><p>Interface for admin command implementations.</p>
+<p>The request and response must conform to the
+<a class="reference internal" href="pymapadmin.html#pymapadmin.typing.AdminRequestProtocol" title="pymapadmin.typing.AdminRequestProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdminRequestProtocol</span></code></a> and
+<a class="reference internal" href="pymapadmin.html#pymapadmin.typing.AdminResponseProtocol" title="pymapadmin.typing.AdminResponseProtocol"><code class="xref py py-class docutils literal notranslate"><span class="pre">AdminResponseProtocol</span></code></a> protocols, respectively.</p>
+<p>The default <a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_response" title="pymapadmin.commands.base.AdminCommand.handle_response"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_response()</span></code></a> implementation calls
+<a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_success" title="pymapadmin.commands.base.AdminCommand.handle_success"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_success()</span></code></a> or <a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_failure" title="pymapadmin.commands.base.AdminCommand.handle_failure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_failure()</span></code></a> depending on the result
+code.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -211,8 +215,6 @@ called once for each streamed response as long as <code class="docutils literal 
 <span class="sig-name descname"><span class="pre">handle_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/base.html#AdminCommand.handle_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.base.AdminCommand.handle_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle each response. For streaming responses, this will be
 called once for each streamed response as long as <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned.</p>
-<p>The default implementation calls <a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_success" title="pymapadmin.commands.base.AdminCommand.handle_success"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_success()</span></code></a> or
-<a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_failure" title="pymapadmin.commands.base.AdminCommand.handle_failure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_failure()</span></code></a> depending on the result code.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -323,8 +325,6 @@ called once for each streamed response as long as <code class="docutils literal 
 <span class="sig-name descname"><span class="pre">handle_response</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">response</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outfile</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">errfile</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/pymapadmin/commands/health.html#CheckCommand.handle_response"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#pymapadmin.commands.health.CheckCommand.handle_response" title="Permalink to this definition">¶</a></dt>
 <dd><p>Handle each response. For streaming responses, this will be
 called once for each streamed response as long as <code class="docutils literal notranslate"><span class="pre">0</span></code> is returned.</p>
-<p>The default implementation calls <a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_success" title="pymapadmin.commands.base.AdminCommand.handle_success"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_success()</span></code></a> or
-<a class="reference internal" href="#pymapadmin.commands.base.AdminCommand.handle_failure" title="pymapadmin.commands.base.AdminCommand.handle_failure"><code class="xref py py-meth docutils literal notranslate"><span class="pre">handle_failure()</span></code></a> depending on the result code.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
@@ -1042,7 +1042,7 @@ step.</p>
         <li class="right" >
           <a href="pymapadmin.html" title="pymapadmin"
              >previous</a> &nbsp; &nbsp;</li>
-    <li><a href="index.html">pymap-admin 0.11.0 documentation</a> &#187;</li>
+    <li><a href="index.html">pymap-admin 0.12.0 documentation</a> &#187;</li>
 
         <li class="nav-item nav-item-this"><a href=""><code class="docutils literal notranslate"><span class="pre">pymapadmin.commands</span></code></a></li> 
       </ul>
