@@ -14,7 +14,7 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-import pkg_resources
+from importlib.metadata import distribution
 
 import cloud_sptheme as csp  # type: ignore
 
@@ -26,7 +26,7 @@ copyright = '2020, Ian Good'
 author = 'Ian Good'
 
 # The short X.Y version
-project_version = pkg_resources.require(project)[0].version
+project_version = distribution(project).version
 version_parts = project_version.split('.')
 version = '.'.join(version_parts[0:2])
 # The full version, including alpha/beta/rc tags
@@ -91,5 +91,5 @@ napoleon_numpy_docstring = False
 
 # -- Options for intersphinx extension ---------------------------------------
 
-intersphinx_mapping = {'https://docs.python.org/3/': None,
-                       'https://grpclib.readthedocs.io/en/latest/': None}
+intersphinx_mapping = {'python': ('https://docs.python.org/3/', None),
+                       'grpclib': ('https://grpclib.readthedocs.io/en/latest/', None)}

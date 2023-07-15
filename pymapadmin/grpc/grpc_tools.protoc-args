@@ -3,4 +3,5 @@
 --grpclib_python_out=.
 --mypy_out=.
 pymapadmin/grpc/admin.proto
+pymapadmin/grpc/error_details.proto
 pymapadmin/grpc/health.proto

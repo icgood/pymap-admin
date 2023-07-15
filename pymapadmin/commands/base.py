@@ -17,12 +17,9 @@ from ..typing import StubT, RequestT, ResponseT, \
     AdminRequestT, AdminResponseT
 from ..grpc.admin_pb2 import SUCCESS
 
-try:
-    # This import ensures error details are displayed correctly
-    # https://grpclib.readthedocs.io/en/latest/errors.html#error-details
-    from google.rpc import error_details_pb2  # noqa
-except ImportError:  # pragma: no cover
-    pass
+# This import ensures error details are displayed correctly
+# https://grpclib.readthedocs.io/en/latest/errors.html#error-details
+from ..grpc import error_details_pb2  # noqa
 
 __all__ = ['Command', 'ClientCommand', 'AdminCommand']
 
@@ -108,9 +105,6 @@ class ClientCommand(Command, Operation[RequestT, ResponseT],
         """Handle each response. For streaming responses, this will be
         called once for each streamed response as long as ``0`` is returned.
 
-        The default implementation calls :meth:`.handle_success` or
-        :meth:`.handle_failure` depending on the result code.
-
         Args:
             response: The response from the server.
             outfile: The file object to print the output to.
@@ -147,7 +141,15 @@ class ClientCommand(Command, Operation[RequestT, ResponseT],
 
 class AdminCommand(ClientCommand[StubT, AdminRequestT, AdminResponseT],
                    metaclass=ABCMeta):
-    """Interface for client command implementations.
+    """Interface for admin command implementations.
+
+    The request and response must conform to the
+    :class:`~pymapadmin.typing.AdminRequestProtocol` and
+    :class:`~pymapadmin.typing.AdminResponseProtocol` protocols, respectively.
+
+    The default :meth:`.handle_response` implementation calls
+    :meth:`.handle_success` or :meth:`.handle_failure` depending on the result
+    code.
 
     Args:
         args: The command line arguments.

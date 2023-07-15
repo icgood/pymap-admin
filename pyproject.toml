@@ -50,7 +50,6 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-error-details = ['googleapis-common-protos ~= 1.59']
 build = ['grpcio-tools', 'mypy-protobuf']
 
 [project.urls]
@@ -145,8 +144,10 @@ python = ['3.11']
 features = ['build']
 
 [tool.hatch.envs.proto.scripts]
-update = "curl -o pymapadmin/grpc/health.proto 'https://raw.githubusercontent.com/grpc/grpc-proto/master/grpc/health/v1/health.proto'"
-build = ['update', "python -m grpc_tools.protoc '@pymapadmin/grpc/grpc_tools.protoc-args'"]
+update-error-details = "curl -o pymapadmin/grpc/error_details.proto 'https://raw.githubusercontent.com/googleapis/googleapis/master/google/rpc/error_details.proto'"
+update-health = "curl -o pymapadmin/grpc/health.proto 'https://raw.githubusercontent.com/grpc/grpc-proto/master/grpc/health/v1/health.proto'"
+update-protos = ['update-error-details', 'update-health']
+build = ['update-protos', "python -m grpc_tools.protoc '@pymapadmin/grpc/grpc_tools.protoc-args'"]
 
 [tool.hatch.envs.doc]
 dependencies = [
