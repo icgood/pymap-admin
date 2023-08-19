@@ -2,18 +2,18 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin.typing &#8212; pymap-admin 0.12.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css" />
+    <title>pymapadmin.typing &#8212; pymap-admin 0.12.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../_static/cloud.css?v=98ea126a" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
-    <script src="../../_static/doctools.js"></script>
-    <script src="../../_static/sphinx_highlight.js"></script>
+    <script src="../../_static/documentation_options.js?v=c5b435e8"></script>
+    <script src="../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
     
     
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">pymap-admin 0.12.0 documentation</a> &#187;</li>
+    <li><a href="../../index.html">pymap-admin 0.12.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../pymapadmin.html" accesskey="U">pymapadmin</a> &#187;</li>
@@ -93,7 +93,9 @@
 <span class="n">AdminResponseT</span> <span class="o">=</span> <span class="n">TypeVar</span><span class="p">(</span><span class="s1">&#39;AdminResponseT&#39;</span><span class="p">,</span> <span class="n">bound</span><span class="o">=</span><span class="s1">&#39;AdminResponseProtocol&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="MethodProtocol"><a class="viewcode-back" href="../../pymapadmin.html#pymapadmin.typing.MethodProtocol">[docs]</a><span class="k">class</span> <span class="nc">MethodProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">[</span><span class="n">RequestT</span><span class="p">,</span> <span class="n">ResponseT</span><span class="p">]):</span>
+<div class="viewcode-block" id="MethodProtocol">
+<a class="viewcode-back" href="../../pymapadmin.html#pymapadmin.typing.MethodProtocol">[docs]</a>
+<span class="k">class</span> <span class="nc">MethodProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">[</span><span class="n">RequestT</span><span class="p">,</span> <span class="n">ResponseT</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Protocol defining an admin method, for a command.&quot;&quot;&quot;</span>
 
     <span class="nd">@abstractmethod</span>
@@ -102,7 +104,10 @@
         <span class="o">...</span></div>
 
 
-<div class="viewcode-block" id="AdminRequestProtocol"><a class="viewcode-back" href="../../pymapadmin.html#pymapadmin.typing.AdminRequestProtocol">[docs]</a><span class="k">class</span> <span class="nc">AdminRequestProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AdminRequestProtocol">
+<a class="viewcode-back" href="../../pymapadmin.html#pymapadmin.typing.AdminRequestProtocol">[docs]</a>
+<span class="k">class</span> <span class="nc">AdminRequestProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Protocol defining the fields that all admin request objects are expected</span>
 <span class="sd">    to have.</span>
 
@@ -113,7 +118,10 @@
     <span class="k">pass</span></div>
 
 
-<div class="viewcode-block" id="AdminResponseProtocol"><a class="viewcode-back" href="../../pymapadmin.html#pymapadmin.typing.AdminResponseProtocol">[docs]</a><span class="k">class</span> <span class="nc">AdminResponseProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
+
+<div class="viewcode-block" id="AdminResponseProtocol">
+<a class="viewcode-back" href="../../pymapadmin.html#pymapadmin.typing.AdminResponseProtocol">[docs]</a>
+<span class="k">class</span> <span class="nc">AdminResponseProtocol</span><span class="p">(</span><span class="n">Protocol</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Protocol defining the fields that all admin response objects are</span>
 <span class="sd">    expected to have.</span>
 
@@ -124,6 +132,7 @@
     <span class="k">def</span> <span class="nf">result</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Result</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;The result protobuf, containing a code and additional data.&quot;&quot;&quot;</span>
         <span class="o">...</span></div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -174,7 +183,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../index.html">pymap-admin 0.12.0 documentation</a> &#187;</li>
+    <li><a href="../../index.html">pymap-admin 0.12.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../pymapadmin.html" >pymapadmin</a> &#187;</li>
@@ -184,8 +193,8 @@
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Ian Good.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    &#169; Copyright 2020, Ian Good.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

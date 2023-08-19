@@ -2,18 +2,18 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin.commands.base &#8212; pymap-admin 0.12.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css" />
+    <title>pymapadmin.commands.base &#8212; pymap-admin 0.12.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css?v=98ea126a" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/documentation_options.js?v=c5b435e8"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
     
     
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.12.0 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.12.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
@@ -89,7 +89,9 @@
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Command&#39;</span><span class="p">,</span> <span class="s1">&#39;ClientCommand&#39;</span><span class="p">,</span> <span class="s1">&#39;AdminCommand&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="Command"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.Command">[docs]</a><span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
+<div class="viewcode-block" id="Command">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.Command">[docs]</a>
+<span class="k">class</span> <span class="nc">Command</span><span class="p">(</span><span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Interface for command implementations.</span>
 
 <span class="sd">    Args:</span>
@@ -103,7 +105,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="n">args</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">:</span> <span class="n">Final</span> <span class="o">=</span> <span class="n">channel</span>
 
-<div class="viewcode-block" id="Command.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.Command.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="Command.add_subparser">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.Command.add_subparser">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">add_subparser</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subparsers</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ArgumentParser</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Add the command-line argument subparser for the command.</span>
@@ -119,12 +123,16 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="o">...</span></div>
 
+
     <span class="nd">@abstractmethod</span>
     <span class="k">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="o">...</span></div>
 
 
-<div class="viewcode-block" id="ClientCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.ClientCommand">[docs]</a><span class="k">class</span> <span class="nc">ClientCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">,</span> <span class="n">Operation</span><span class="p">[</span><span class="n">RequestT</span><span class="p">,</span> <span class="n">ResponseT</span><span class="p">],</span>
+
+<div class="viewcode-block" id="ClientCommand">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.ClientCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">ClientCommand</span><span class="p">(</span><span class="n">Command</span><span class="p">,</span> <span class="n">Operation</span><span class="p">[</span><span class="n">RequestT</span><span class="p">,</span> <span class="n">ResponseT</span><span class="p">],</span>
                     <span class="n">Generic</span><span class="p">[</span><span class="n">StubT</span><span class="p">,</span> <span class="n">RequestT</span><span class="p">,</span> <span class="n">ResponseT</span><span class="p">],</span>
                     <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Interface for client command implementations.</span>
@@ -159,12 +167,17 @@
             <span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;auth-token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
         <span class="k">return</span> <span class="n">metadata</span>
 
-<div class="viewcode-block" id="ClientCommand.build_request"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.ClientCommand.build_request">[docs]</a>    <span class="nd">@abstractmethod</span>
+<div class="viewcode-block" id="ClientCommand.build_request">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.ClientCommand.build_request">[docs]</a>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RequestT</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Build the request.&quot;&quot;&quot;</span>
         <span class="o">...</span></div>
 
-<div class="viewcode-block" id="ClientCommand.handle_response"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.ClientCommand.handle_response">[docs]</a>    <span class="nd">@abstractmethod</span>
+
+<div class="viewcode-block" id="ClientCommand.handle_response">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.ClientCommand.handle_response">[docs]</a>
+    <span class="nd">@abstractmethod</span>
     <span class="k">def</span> <span class="nf">handle_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">ResponseT</span><span class="p">,</span>
                         <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle each response. For streaming responses, this will be</span>
@@ -178,7 +191,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="o">...</span></div>
 
-<div class="viewcode-block" id="ClientCommand.handle_exception"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.ClientCommand.handle_exception">[docs]</a>    <span class="k">def</span> <span class="nf">handle_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span>
+
+<div class="viewcode-block" id="ClientCommand.handle_exception">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.ClientCommand.handle_exception">[docs]</a>
+    <span class="k">def</span> <span class="nf">handle_exception</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc</span><span class="p">:</span> <span class="ne">Exception</span><span class="p">,</span>
                          <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle an exception that occurred while calling the RPC function.</span>
 
@@ -190,6 +206,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">traceback</span><span class="o">.</span><span class="n">print_exc</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">1</span></div>
+
 
     <span class="k">async</span> <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_request</span><span class="p">()</span>
@@ -204,7 +221,10 @@
             <span class="k">return</span> <span class="mi">0</span></div>
 
 
-<div class="viewcode-block" id="AdminCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.AdminCommand">[docs]</a><span class="k">class</span> <span class="nc">AdminCommand</span><span class="p">(</span><span class="n">ClientCommand</span><span class="p">[</span><span class="n">StubT</span><span class="p">,</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">],</span>
+
+<div class="viewcode-block" id="AdminCommand">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.AdminCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">AdminCommand</span><span class="p">(</span><span class="n">ClientCommand</span><span class="p">[</span><span class="n">StubT</span><span class="p">,</span> <span class="n">AdminRequestT</span><span class="p">,</span> <span class="n">AdminResponseT</span><span class="p">],</span>
                    <span class="n">metaclass</span><span class="o">=</span><span class="n">ABCMeta</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Interface for admin command implementations.</span>
 
@@ -222,7 +242,9 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="AdminCommand.handle_response"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.AdminCommand.handle_response">[docs]</a>    <span class="k">def</span> <span class="nf">handle_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">AdminResponseT</span><span class="p">,</span>
+<div class="viewcode-block" id="AdminCommand.handle_response">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.AdminCommand.handle_response">[docs]</a>
+    <span class="k">def</span> <span class="nf">handle_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">AdminResponseT</span><span class="p">,</span>
                         <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">result</span><span class="o">.</span><span class="n">code</span> <span class="o">==</span> <span class="n">SUCCESS</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">handle_success</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">errfile</span><span class="p">)</span>
@@ -231,7 +253,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">handle_failure</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">errfile</span><span class="p">)</span>
             <span class="k">return</span> <span class="mi">1</span></div>
 
-<div class="viewcode-block" id="AdminCommand.handle_success"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.AdminCommand.handle_success">[docs]</a>    <span class="k">def</span> <span class="nf">handle_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">AdminResponseT</span><span class="p">,</span>
+
+<div class="viewcode-block" id="AdminCommand.handle_success">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.AdminCommand.handle_success">[docs]</a>
+    <span class="k">def</span> <span class="nf">handle_success</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">AdminResponseT</span><span class="p">,</span>
                        <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Print a successful response.</span>
 
@@ -243,7 +268,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">outfile</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="AdminCommand.handle_failure"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.AdminCommand.handle_failure">[docs]</a>    <span class="k">def</span> <span class="nf">handle_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">AdminResponseT</span><span class="p">,</span>
+
+<div class="viewcode-block" id="AdminCommand.handle_failure">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.base.AdminCommand.handle_failure">[docs]</a>
+    <span class="k">def</span> <span class="nf">handle_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">AdminResponseT</span><span class="p">,</span>
                        <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Print a failure response.</span>
 
@@ -253,7 +281,9 @@
 <span class="sd">            errfile: The file object to print errors to.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">errfile</span><span class="p">)</span></div></div>
+        <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">result</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">errfile</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -304,7 +334,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.12.0 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.12.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
@@ -315,8 +345,8 @@
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Ian Good.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    &#169; Copyright 2020, Ian Good.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>

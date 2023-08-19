@@ -2,18 +2,18 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="en" data-content_root="../../../">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>pymapadmin.commands.health &#8212; pymap-admin 0.12.0 documentation</title>
-    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css" />
+    <title>pymapadmin.commands.health &#8212; pymap-admin 0.12.1 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/cloud.css?v=98ea126a" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noticia+Text:400,i,b,bi|Open+Sans:400,i,b,bi|Roboto+Mono:400,i,b,bi&amp;display=swap" type="text/css" />
     
-    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
-    <script src="../../../_static/doctools.js"></script>
-    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/documentation_options.js?v=c5b435e8"></script>
+    <script src="../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
 
     
     
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.12.0 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.12.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
@@ -85,30 +85,42 @@
         <span class="k">return</span> <span class="n">HealthStub</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">channel</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="CheckCommand"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.health.CheckCommand">[docs]</a><span class="k">class</span> <span class="nc">CheckCommand</span><span class="p">(</span><span class="n">HealthCommand</span><span class="p">[</span><span class="n">HealthCheckRequest</span><span class="p">,</span> <span class="n">HealthCheckResponse</span><span class="p">],</span>
+<div class="viewcode-block" id="CheckCommand">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.health.CheckCommand">[docs]</a>
+<span class="k">class</span> <span class="nc">CheckCommand</span><span class="p">(</span><span class="n">HealthCommand</span><span class="p">[</span><span class="n">HealthCheckRequest</span><span class="p">,</span> <span class="n">HealthCheckResponse</span><span class="p">],</span>
                    <span class="n">SingleOperation</span><span class="p">[</span><span class="n">HealthCheckRequest</span><span class="p">,</span> <span class="n">HealthCheckResponse</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check the health of the server.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="CheckCommand.add_subparser"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.health.CheckCommand.add_subparser">[docs]</a>    <span class="nd">@classmethod</span>
+<div class="viewcode-block" id="CheckCommand.add_subparser">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.health.CheckCommand.add_subparser">[docs]</a>
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">add_subparser</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">subparsers</span><span class="p">:</span> <span class="n">Any</span><span class="p">)</span> \
             <span class="o">-&gt;</span> <span class="n">ArgumentParser</span><span class="p">:</span>  <span class="c1"># pragma: no cover</span>
         <span class="n">argparser</span><span class="p">:</span> <span class="n">ArgumentParser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
             <span class="n">name</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="bp">cls</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">,</span>
             <span class="n">help</span><span class="o">=</span><span class="s1">&#39;check the server health&#39;</span><span class="p">)</span>
+        <span class="n">argparser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;service&#39;</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">nargs</span><span class="o">=</span><span class="s1">&#39;?&#39;</span><span class="p">,</span>
+                               <span class="n">help</span><span class="o">=</span><span class="s1">&#39;The service name, if any.&#39;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">argparser</span></div>
+
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MethodProtocol</span><span class="p">[</span><span class="n">HealthCheckRequest</span><span class="p">,</span>
                                        <span class="n">HealthCheckResponse</span><span class="p">]:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">Check</span>
 
-<div class="viewcode-block" id="CheckCommand.build_request"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.health.CheckCommand.build_request">[docs]</a>    <span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HealthCheckRequest</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">HealthCheckRequest</span><span class="p">()</span></div>
+<div class="viewcode-block" id="CheckCommand.build_request">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.health.CheckCommand.build_request">[docs]</a>
+    <span class="k">def</span> <span class="nf">build_request</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HealthCheckRequest</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">HealthCheckRequest</span><span class="p">(</span><span class="n">service</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">args</span><span class="o">.</span><span class="n">service</span><span class="p">)</span></div>
+
 
     <span class="k">def</span> <span class="nf">_is_serving</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">HealthCheckResponse</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">response</span><span class="o">.</span><span class="n">status</span> <span class="o">==</span> <span class="n">HealthCheckResponse</span><span class="o">.</span><span class="n">ServingStatus</span><span class="o">.</span><span class="n">SERVING</span>
 
-<div class="viewcode-block" id="CheckCommand.handle_response"><a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.health.CheckCommand.handle_response">[docs]</a>    <span class="k">def</span> <span class="nf">handle_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">HealthCheckResponse</span><span class="p">,</span>
+<div class="viewcode-block" id="CheckCommand.handle_response">
+<a class="viewcode-back" href="../../../pymapadmin.commands.html#pymapadmin.commands.health.CheckCommand.handle_response">[docs]</a>
+    <span class="k">def</span> <span class="nf">handle_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">response</span><span class="p">:</span> <span class="n">HealthCheckResponse</span><span class="p">,</span>
                         <span class="n">outfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">,</span> <span class="n">errfile</span><span class="p">:</span> <span class="n">TextIO</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">success</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_serving</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">success</span><span class="p">:</span>
@@ -116,7 +128,9 @@
             <span class="k">return</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">errfile</span><span class="p">)</span>
-            <span class="k">return</span> <span class="mi">1</span></div></div>
+            <span class="k">return</span> <span class="mi">1</span></div>
+</div>
+
 </pre></div>
 
             <div class="clearer"></div>
@@ -167,7 +181,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> &nbsp; &nbsp;</li>
-    <li><a href="../../../index.html">pymap-admin 0.12.0 documentation</a> &#187;</li>
+    <li><a href="../../../index.html">pymap-admin 0.12.1 documentation</a> &#187;</li>
 
           <li class="nav-item nav-item-1"><a href="../../index.html" >Module code</a> &#187;</li>
           <li class="nav-item nav-item-2"><a href="../../pymapadmin.html" >pymapadmin</a> &#187;</li>
@@ -178,8 +192,8 @@
     </div>
 
     <div class="footer" role="contentinfo">
-        &#169; Copyright 2020, Ian Good.
-      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.0.1.
+    &#169; Copyright 2020, Ian Good.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.2.
     </div>
     <!-- cloud_sptheme 1.4 -->
   </body>
