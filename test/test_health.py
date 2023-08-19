@@ -33,10 +33,11 @@ class TestCheckCommand:
                 status=HealthCheckResponse.ServingStatus.SERVING)])
         outfile = StringIO()
         errfile = StringIO()
-        args = Namespace(token=None, token_file=None)
+        args = Namespace(token=None, token_file=None, service='test')
         async with ChannelFor([handler]) as channel:
             command = CheckCommand(args, channel)
             code = await command(outfile, errfile)
+        assert [HealthCheckRequest(service='test')] == handler.requests
         assert 0 == code
         assert 'status: SERVING\n\n' == outfile.getvalue()
         assert '' == errfile.getvalue()
@@ -47,10 +48,11 @@ class TestCheckCommand:
                 status=HealthCheckResponse.ServingStatus.NOT_SERVING)])
         outfile = StringIO()
         errfile = StringIO()
-        args = Namespace(token=None, token_file=None)
+        args = Namespace(token=None, token_file=None, service='')
         async with ChannelFor([handler]) as channel:
             command = CheckCommand(args, channel)
             code = await command(outfile, errfile)
+        assert [HealthCheckRequest(service='')] == handler.requests
         assert 1 == code
         assert '' == outfile.getvalue()
         assert 'status: NOT_SERVING\n\n' == errfile.getvalue()

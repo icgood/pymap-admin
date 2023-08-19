@@ -30,6 +30,8 @@ class CheckCommand(HealthCommand[HealthCheckRequest, HealthCheckResponse],
         argparser: ArgumentParser = subparsers.add_parser(
             name, description=cls.__doc__,
             help='check the server health')
+        argparser.add_argument('service', default='', nargs='?',
+                               help='The service name, if any.')
         return argparser
 
     @property
@@ -38,7 +40,7 @@ class CheckCommand(HealthCommand[HealthCheckRequest, HealthCheckResponse],
         return self.client.Check
 
     def build_request(self) -> HealthCheckRequest:
-        return HealthCheckRequest()
+        return HealthCheckRequest(service=self.args.service)
 
     def _is_serving(self, response: HealthCheckResponse) -> bool:
         return response.status == HealthCheckResponse.ServingStatus.SERVING
