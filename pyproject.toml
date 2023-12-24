@@ -42,6 +42,7 @@ classifiers = [
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
 ]
 dependencies = [
     'grpclib ~= 0.4',
@@ -51,6 +52,21 @@ dependencies = [
 
 [project.optional-dependencies]
 build = ['grpcio-tools', 'mypy-protobuf']
+dev = [
+    'mypy',
+    'pytest',
+    'pytest-asyncio',
+    'pytest-cov',
+    'ruff',
+    'pycodestyle',
+    'autopep8',
+    'types-protobuf',
+]
+doc = [
+    'sphinx',
+    'sphinx-autodoc-typehints',
+    'cloud_sptheme',
+]
 
 [project.urls]
 'Homepage' = 'https://github.com/icgood/pymap-admin/'
@@ -119,16 +135,7 @@ exclude_lines = [
 ]
 
 [tool.hatch.envs.default]
-dependencies = [
-    'mypy',
-    'pytest',
-    'pytest-asyncio',
-    'pytest-cov',
-    'ruff',
-    'pycodestyle',
-    'autopep8',
-    'types-protobuf',
-]
+features = ['dev']
 
 [tool.hatch.envs.default.scripts]
 run-pytest = 'py.test --cov-report=term-missing --cov=pymapadmin'
@@ -138,7 +145,7 @@ run-autopep8 = 'autopep8 --exit-code -dr pymapadmin test'
 check = ['run-pytest', 'run-autopep8', 'run-mypy', 'run-ruff']
 
 [[tool.hatch.envs.all.matrix]]
-python = ['3.11']
+python = ['3.11', '3.12']
 
 [tool.hatch.envs.proto]
 features = ['build']
@@ -150,11 +157,7 @@ update-protos = ['update-error-details', 'update-health']
 build = ['update-protos', "python -m grpc_tools.protoc '@pymapadmin/grpc/grpc_tools.protoc-args'"]
 
 [tool.hatch.envs.doc]
-dependencies = [
-    'sphinx',
-    'sphinx-autodoc-typehints',
-    'cloud_sptheme',
-]
+features = ['doc']
 
 [tool.hatch.envs.doc.scripts]
 build = 'make -C doc html'

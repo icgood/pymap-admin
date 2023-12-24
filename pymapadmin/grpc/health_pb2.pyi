@@ -41,7 +41,7 @@ class HealthCheckResponse(google.protobuf.message.Message):
         ValueType = typing.NewType("ValueType", builtins.int)
         V: typing_extensions.TypeAlias = ValueType
 
-    class _ServingStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[HealthCheckResponse._ServingStatus.ValueType], builtins.type):  # noqa: F821
+    class _ServingStatusEnumTypeWrapper(google.protobuf.internal.enum_type_wrapper._EnumTypeWrapper[HealthCheckResponse._ServingStatus.ValueType], builtins.type):
         DESCRIPTOR: google.protobuf.descriptor.EnumDescriptor
         UNKNOWN: HealthCheckResponse._ServingStatus.ValueType  # 0
         SERVING: HealthCheckResponse._ServingStatus.ValueType  # 1
